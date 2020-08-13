@@ -44,27 +44,18 @@ i18n.addResourceBundle("de-DE", "Article", de_de);
  * Styles the component
  */
 const useStyles = makeStyles(theme => ({
-  container: {
-    padding: theme.spacing(1),
-    margin: theme.spacing(1),
-    border: "1px solid"
-  }
+  container: {}
 }));
 
 /**
  * Displays the component
  */
 const Article = props => {
+  const { name } = props;
   const { container } = useStyles(props);
   const { t } = useTranslation("Article");
 
-  return (
-    <Grid container>
-      <Grid item xs={12} className={clsx(container, "Article")}>
-        {t("Article")}
-      </Grid>
-    </Grid>
-  );
+  return <h5>{name}</h5>;
 };
 
 Article.propTypes = propTypes;

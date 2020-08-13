@@ -59,7 +59,7 @@ const Layout = props => {
   const { t } = useTranslation("Layout");
 
   return (
-    <Grid container className={clsx(container, "Layout")}>
+    <Grid container spacing={2} className={clsx(container, "Layout")}>
       <Grid item xs={12}>
         <LanguageSelector {...languageSelector} />
       </Grid>

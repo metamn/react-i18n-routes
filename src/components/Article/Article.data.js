@@ -4,15 +4,24 @@
  * @see Article.md for details
  */
 import PropTypes from "prop-types";
+import shortid from "shortid";
 
 /**
  * Defines the prop types
  */
-const propTypes = {};
+const propTypes = {
+  id: PropTypes.number,
+  slug: PropTypes.string,
+  name: PropTypes.string
+};
 
 /**
  * Defines the default props
  */
-const defaultProps = {};
+const defaultProps = {
+  id: shortid.generate(),
+  slug: "article",
+  name: "Article"
+};
 
 export { propTypes, defaultProps };

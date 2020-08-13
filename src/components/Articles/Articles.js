@@ -10,6 +10,7 @@
 import React from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
+import shortid from "shortid";
 
 /**
  * Imports other components and hooks
@@ -47,26 +48,32 @@ i18n.addResourceBundle("de-DE", "Articles", de_de);
  * Styles the component
  */
 const useStyles = makeStyles(theme => ({
-  container: {
-    padding: theme.spacing(1),
-    margin: theme.spacing(1),
-    border: "1px solid"
-  }
+  container: {}
 }));
 
 /**
  * Displays the component
  */
 const Articles = props => {
+  const { articles } = props;
   const { container } = useStyles(props);
   const { t } = useTranslation("Home");
 
-  const slug = t("article");
-  const name = t("Article");
+  const articlesList =
+    articles &&
+    articles.map(item => {
+      const { id, name, slug } = item;
+
+      return (
+        <li key={id}>
+          <Link to={slug}>{name}</Link>
+        </li>
+      );
+    });
 
   return (
     <Layout>
-      <Link to={`/${slug}`}>{name}</Link>
+      <ul>{articlesList}</ul>
     </Layout>
   );
 };

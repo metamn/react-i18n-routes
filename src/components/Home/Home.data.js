@@ -6,6 +6,10 @@
 import PropTypes from "prop-types";
 
 /**
+ * Imports other components and hooks
+ */
+
+/**
  * Defines the prop types
  */
 const propTypes = {};
