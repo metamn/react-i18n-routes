@@ -8,7 +8,7 @@
  * Imports React and third party packages
  */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
 
 /**
  * Imports other components and hooks
@@ -41,19 +41,20 @@ i18n.addResourceBundle("de-DE", "Home", de_de);
  */
 const Home = props => {
   const { articles } = props;
+  const { name: articlesName, slug: articlesSlug, articles: items } = articles;
   const { t } = useTranslation("Home");
 
-  const slug = t("articles");
-  const name = t("Archives");
-
   const articlesList =
-    articles &&
-    articles.map(item => {
+    items &&
+    items.map(item => {
       const { id, name, slug } = item;
+
+      // NOTE: 1. Nested slugs has to be creted somewhere
+      const articleSlug = `/${articlesSlug}/${slug}`;
 
       return (
         <li key={id}>
-          <Link to={slug}>{t(name)}</Link>
+          <Link to={articleSlug}>{t(name)}</Link>
         </li>
       );
     });
@@ -63,7 +64,8 @@ const Home = props => {
       <p>{t("Access articles directly")}:</p>
       <p>{articlesList}</p>
       <p>
-        {t("Access articles through the")} <Link to={`/${slug}`}>{name}</Link>.
+        {t("Access articles through the")}{" "}
+        <Link to={`/${articlesSlug}`}>{t(articlesName)}</Link>.
       </p>
     </Layout>
   );

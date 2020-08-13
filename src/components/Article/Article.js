@@ -10,6 +10,11 @@
 import React from "react";
 
 /**
+ * Imports other components and hooks
+ */
+import Layout from "../Layout";
+
+/**
  * Imports data
  */
 import { propTypes, defaultProps } from "./Article.data";
@@ -36,7 +41,11 @@ const Article = props => {
   const { name } = props;
   const { t } = useTranslation("Article");
 
-  return <h5>{t(name)}</h5>;
+  return (
+    <Layout>
+      <h5>Article: {t(name)}</h5>
+    </Layout>
+  );
 };
 
 Article.propTypes = propTypes;

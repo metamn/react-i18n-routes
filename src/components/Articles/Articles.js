@@ -8,12 +8,13 @@
  * Imports React and third party packages
  */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
 
 /**
  * Imports other components and hooks
  */
 import Layout from "../Layout";
+import Article from "../Article";
 
 /**
  * Imports data
@@ -54,10 +55,21 @@ const Articles = props => {
       );
     });
 
+  // NOTE: 2. A new route has to be added to child
+  const match = useRouteMatch();
+  const { path } = match;
+
   return (
-    <Layout>
-      <ul>{articlesList}</ul>
-    </Layout>
+    <Switch>
+      <Route path={`${path}/:slug`}>
+        <Article />
+      </Route>
+      <Route path={path}>
+        <Layout>
+          <ul>{articlesList}</ul>
+        </Layout>
+      </Route>
+    </Switch>
   );
 };
 

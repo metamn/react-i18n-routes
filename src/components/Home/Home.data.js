@@ -9,29 +9,20 @@ import shortid from "shortid";
 /**
  * Imports other components and hooks
  */
-import { ArticlePropTypes, ArticleDefaultProps } from "../Article";
+import { ArticlesPropTypes, ArticlesDefaultProps } from "../Articles";
 
 /**
  * Defines the prop types
  */
 const propTypes = {
-  articles: PropTypes.arrayOf(PropTypes.shape(ArticlePropTypes))
+  articles: PropTypes.shape(ArticlesPropTypes)
 };
 
 /**
  * Defines the default props
  */
 const defaultProps = {
-  articles: Array(3)
-    .fill(ArticleDefaultProps)
-    .map((item, index) => {
-      return {
-        ...item,
-        id: shortid.generate(),
-        name: `Article ${index + 10}`,
-        slug: `article-${index + 10}`
-      };
-    })
+  articles: ArticlesDefaultProps
 };
 
 export { propTypes, defaultProps };
