@@ -14,6 +14,7 @@ import clsx from "clsx";
  * Imports other components and hooks
  */
 import LanguageSelector from "../LanguageSelector";
+import Breadcrumbs from "../Breadcrumbs";
 
 /**
  * Imports data
@@ -61,6 +62,9 @@ const Layout = props => {
     <Grid container className={clsx(container, "Layout")}>
       <Grid item xs={12}>
         <LanguageSelector {...languageSelector} />
+      </Grid>
+      <Grid item xs={12}>
+        <Breadcrumbs />
       </Grid>
       <Grid item xs={12}>
         {children}

@@ -9,11 +9,13 @@
  */
 import React from "react";
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 
 /**
  * Imports other components and hooks
  */
 import Layout from "../Layout";
+import Articles from "../Articles";
 
 /**
  * Imports data
@@ -45,11 +47,7 @@ i18n.addResourceBundle("de-DE", "Home", de_de);
  * Styles the component
  */
 const useStyles = makeStyles(theme => ({
-  container: {
-    padding: theme.spacing(1),
-    margin: theme.spacing(1),
-    border: "1px solid"
-  }
+  container: {}
 }));
 
 /**
@@ -59,7 +57,14 @@ const Home = props => {
   const { container } = useStyles(props);
   const { t } = useTranslation("Home");
 
-  return <Layout />;
+  const slug = t("articles");
+  const name = t("Articles");
+
+  return (
+    <Layout>
+      <Link to={`/${slug}`}>{name}</Link>
+    </Layout>
+  );
 };
 
 Home.propTypes = propTypes;

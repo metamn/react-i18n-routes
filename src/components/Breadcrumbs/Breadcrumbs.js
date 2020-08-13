@@ -62,11 +62,13 @@ const StyledBreadcrumb = withStyles(theme => ({
     height: theme.spacing(3),
     color: theme.palette.grey[800],
     fontWeight: theme.typography.fontWeightRegular,
+
     "&:hover, &:focus": {
       backgroundColor: theme.palette.grey[500],
       cursor: "pointer",
       color: "white"
     },
+
     "&:active": {
       boxShadow: theme.shadows[1],
       backgroundColor: emphasize(theme.palette.grey[500], 0.12),
