@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
  * Imports other components and hooks
  */
 import Layout from "../Layout";
+import Article from "../Article";
 
 /**
  * Imports data
@@ -39,14 +40,31 @@ i18n.addResourceBundle("de-DE", "Home", de_de);
  * Displays the component
  */
 const Home = props => {
+  const { articles } = props;
   const { t } = useTranslation("Home");
 
   const slug = t("articles");
-  const name = t("Articles");
+  const name = t("Archives");
+
+  const articlesList =
+    articles &&
+    articles.map(item => {
+      const { id, name, slug } = item;
+
+      return (
+        <li key={id}>
+          <Link to={slug}>{t(name)}</Link>
+        </li>
+      );
+    });
 
   return (
     <Layout>
-      <Link to={`/${slug}`}>{name}</Link>
+      <p>{t("Access articles directly")}:</p>
+      <p>{articlesList}</p>
+      <p>
+        {t("Access articles through the")} <Link to={`/${slug}`}>{name}</Link>.
+      </p>
     </Layout>
   );
 };
