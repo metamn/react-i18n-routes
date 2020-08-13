@@ -9,10 +9,13 @@
  */
 import React from "react";
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 
 /**
  * Imports other components and hooks
  */
+import Layout from "../Layout";
+import Article from "../Article";
 
 /**
  * Imports data
@@ -56,14 +59,15 @@ const useStyles = makeStyles(theme => ({
  */
 const Articles = props => {
   const { container } = useStyles(props);
-  const { t } = useTranslation("Articles");
+  const { t } = useTranslation("Home");
+
+  const slug = t("article");
+  const name = t("Article");
 
   return (
-    <Grid container>
-      <Grid item xs={12} className={clsx(container, "Articles")}>
-        {t("Articles")}
-      </Grid>
-    </Grid>
+    <Layout>
+      <Link to={`/${slug}`}>{name}</Link>
+    </Layout>
   );
 };
 
