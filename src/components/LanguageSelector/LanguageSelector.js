@@ -53,7 +53,6 @@ const useStyles = makeStyles(theme => ({
 const LanguageSelector = props => {
   const { languages, defaultLanguage } = props;
   const { alternateName } = defaultLanguage;
-
   const { container, textField } = useStyles(props);
 
   const currentLanguage = i18n.language || alternateName;
@@ -96,6 +95,7 @@ const LanguageSelector = props => {
         name="language"
         className={clsx(textField, "TextField")}
         select
+        variant="outlined"
         value={selected}
         onChange={selectHandler}
       >

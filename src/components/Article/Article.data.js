@@ -10,7 +10,7 @@ import shortid from "shortid";
  * Defines the prop types
  */
 const propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.string,
   slug: PropTypes.string,
   name: PropTypes.string
 };
