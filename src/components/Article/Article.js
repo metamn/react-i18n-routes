@@ -8,6 +8,8 @@
  * Imports React and third party packages
  */
 import React from "react";
+import { useRouteMatch } from "react-router-dom";
+import { startCase } from "lodash";
 
 /**
  * Imports other components and hooks
@@ -38,12 +40,23 @@ i18n.addResourceBundle("de-DE", "Article", de_de);
  * Displays the component
  */
 const Article = props => {
-  const { name } = props;
+  const { slug: defaultSlug } = props;
   const { t } = useTranslation("Article");
+
+  // NOTE: 0. Resources have to query their slugs
+  const {
+    params: { slug: slugFromURL }
+  } = useRouteMatch();
+
+  const slug = slugFromURL ? slugFromURL : defaultSlug;
+
+  const nameFromSlug = startCase(slug);
 
   return (
     <Layout>
-      <h5>Article: {t(name)}</h5>
+      <h5>
+        Name: {nameFromSlug}, slug: {slug}
+      </h5>
     </Layout>
   );
 };

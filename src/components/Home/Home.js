@@ -85,7 +85,7 @@ const Home = props => {
 
   return (
     <Layout>
-      <ul>
+      <ol>
         <li key="2">
           {t("Access articles through the archive")}:&nbsp;
           <Link to={`/${articlesSlug}`}>{t(articlesName)}</Link>.
@@ -93,14 +93,14 @@ const Home = props => {
 
         <li key="1">
           <p>{t("Access articles directly")}:</p>
-          <p>{articlesList}</p>
+          <ul>{articlesList}</ul>
         </li>
 
         <li key="3">
           <p>{t("Open articles in antother tab")}:</p>
-          <p>{articlesList2}</p>
+          <ul>{articlesList2}</ul>
         </li>
-      </ul>
+      </ol>
     </Layout>
   );
 };

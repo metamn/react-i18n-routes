@@ -15,7 +15,8 @@ import { ArticlePropTypes, ArticleDefaultProps } from "../Article";
  * Defines the prop types
  */
 const propTypes = {
-  // NOTE: 0. Every resource has to have a name and slug
+  // NOTE: 0. Resource containers have their names and slug coming from the language files
+  // FIXME: Remove name and slug
   name: PropTypes.string,
   slug: PropTypes.string,
   articles: PropTypes.arrayOf(PropTypes.shape(ArticlePropTypes))
