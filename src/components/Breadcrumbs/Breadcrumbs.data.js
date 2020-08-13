@@ -3,7 +3,6 @@
  *
  * @see Breadcrumbs.md for details
  */
-import PropTypes from "prop-types";
 
 /**
  * Defines the prop types

@@ -3,11 +3,6 @@
  *
  * @see Home.md for details
  */
-import PropTypes from "prop-types";
-
-/**
- * Imports other components and hooks
- */
 
 /**
  * Defines the prop types

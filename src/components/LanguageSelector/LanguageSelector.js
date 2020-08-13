@@ -22,7 +22,6 @@ import { propTypes, defaultProps } from "./LanguageSelector.data";
  */
 import { makeStyles } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
@@ -31,16 +30,6 @@ import Typography from "@material-ui/core/Typography";
  * Imports translations
  */
 import i18n from "../../i18n";
-import { useTranslation } from "react-i18next";
-import { ro_ro } from "./LanguageSelector.lang.ro-ro";
-import { hu_hu } from "./LanguageSelector.lang.hu-hu";
-import { en_us } from "./LanguageSelector.lang.en-us";
-import { de_de } from "./LanguageSelector.lang.de-de";
-
-i18n.addResourceBundle("ro-RO", "LanguageSelector", ro_ro);
-i18n.addResourceBundle("hu-HU", "LanguageSelector", hu_hu);
-i18n.addResourceBundle("en-US", "LanguageSelector", en_us);
-i18n.addResourceBundle("de-DE", "LanguageSelector", de_de);
 
 /**
  * Styles the component
@@ -54,13 +43,6 @@ const useStyles = makeStyles(theme => ({
      */
     "& .MuiInput-underline::before": {
       borderBottom: "none"
-    },
-
-    /**
-     * Aligning the dropdown icon
-     */
-    ["& .MuiSelect-icon"]: {
-      top: "auto"
     }
   }
 }));
@@ -73,7 +55,6 @@ const LanguageSelector = props => {
   const { alternateName } = defaultLanguage;
 
   const { container, textField } = useStyles(props);
-  const { t } = useTranslation("LanguageSelector");
 
   const currentLanguage = i18n.language || alternateName;
 

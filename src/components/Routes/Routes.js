@@ -8,7 +8,6 @@
  * Imports React and third party packages
  */
 import React from "react";
-import clsx from "clsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 /**

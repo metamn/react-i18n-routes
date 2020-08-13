@@ -8,22 +8,11 @@
  * Imports React and third party packages
  */
 import React from "react";
-import clsx from "clsx";
-
-/**
- * Imports other components and hooks
- */
 
 /**
  * Imports data
  */
 import { propTypes, defaultProps } from "./Article.data";
-
-/**
- * Imports Material UI components
- */
-import { makeStyles } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
 
 /**
  * Imports translations
@@ -41,21 +30,13 @@ i18n.addResourceBundle("en-US", "Article", en_us);
 i18n.addResourceBundle("de-DE", "Article", de_de);
 
 /**
- * Styles the component
- */
-const useStyles = makeStyles(theme => ({
-  container: {}
-}));
-
-/**
  * Displays the component
  */
 const Article = props => {
   const { name } = props;
-  const { container } = useStyles(props);
   const { t } = useTranslation("Article");
 
-  return <h5>{name}</h5>;
+  return <h5>{t(name)}</h5>;
 };
 
 Article.propTypes = propTypes;

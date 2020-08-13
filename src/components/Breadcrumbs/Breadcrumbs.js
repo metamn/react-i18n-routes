@@ -28,7 +28,6 @@ import { propTypes, defaultProps } from "./Breadcrumbs.data";
 import { makeStyles, useTheme, useMediaQuery } from "@material-ui/core";
 import { emphasize, withStyles } from "@material-ui/core/styles";
 import { Breadcrumbs as MUIBreadcrumbs } from "@material-ui/core";
-import Link from "@material-ui/core/Link";
 import Chip from "@material-ui/core/Chip";
 
 /**
@@ -89,7 +88,6 @@ const Breadcrumbs = props => {
    * Integrates with the router
    */
   const breadcrumbs = useBreadcrumbs();
-  const breadcrumbsLength = breadcrumbs.length;
 
   /**
    * Displays less on small screens
@@ -103,7 +101,6 @@ const Breadcrumbs = props => {
    */
   const links = breadcrumbs.map(({ breadcrumb }, index) => {
     const { key } = breadcrumb;
-    const color = index === breadcrumbsLength - 1 ? "textPrimary" : "inherit";
 
     /**
      * Get breadcrumb name
