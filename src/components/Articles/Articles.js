@@ -40,7 +40,7 @@ i18n.addResourceBundle("de-DE", "Articles", de_de);
  * Displays the component
  */
 const Articles = props => {
-  const { articles } = props;
+  const { name, slug: articlesSlug, articles } = props;
   const { t } = useTranslation("Home");
 
   const articlesList =
@@ -48,9 +48,12 @@ const Articles = props => {
     articles.map(item => {
       const { id, name, slug } = item;
 
+      // NOTE: 1. Nested slugs has to be creted somewhere or everytime
+      const articleSlug = `/${articlesSlug}/${slug}`;
+
       return (
         <li key={id}>
-          <Link to={slug}>{t(name)}</Link>
+          <Link to={articleSlug}>{t(name)}</Link>
         </li>
       );
     });
