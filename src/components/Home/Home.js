@@ -44,6 +44,9 @@ const Home = props => {
   const { name: articlesName, slug: articlesSlug, articles: items } = articles;
   const { t } = useTranslation("Home");
 
+  /**
+   * Articles with internal links
+   */
   const articlesList =
     items &&
     items.map(item => {
@@ -59,14 +62,45 @@ const Home = props => {
       );
     });
 
+  /**
+   * Articles with external links
+   */
+  const articlesList2 =
+    items &&
+    items.map(item => {
+      const { id, name, slug } = item;
+
+      // NOTE: 1. Nested slugs has to be creted somewhere
+      // NOTE: 3. Well setup slugs can be accessed externally without problem (sharing is possible)
+      const articleSlug = `/${articlesSlug}/${slug}`;
+
+      return (
+        <li key={id}>
+          <a href={articleSlug} target="blank">
+            {t(name)}
+          </a>
+        </li>
+      );
+    });
+
   return (
     <Layout>
-      <p>{t("Access articles directly")}:</p>
-      <p>{articlesList}</p>
-      <p>
-        {t("Access articles through the")}{" "}
-        <Link to={`/${articlesSlug}`}>{t(articlesName)}</Link>.
-      </p>
+      <ul>
+        <li key="2">
+          {t("Access articles through the archive")}:&nbsp;
+          <Link to={`/${articlesSlug}`}>{t(articlesName)}</Link>.
+        </li>
+
+        <li key="1">
+          <p>{t("Access articles directly")}:</p>
+          <p>{articlesList}</p>
+        </li>
+
+        <li key="3">
+          <p>{t("Open articles in antother tab")}:</p>
+          <p>{articlesList2}</p>
+        </li>
+      </ul>
     </Layout>
   );
 };
