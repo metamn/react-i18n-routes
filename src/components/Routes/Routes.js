@@ -42,9 +42,17 @@ const Routes = props => {
   const { routes } = props;
   const { t, i18n } = useTranslation("Routes");
 
+  const routesList =
+    routes &&
+    routes.map(route => {
+      const { id } = route;
+
+      return <Route key={id} {...route} />;
+    });
+
   return (
     <Router>
-      <Switch>{routes && routes.map(route => <Route {...route} />)}</Switch>
+      <Switch>{routesList}</Switch>
     </Router>
   );
 };

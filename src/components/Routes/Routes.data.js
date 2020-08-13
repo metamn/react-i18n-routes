@@ -4,6 +4,7 @@
  * @see Routes.md for details
  */
 import PropTypes from "prop-types";
+import shortid from "shortid";
 
 /**
  * Imports other components and hooks
@@ -23,8 +24,8 @@ const propTypes = {
  */
 const defaultProps = {
   routes: [
-    { path: "/articles", component: Articles },
-    { path: "/", component: Home }
+    { id: shortid.generate(), path: "/articles", component: Articles },
+    { id: shortid.generate(), path: "/", component: Home }
   ]
 };
 
