@@ -49,24 +49,48 @@ const Routes = props => {
   const { routes } = props;
   const { t, i18n } = useTranslation("Routes");
 
+  /**
+   * Collects all resource container translations
+   */
+  const { t: tResourceContainers } = useTranslation("Articles");
+
+  /**
+   * Handles 404 routes
+   */
+  const routeNotFound = (
+    <Route
+      key={shortid.generate()}
+      {...{ path: "*", component: RouteNotFound }}
+    />
+  );
+
+  /**
+   * Displays routes on default language
+   */
   const routesList =
     routes &&
-    routes
-      .map(route => {
-        const { id } = route;
+    routes.map(route => {
+      const { id } = route;
 
-        return <Route key={id} {...route} />;
-      })
-      .concat([
-        <Route
-          key={shortid.generate()}
-          {...{ path: "*", component: RouteNotFound }}
-        />
-      ]);
+      return <Route key={id} {...route} />;
+    });
+
+  /**
+   * Displays routes on localized language
+   */
+  const localizedRoutesList = localizeRoutes({
+    routes: routesList,
+    t: tResourceContainers
+  });
+
+  /**
+   * Merges all route lists
+   */
+  const display = [...routesList, routeNotFound];
 
   return (
     <Router>
-      <Switch>{routesList}</Switch>
+      <Switch>{display}</Switch>
     </Router>
   );
 };
