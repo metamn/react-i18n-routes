@@ -8,6 +8,8 @@ import shortid from "shortid";
 
 /**
  * Defines the prop types
+ *
+ * // NOTE: 1. Resources are coming from the DB
  */
 const propTypes = {
   id: PropTypes.string,

@@ -50,6 +50,7 @@ const Routes = props => {
       return <Route key={id} {...route} />;
     });
 
+  // NOTE: Invalid routes must be catched somewhere
   return (
     <Router>
       <Switch>{routesList}</Switch>

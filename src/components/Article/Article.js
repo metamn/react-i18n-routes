@@ -43,13 +43,13 @@ const Article = props => {
   const { slug: defaultSlug } = props;
   const { t } = useTranslation("Article");
 
-  // NOTE: 0. Resources have to query their slugs
+  // NOTE: 2. Resources parse the URL to get their unique id
   const {
     params: { slug: slugFromURL }
   } = useRouteMatch();
 
+  // NOTE: 3. Resources query the DB and load their own data
   const slug = slugFromURL ? slugFromURL : defaultSlug;
-
   const nameFromSlug = startCase(slug);
 
   return (

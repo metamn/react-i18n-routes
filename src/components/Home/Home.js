@@ -9,6 +9,7 @@
  */
 import React from "react";
 import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
+import { kebabCase } from "lodash";
 
 /**
  * Imports other components and hooks
@@ -41,8 +42,12 @@ i18n.addResourceBundle("de-DE", "Home", de_de);
  */
 const Home = props => {
   const { articles } = props;
-  const { name: articlesName, slug: articlesSlug, articles: items } = articles;
-  const { t } = useTranslation("Home");
+  const { articles: items } = articles;
+  const { t } = useTranslation(["Articles", "Home"]);
+
+  // NOTE: 7. Resource containers should provide their localized name, slug to other components
+  const articlesName = t("Articles:Articles");
+  const articlesSlug = kebabCase(articlesName);
 
   /**
    * Articles with internal links
@@ -52,7 +57,7 @@ const Home = props => {
     items.map(item => {
       const { id, name, slug } = item;
 
-      // NOTE: 1. Nested slugs has to be creted somewhere
+      // NOTE: 8. Or they should provide a `List` function to other components
       const articleSlug = `/${articlesSlug}/${slug}`;
 
       return (
@@ -69,9 +74,6 @@ const Home = props => {
     items &&
     items.map(item => {
       const { id, name, slug } = item;
-
-      // NOTE: 1. Nested slugs has to be creted somewhere
-      // NOTE: 3. Well setup slugs can be accessed externally without problem (sharing is possible)
       const articleSlug = `/${articlesSlug}/${slug}`;
 
       return (

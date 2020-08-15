@@ -9,6 +9,7 @@
  */
 import React from "react";
 import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
+import { kebabCase } from "lodash";
 
 /**
  * Imports other components and hooks
@@ -40,15 +41,19 @@ i18n.addResourceBundle("de-DE", "Articles", de_de);
  * Displays the component
  */
 const Articles = props => {
-  const { name, slug: articlesSlug, articles } = props;
+  const { articles } = props;
   const { t } = useTranslation("Home");
+
+  // NOTE: 4. Resource containers get their name, slug from the language file
+  const articlesName = t("Articles");
+  const articlesSlug = kebabCase(articlesName);
 
   const articlesList =
     articles &&
     articles.map(item => {
       const { id, name, slug } = item;
 
-      // NOTE: 1. Nested slugs has to be creted somewhere or everytime
+      // NOTE: 5. Resource containers are responsible to compose up complete, nested links pointing to their childrens
       const articleSlug = `/${articlesSlug}/${slug}`;
 
       return (
@@ -58,7 +63,7 @@ const Articles = props => {
       );
     });
 
-  // NOTE: 2. A new route has to be added to child
+  // NOTE: 6. Resource containers manage routes to their children
   const match = useRouteMatch();
   const { path } = match;
 
