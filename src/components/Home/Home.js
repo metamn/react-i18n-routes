@@ -44,11 +44,12 @@ const Home = props => {
   const { articles } = props;
   const { articles: items } = articles;
   const { t } = useTranslation("Home");
-  const { t: t2 } = useTranslation("Articles");
+  const { t: tArticles } = useTranslation("Articles");
 
   // NOTE: 7. Resource containers should provide their localized name, slug to other components
-  const articlesName = t2("Articles");
-  const articlesSlug = routesGenerateSlug({ name: "Articles", t: t2 });
+  // NOTE: 7a. They do via t(). We don't need anything else here
+  const articlesName = tArticles("Articles");
+  const articlesSlug = routesGenerateSlug({ name: "Articles" });
 
   /**
    * Articles with internal links

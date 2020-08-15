@@ -82,7 +82,8 @@ const StyledBreadcrumb = withStyles(theme => ({
  */
 const Breadcrumbs = props => {
   const { container } = useStyles(props);
-  const { t } = useTranslation(["Breadcrumbs"]);
+  const { t } = useTranslation("Breadcrumbs");
+  const { t: tHome } = useTranslation("Home");
 
   /**
    * Integrates with the router
@@ -109,10 +110,13 @@ const Breadcrumbs = props => {
     const { children } = props;
 
     /**
-     * `Home` must be translated
+     * Only `Home` must be translated
+     * // NOTE: Verify how Breadcrumbs work with translated routes
+     * - The plugin loads the URL, parses it as is, and generates React Router compatible routes.
+     * - If the URL is translated the the breadcrumbs will be translated too
      */
     const translatedLabel =
-      children === "Home" ? t(`MenuItems:${children}`, children) : children;
+      children === "Home" ? tHome(children, children) : children;
 
     return (
       <StyledBreadcrumb
