@@ -56,7 +56,7 @@ const Routes = props => {
 
         return <Route key={id} {...route} />;
       })
-      // NOTE: Invalid routes must be catched somewhere
+      // NOTE: 9. Invalid routes are catched at top level
       .concat([
         <Route key={shortid.generate()} path="*">
           <RouteNotFound />

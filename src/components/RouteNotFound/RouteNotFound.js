@@ -8,11 +8,13 @@
  * Imports React and third party packages
  */
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 /**
  * Imports other components and hooks
+ *
+ * // NOTE: 10. The 404 page has to be kept simple. When wrapped into `<Layout>` sometimes it gets into an infinite loop due to the state in `<LanguageSelector>`
  */
-import Layout from "../Layout";
 
 /**
  * Imports data
@@ -40,7 +42,14 @@ i18n.addResourceBundle("de-DE", "RouteNotFound", de_de);
 const RouteNotFound = props => {
   const { t } = useTranslation("RouteNotFound");
 
-  return <Layout>{t("404")}</Layout>;
+  const location = useLocation();
+  const { pathname } = location;
+
+  return (
+    <>
+      {t("Not found")}: {pathname}
+    </>
+  );
 };
 
 RouteNotFound.propTypes = propTypes;
