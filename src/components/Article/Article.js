@@ -27,14 +27,10 @@ import { propTypes, defaultProps } from "./Article.data";
 import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 import { ro_ro } from "./Article.lang.ro-ro";
-import { hu_hu } from "./Article.lang.hu-hu";
 import { en_us } from "./Article.lang.en-us";
-import { de_de } from "./Article.lang.de-de";
 
 i18n.addResourceBundle("ro-RO", "Article", ro_ro);
-i18n.addResourceBundle("hu-HU", "Article", hu_hu);
 i18n.addResourceBundle("en-US", "Article", en_us);
-i18n.addResourceBundle("de-DE", "Article", de_de);
 
 /**
  * Displays the component

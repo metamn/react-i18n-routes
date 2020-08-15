@@ -35,14 +35,10 @@ import {
 import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 import { ro_ro } from "./Routes.lang.ro-ro";
-import { hu_hu } from "./Routes.lang.hu-hu";
 import { en_us } from "./Routes.lang.en-us";
-import { de_de } from "./Routes.lang.de-de";
 
 i18n.addResourceBundle("ro-RO", "Routes", ro_ro);
-i18n.addResourceBundle("hu-HU", "Routes", hu_hu);
 i18n.addResourceBundle("en-US", "Routes", en_us);
-i18n.addResourceBundle("de-DE", "Routes", de_de);
 
 /**
  * Displays the component

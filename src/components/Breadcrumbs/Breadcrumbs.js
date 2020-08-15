@@ -36,14 +36,10 @@ import Chip from "@material-ui/core/Chip";
 import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 import { ro_ro } from "./Breadcrumbs.lang.ro-ro";
-import { hu_hu } from "./Breadcrumbs.lang.hu-hu";
 import { en_us } from "./Breadcrumbs.lang.en-us";
-import { de_de } from "./Breadcrumbs.lang.de-de";
 
 i18n.addResourceBundle("ro-RO", "Breadcrumbs", ro_ro);
-i18n.addResourceBundle("hu-HU", "Breadcrumbs", hu_hu);
 i18n.addResourceBundle("en-US", "Breadcrumbs", en_us);
-i18n.addResourceBundle("de-DE", "Breadcrumbs", de_de);
 
 /**
  * Styles the component
