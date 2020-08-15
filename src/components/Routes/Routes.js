@@ -9,6 +9,12 @@
  */
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import shortid from "shortid";
+
+/**
+ * Imports other components and hooks
+ */
+import RouteNotFound from "../RouteNotFound";
 
 /**
  * Imports data
@@ -44,13 +50,19 @@ const Routes = props => {
 
   const routesList =
     routes &&
-    routes.map(route => {
-      const { id } = route;
+    routes
+      .map(route => {
+        const { id } = route;
 
-      return <Route key={id} {...route} />;
-    });
+        return <Route key={id} {...route} />;
+      })
+      // NOTE: Invalid routes must be catched somewhere
+      .concat([
+        <Route key={shortid.generate()} path="*">
+          <RouteNotFound />
+        </Route>
+      ]);
 
-  // NOTE: Invalid routes must be catched somewhere
   return (
     <Router>
       <Switch>{routesList}</Switch>

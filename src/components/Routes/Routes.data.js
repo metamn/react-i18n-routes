@@ -25,7 +25,7 @@ const propTypes = {
 const defaultProps = {
   routes: [
     { id: shortid.generate(), path: "/articles", component: Articles },
-    { id: shortid.generate(), path: "/", component: Home }
+    { id: shortid.generate(), path: "/", exact: true, component: Home }
   ]
 };
 
