@@ -12,6 +12,7 @@
     "i18next": "^19.6.3",
     "i18next-browser-languagedetector": "^5.0.1",
     "lodash": "^4.17.19",
+    "miragejs": "^0.1.40",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.7.0",
