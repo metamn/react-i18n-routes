@@ -1,6 +1,6 @@
 const ro_ro = {
   RouteNotFound: "RouteNotFound (ro_ro)",
-  "Not found": "Nu a fost gasit:"
+  "Not found": "Not found (RO)"
 };
 
 export { ro_ro };

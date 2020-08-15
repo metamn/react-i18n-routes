@@ -11,7 +11,6 @@ import shortid from "shortid";
  */
 import Home from "../Home";
 import Articles from "../Articles";
-import RouteNotFound from "../RouteNotFound";
 
 /**
  * Defines the prop types
@@ -28,11 +27,8 @@ const propTypes = {
  */
 const defaultProps = {
   routes: [
-    { id: shortid.generate(), path: "/articles-ro", component: Articles },
     { id: shortid.generate(), path: "/articles", component: Articles },
-    { id: shortid.generate(), path: "/ro", exact: true, component: Home },
-    { id: shortid.generate(), path: "/", exact: true, component: Home },
-    { id: shortid.generate(), path: "*", component: RouteNotFound }
+    { id: shortid.generate(), path: "/", exact: true, component: Home }
   ]
 };
 
