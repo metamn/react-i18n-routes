@@ -43,11 +43,12 @@ i18n.addResourceBundle("de-DE", "Home", de_de);
 const Home = props => {
   const { articles } = props;
   const { articles: items } = articles;
-  const { t } = useTranslation(["Home", "Articles"]);
+  const { t } = useTranslation("Home");
+  const { t: t2 } = useTranslation("Articles");
 
   // NOTE: 7. Resource containers should provide their localized name, slug to other components
-  const articlesName = t("Articles:Articles");
-  const articlesSlug = routesGenerateSlug({ name: "Articles" });
+  const articlesName = t2("Articles");
+  const articlesSlug = routesGenerateSlug({ name: "Articles", t: t2 });
 
   /**
    * Articles with internal links
