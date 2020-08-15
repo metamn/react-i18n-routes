@@ -65,6 +65,7 @@ const prefixRoutes = props => {
     routes &&
     routes.map(item => {
       const { path } = item;
+
       return {
         ...item,
         path: prefixPath({ path: path, prefix: currentLangPrefix })
@@ -108,6 +109,7 @@ const localizeRoutes = props => {
     routes &&
     routes.map(item => {
       const { path } = item;
+
       return { ...item, path: localizePath({ path: path, t: t }) };
     })
   );
