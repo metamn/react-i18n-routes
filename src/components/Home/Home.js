@@ -7,7 +7,7 @@
 /**
  * Imports React and third party packages
  */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
 
 /**
@@ -41,10 +41,20 @@ i18n.addResourceBundle("de-DE", "Home", de_de);
  * Displays the component
  */
 const Home = props => {
-  const { articles } = props;
-  const { articles: items } = articles;
+  const { articles: defaultArticles } = props;
   const { t } = useTranslation("Home");
   const { t: tArticles } = useTranslation("Articles");
+
+  /**
+   * Loads articles from the server
+   */
+  const [articles, setArticles] = useState(defaultArticles);
+
+  useEffect(() => {
+    fetch("/api/articles")
+      .then(response => response.json())
+      .then(json => setArticles(json.articles));
+  }, []);
 
   // NOTE: 7. Resource containers should provide their localized name to other components
   // NOTE: 7a. They do via t(). We don't need anything else here
@@ -57,8 +67,8 @@ const Home = props => {
    * Articles with internal links
    */
   const articlesList =
-    items &&
-    items.map(item => {
+    articles &&
+    articles.map(item => {
       const { id, name, slug } = item;
 
       // NOTE: 8. Or they should provide a `List` function to other components
@@ -75,8 +85,8 @@ const Home = props => {
    * Articles with external links
    */
   const articlesList2 =
-    items &&
-    items.map(item => {
+    articles &&
+    articles.map(item => {
       const { id, name, slug } = item;
       const articleSlug = `/${articlesSlug}/${slug}`;
 

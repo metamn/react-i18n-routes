@@ -28,8 +28,8 @@ const defaultProps = {
       return {
         ...item,
         id: shortid.generate(),
-        name: `Article ${index + 1}`,
-        slug: `article-${index + 1}`
+        name: `Article ${index + 1}a`,
+        slug: `article-${index + 1}a`
       };
     })
 };

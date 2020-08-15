@@ -15,14 +15,14 @@ import { ArticlesPropTypes, ArticlesDefaultProps } from "../Articles";
  * Defines the prop types
  */
 const propTypes = {
-  articles: PropTypes.shape(ArticlesPropTypes)
+  ...ArticlesPropTypes
 };
 
 /**
  * Defines the default props
  */
 const defaultProps = {
-  articles: ArticlesDefaultProps
+  ...ArticlesDefaultProps
 };
 
 export { propTypes, defaultProps };

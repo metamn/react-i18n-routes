@@ -1,4 +1,5 @@
 import { Server, Model } from "miragejs";
+import shortid from "shortid";
 
 const makeServer = () => {
   let server = new Server({
@@ -7,9 +8,21 @@ const makeServer = () => {
     },
 
     seeds(server) {
-      server.create("article", { name: "Article 1" });
-      server.create("article", { name: "Article 2" });
-      server.create("article", { name: "Article 3" });
+      server.create("article", {
+        id: shortid.generate(),
+        name: "Article 1",
+        slug: "article-1"
+      });
+      server.create("article", {
+        id: shortid.generate(),
+        name: "Article 2",
+        slug: "article-2"
+      });
+      server.create("article", {
+        id: shortid.generate(),
+        name: "Article 3",
+        slug: "article-3"
+      });
     },
 
     routes() {

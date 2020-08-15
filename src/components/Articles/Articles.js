@@ -7,7 +7,7 @@
 /**
  * Imports React and third party packages
  */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
 
 /**
@@ -41,8 +41,19 @@ i18n.addResourceBundle("de-DE", "Articles", de_de);
  * Displays the component
  */
 const Articles = props => {
-  const { articles } = props;
+  const { articles: defaultArticles } = props;
   const { t } = useTranslation("Articles");
+
+  /**
+   * Loads articles from the server
+   */
+  const [articles, setArticles] = useState(defaultArticles);
+
+  useEffect(() => {
+    fetch("/api/articles")
+      .then(response => response.json())
+      .then(json => setArticles(json.articles));
+  }, []);
 
   // NOTE: 4. Resource containers get their name from the language file
   const articlesName = t("Articles");
