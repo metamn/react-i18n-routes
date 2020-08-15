@@ -24,7 +24,12 @@ import { propTypes, defaultProps } from "./Routes.data";
 /**
  * Imports logic
  */
-import { localizeRoutes, localizePath, prefixRoutes } from "./Routes.logic";
+import {
+  localizeRoutes,
+  localizePath,
+  prefixRoutes,
+  generateSlug
+} from "./Routes.logic";
 
 /**
  * Imports translations
@@ -77,5 +82,6 @@ export default Routes;
 export {
   propTypes as RoutesPropTypes,
   defaultProps as RoutesDefaultProps,
-  localizePath as routesLocalizePath
+  localizePath as routesLocalizePath,
+  generateSlug as routesGenerateSlug
 };

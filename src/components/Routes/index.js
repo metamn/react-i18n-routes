@@ -2,5 +2,6 @@ export {
   default,
   RoutesPropTypes,
   RoutesDefaultProps,
-  routesLocalizePath
+  routesLocalizePath,
+  routesGenerateSlug
 } from "./Routes";

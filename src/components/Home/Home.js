@@ -9,13 +9,13 @@
  */
 import React from "react";
 import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
-import { kebabCase } from "lodash";
 
 /**
  * Imports other components and hooks
  */
 import Layout from "../Layout";
 import Article from "../Article";
+import { routesGenerateSlug } from "../Routes";
 
 /**
  * Imports data
@@ -47,7 +47,7 @@ const Home = props => {
 
   // NOTE: 7. Resource containers should provide their localized name, slug to other components
   const articlesName = t("Articles:Articles");
-  const articlesSlug = kebabCase(articlesName);
+  const articlesSlug = routesGenerateSlug({ name: "Articles" });
 
   /**
    * Articles with internal links

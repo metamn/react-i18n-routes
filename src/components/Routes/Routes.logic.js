@@ -1,3 +1,26 @@
+import { kebabCase } from "lodash";
+
+/**
+ * Generates a slug from a label
+ *
+ * Ex: 'Foo Bar' => 'foo-bar'
+ */
+const generateSlug = props => {
+  const { name, t } = props;
+
+  /**
+   * If there is a translation file the slug will be localized
+   */
+  const translatedName = t ? t(name) : name;
+
+  return kebabCase(translatedName);
+};
+
+/**
+ * Ads a perfix to a path
+ *
+ * Ex: /prefix/path
+ */
 const prefixPath = props => {
   const { path, prefix } = props;
 
@@ -74,6 +97,8 @@ const localizePath = props => {
 
 /**
  * Translates a set of route paths
+ *
+ * Ex: ['/destinations', '/account'] => ['/destinatii', '/cont']
  */
 const localizeRoutes = props => {
   const { routes, t } = props;
@@ -87,4 +112,4 @@ const localizeRoutes = props => {
   );
 };
 
-export { localizeRoutes, localizePath, prefixRoutes };
+export { localizeRoutes, localizePath, prefixRoutes, generateSlug };
