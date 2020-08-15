@@ -44,8 +44,10 @@ const Articles = props => {
   const { articles } = props;
   const { t } = useTranslation("Articles");
 
-  // NOTE: 4. Resource containers get their name, slug from the language file
+  // NOTE: 4. Resource containers get their name from the language file
   const articlesName = t("Articles");
+
+  // NOTE: 4a. Resource container slugs are generated from their name. They can be either translated or not.
   const articlesSlug = routesGenerateSlug({ name: "Articles" });
 
   const articlesList =

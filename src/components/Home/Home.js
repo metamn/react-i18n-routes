@@ -46,9 +46,11 @@ const Home = props => {
   const { t } = useTranslation("Home");
   const { t: tArticles } = useTranslation("Articles");
 
-  // NOTE: 7. Resource containers should provide their localized name, slug to other components
+  // NOTE: 7. Resource containers should provide their localized name to other components
   // NOTE: 7a. They do via t(). We don't need anything else here
   const articlesName = tArticles("Articles");
+
+  // NOTE: 7b. Resource containers should provide their slug to other components. Otherwise the same function with the same settings (`routesGenerateSlug`) should be used to generate the slug across the project.
   const articlesSlug = routesGenerateSlug({ name: "Articles" });
 
   /**

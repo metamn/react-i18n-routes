@@ -32,19 +32,9 @@ const defaultProps = {
       displayName: "En"
     },
     {
-      name: "German",
-      alternateName: "de-DE",
-      displayName: "De"
-    },
-    {
       name: "Romanian",
       alternateName: "ro-RO",
       displayName: "Ro"
-    },
-    {
-      name: "Hungarian",
-      alternateName: "hu-HU",
-      displayName: "Hu"
     }
   ],
   defaultLanguage: {
