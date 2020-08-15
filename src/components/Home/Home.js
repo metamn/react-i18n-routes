@@ -63,7 +63,7 @@ const Home = props => {
   const articlesName = tArticles("Articles");
 
   // NOTE: 7b. Resource containers should provide their slug to other components. Otherwise the same function with the same settings (`routesGenerateSlug`) should be used to generate the slug across the project.
-  const articlesSlug = routesGenerateSlug({ name: "Articles" });
+  const articlesSlug = routesGenerateSlug({ name: "Articles", t: tArticles });
 
   /**
    * Articles with internal links

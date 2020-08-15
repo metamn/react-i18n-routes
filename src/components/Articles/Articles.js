@@ -42,24 +42,26 @@ i18n.addResourceBundle("de-DE", "Articles", de_de);
  */
 const Articles = props => {
   const { articles: defaultArticles } = props;
-  const { t } = useTranslation("Articles");
+  const { t, i18n } = useTranslation("Articles");
 
   /**
    * Loads articles from the server
    */
   const [articles, setArticles] = useState(defaultArticles);
 
+  const currentLang = i18n && i18n.language ? i18n.language : "";
+
   useEffect(() => {
-    fetch("/api/articles")
+    fetch(`/api/articles/${currentLang}`)
       .then(response => response.json())
       .then(json => setArticles(json.articles));
-  }, []);
+  }, [currentLang]);
 
   // NOTE: 4. Resource containers get their name from the language file
   const articlesName = t("Articles");
 
   // NOTE: 4a. Resource container slugs are generated from their name. They can be either translated or not.
-  const articlesSlug = routesGenerateSlug({ name: "Articles" });
+  const articlesSlug = routesGenerateSlug({ name: "Articles", t: t });
 
   const articlesList =
     articles &&
