@@ -31,6 +31,12 @@ const makeServer = () => {
       this.get("/articles", schema => {
         return schema.articles.all();
       });
+
+      this.get("/articles/:slug", (schema, request) => {
+        const slug = request.params.slug;
+
+        return schema.articles.findBy({ slug: slug });
+      });
     }
   });
 

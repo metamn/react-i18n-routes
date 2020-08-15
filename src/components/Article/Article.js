@@ -7,7 +7,7 @@
 /**
  * Imports React and third party packages
  */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import { startCase } from "lodash";
 
@@ -48,15 +48,26 @@ const Article = props => {
     params: { slug: slugFromURL }
   } = useRouteMatch();
 
+  const slugForQuery = slugFromURL ? slugFromURL : defaultSlug;
+
   // NOTE: 3. Resources query the DB and load their own data
-  const slug = slugFromURL ? slugFromURL : defaultSlug;
-  const nameFromSlug = startCase(slug);
+  // const nameFromSlug = startCase(slug);
+  const [article, setArticle] = useState(props);
+
+  useEffect(() => {
+    fetch(`/api/articles/${slugForQuery}`)
+      .then(response => response.json())
+      .then(json => setArticle(json.article));
+  }, []);
+
+  // Parsing the (received) data
+  const { name, slug } = article;
 
   return (
     <Layout>
       <dl>
         <dt>{t("Name")}:</dt>
-        <dd>{nameFromSlug}</dd>
+        <dd>{name}</dd>
         <dt>{t("Slug")}:</dt>
         <dd>{slug}</dd>
       </dl>
