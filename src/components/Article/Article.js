@@ -54,9 +54,12 @@ const Article = props => {
 
   return (
     <Layout>
-      <h5>
-        Name: {nameFromSlug}, slug: {slug}
-      </h5>
+      <dl>
+        <dt>{t("Name")}:</dt>
+        <dd>{nameFromSlug}</dd>
+        <dt>{t("Slug")}:</dt>
+        <dd>{slug}</dd>
+      </dl>
     </Layout>
   );
 };
