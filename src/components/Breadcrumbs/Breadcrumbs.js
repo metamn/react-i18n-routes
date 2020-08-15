@@ -114,6 +114,8 @@ const Breadcrumbs = props => {
     const translatedLabel =
       children === "Home" ? tHome(children, children) : children;
 
+    // FIXME: translatedLabel has to be decamelized (Article-ro > Article Ro)
+
     return (
       <StyledBreadcrumb
         label={translatedLabel}

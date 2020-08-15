@@ -24,10 +24,13 @@ const propTypes = {
  * Defines the default props
  *
  * // NOTE: 9. Invalid routes are catched at top level
+ * // FIXME: translated routes has to be generated, not manually added (?)
  */
 const defaultProps = {
   routes: [
+    { id: shortid.generate(), path: "/articles-ro", component: Articles },
     { id: shortid.generate(), path: "/articles", component: Articles },
+    { id: shortid.generate(), path: "/ro", exact: true, component: Home },
     { id: shortid.generate(), path: "/", exact: true, component: Home },
     { id: shortid.generate(), path: "*", component: RouteNotFound }
   ]

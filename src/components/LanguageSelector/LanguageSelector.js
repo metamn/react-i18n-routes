@@ -71,6 +71,8 @@ const LanguageSelector = props => {
 
   /**
    * Sets the new language
+   *
+   * // FIXME: also the URL has to be updated. Otherwise we'll get mixed languages un the UI.
    */
   useEffect(() => {
     i18n.changeLanguage(selected);
