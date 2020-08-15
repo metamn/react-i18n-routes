@@ -1,7 +1,7 @@
 const ro_ro = {
-  Article: "Articol",
-  Name: "Nume",
-  Slug: "Slug"
+  Article: "Article (RO)",
+  Name: "Name (RO)",
+  Slug: "Slug (RO)"
 };
 
 export { ro_ro };

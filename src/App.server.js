@@ -24,18 +24,18 @@ const makeServer = () => {
         lang: "en-US"
       });
       server.create("article", {
-        name: "Articol 1",
-        slug: "articol-1",
+        name: "Article 1 (RO)",
+        slug: "article-1-ro",
         lang: "ro-RO"
       });
       server.create("article", {
-        name: "Articol 2",
-        slug: "articol-2",
+        name: "Article 2 (RO)",
+        slug: "article-2-ro",
         lang: "ro-RO"
       });
       server.create("article", {
-        name: "Articol 3",
-        slug: "articol-3",
+        name: "Article 3 (RO)",
+        slug: "article-3-ro",
         lang: "ro-RO"
       });
     },

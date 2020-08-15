@@ -1,5 +1,5 @@
 const ro_ro = {
-  Articles: "Articole"
+  Articles: "Articles (RO)"
 };
 
 export { ro_ro };
