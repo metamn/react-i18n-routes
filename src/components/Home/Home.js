@@ -90,7 +90,7 @@ const Home = props => {
       <ol>
         <li key="2">
           {t("Access articles through the archive")}:&nbsp;
-          <Link to={`/${articlesSlug}`}>{t(articlesName)}</Link>.
+          <Link to={`/${articlesSlug}`}>{articlesName}</Link>.
         </li>
 
         <li key="1">

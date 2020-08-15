@@ -42,7 +42,7 @@ i18n.addResourceBundle("de-DE", "Articles", de_de);
  */
 const Articles = props => {
   const { articles } = props;
-  const { t } = useTranslation("Home");
+  const { t } = useTranslation("Articles");
 
   // NOTE: 4. Resource containers get their name, slug from the language file
   const articlesName = t("Articles");

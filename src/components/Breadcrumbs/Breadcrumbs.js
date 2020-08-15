@@ -82,7 +82,7 @@ const StyledBreadcrumb = withStyles(theme => ({
  */
 const Breadcrumbs = props => {
   const { container } = useStyles(props);
-  const { t } = useTranslation(["Breadcrumbs", "MenuItems"]);
+  const { t } = useTranslation(["Breadcrumbs"]);
 
   /**
    * Integrates with the router

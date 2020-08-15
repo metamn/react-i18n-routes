@@ -10,8 +10,9 @@ const generateSlug = props => {
 
   /**
    * If there is a translation file the slug will be localized
+   * - If localization is not found for `name` it will fall back silently to `name` in the default language
    */
-  const translatedName = t ? t(name) : name;
+  const translatedName = t ? t(name, name) : name;
 
   return kebabCase(translatedName);
 };
