@@ -55,7 +55,7 @@ const Article = props => {
   const [article, setArticle] = useState(props);
 
   useEffect(() => {
-    fetch(`/api/articles/${slugForQuery}`)
+    fetch(`/api/article/${slugForQuery}`)
       .then(response => response.json())
       .then(json => setArticle(json.article));
   }, []);

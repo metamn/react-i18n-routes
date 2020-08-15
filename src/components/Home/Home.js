@@ -42,7 +42,7 @@ i18n.addResourceBundle("de-DE", "Home", de_de);
  */
 const Home = props => {
   const { articles: defaultArticles } = props;
-  const { t } = useTranslation("Home");
+  const { t, i18n } = useTranslation("Home");
   const { t: tArticles } = useTranslation("Articles");
 
   /**
@@ -50,11 +50,13 @@ const Home = props => {
    */
   const [articles, setArticles] = useState(defaultArticles);
 
+  const currentLang = i18n && i18n.language ? i18n.language : "";
+
   useEffect(() => {
-    fetch("/api/articles")
+    fetch(`/api/articles/${currentLang}`)
       .then(response => response.json())
       .then(json => setArticles(json.articles));
-  }, []);
+  }, [currentLang]);
 
   // NOTE: 7. Resource containers should provide their localized name to other components
   // NOTE: 7a. They do via t(). We don't need anything else here
