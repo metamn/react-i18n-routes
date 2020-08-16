@@ -1,5 +1,16 @@
 import { kebabCase } from "lodash";
 
+import {
+  getCurrentLang,
+  getDefaultLang,
+  isCurrentLangTheDefaultLang,
+  prettifyLocale,
+  prefixPath
+} from "./Routes.logic.helpers";
+
+/**
+ * Updates the URL on language change
+ */
 const updateURL = props => {
   const { i18n } = props;
 
@@ -9,37 +20,6 @@ const updateURL = props => {
   const prettyLocale = prettifyLocale(currentLang);
 
   return `/${prettyLocale}`;
-};
-
-/**
- * Gets the current language
- */
-const getCurrentLang = i18n => {
-  return i18n && i18n.language ? i18n.language : "";
-};
-
-/**
- * Gets the default language
- */
-const getDefaultLang = i18n => {
-  return i18n && i18n.options && i18n.options.lng ? i18n.options.lng : "";
-};
-
-/**
- * Checks if the current lang is the default lang
- */
-const isCurrentLangTheDefaultLang = i18n => {
-  return getDefaultLang(i18n) === getCurrentLang(i18n);
-};
-
-/**
- * Removes the second part of the locale
- *
- * Ex: 'hu-HU' > 'hu'
- */
-const prettifyLocale = locale => {
-  const split = locale.split("-");
-  return split[0] ? split[0] : "";
 };
 
 /**
@@ -57,17 +37,6 @@ const generateSlug = props => {
   const translatedName = t ? t(name, name) : name;
 
   return kebabCase(translatedName);
-};
-
-/**
- * Ads a perfix to a path
- *
- * Ex: /prefix/path
- */
-const prefixPath = props => {
-  const { path, prefix } = props;
-
-  return `/${prefix}${path}`;
 };
 
 /**
@@ -146,13 +115,16 @@ const localizeRoutes = props => {
       return { ...item, path: localizePath({ path: path, t: t }) };
     });
 
-  console.log("localized:", localized);
-
   const prefixed = prefixRoutes({ routes: localized, i18n: i18n });
-
-  console.log("prefixed:", prefixed);
 
   return prefixed;
 };
 
-export { localizeRoutes, localizePath, prefixRoutes, generateSlug, updateURL };
+export {
+  localizeRoutes,
+  localizePath,
+  prefixRoutes,
+  generateSlug,
+  updateURL,
+  getCurrentLang
+};

@@ -15,7 +15,7 @@ import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
  */
 import Layout from "../Layout";
 import Article from "../Article";
-import { routesGenerateSlug } from "../Routes";
+import { routesGenerateSlug, routesGetCurrentLang } from "../Routes";
 
 /**
  * Imports data
@@ -46,7 +46,10 @@ const Home = props => {
    */
   const [articles, setArticles] = useState(defaultArticles);
 
-  const currentLang = i18n && i18n.language ? i18n.language : "";
+  /**
+   * Re-loads articles from server when the language is changed
+   */
+  const currentLang = routesGetCurrentLang(i18n);
 
   useEffect(() => {
     fetch(`/api/articles/${currentLang}`)
@@ -59,7 +62,7 @@ const Home = props => {
   const articlesName = tArticles("Articles");
 
   // NOTE: 7b. Resource containers should provide their slug to other components. Otherwise the same function with the same settings (`routesGenerateSlug`) should be used to generate the slug across the project.
-  const articlesSlug = routesGenerateSlug({ name: "Articles", t: tArticles });
+  const articlesSlug = tArticles("articles");
 
   /**
    * Articles with internal links

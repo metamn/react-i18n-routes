@@ -29,7 +29,8 @@ import {
   localizePath,
   prefixRoutes,
   generateSlug,
-  updateURL
+  updateURL,
+  getCurrentLang
 } from "./Routes.logic";
 
 /**
@@ -103,5 +104,6 @@ export {
   defaultProps as RoutesDefaultProps,
   localizePath as routesLocalizePath,
   generateSlug as routesGenerateSlug,
-  updateURL as routesUpdateURL
+  updateURL as routesUpdateURL,
+  getCurrentLang as routesGetCurrentLang
 };

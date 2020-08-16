@@ -4,5 +4,6 @@ export {
   RoutesDefaultProps,
   routesLocalizePath,
   routesGenerateSlug,
-  routesUpdateURL
+  routesUpdateURL,
+  routesGetCurrentLang
 } from "./Routes";
