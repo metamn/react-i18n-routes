@@ -11,6 +11,11 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 /**
+ * Imports other components and hooks
+ */
+import { LanguageSelectorDefaultProps } from "../LanguageSelector";
+
+/**
  * Imports data
  */
 import { propTypes, defaultProps } from "./Routes.data";
@@ -19,6 +24,8 @@ import { propTypes, defaultProps } from "./Routes.data";
  * Imports logic
  */
 import {
+  collectTranslationFilenames,
+  routesForLanguage,
   localizeRoutes,
   localizePath,
   prefixRoutes,
@@ -43,20 +50,30 @@ i18n.addResourceBundle("en-US", "Routes", en_us);
  * Displays the component
  */
 const Routes = props => {
-  const { items } = props;
+  const { items: routes } = props;
   const { t, i18n } = useTranslation("Routes");
 
-  const routesList =
-    items &&
-    items.map(item => {
-      const { id } = item;
+  // NOTE: cannot load translations outside the current language. See https://github.com/i18next/react-i18next/issues/896
+  const ro = i18n.getFixedT("ro-RO", "Articles");
+  console.log("ro:", ro("Articles"));
 
-      return <Route key={id} {...item} />;
-    });
+  /**
+   * Loads all languages
+   */
+  const { languages } = LanguageSelectorDefaultProps;
+
+  /**
+   * Creates routes for all languages
+   */
+  const routesForLanguages =
+    languages &&
+    languages.map(language =>
+      routesForLanguage({ routes: routes, language: language, t: t })
+    );
 
   return (
     <Router>
-      <Switch>{routesList}</Switch>
+      <Switch>{routesForLanguages}</Switch>
     </Router>
   );
 };

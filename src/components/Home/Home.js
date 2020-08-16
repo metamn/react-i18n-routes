@@ -43,6 +43,7 @@ i18n.addResourceBundle("en-US", "Home", en_us);
 const Home = props => {
   const { articles: defaultArticles, routes } = props;
   const { items: defaultArticlesItems } = defaultArticles;
+
   const { t, i18n } = useTranslation("Home");
   const { t: tArticles } = useTranslation("Articles");
 
