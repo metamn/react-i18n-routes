@@ -41,14 +41,15 @@ i18n.addResourceBundle("en-US", "Home", en_us);
  * Displays the component
  */
 const Home = props => {
-  const { articles: defaultArticles } = props;
+  const { articles: defaultArticles, routes } = props;
+  const { items: defaultArticlesItems } = defaultArticles;
   const { t, i18n } = useTranslation("Home");
   const { t: tArticles } = useTranslation("Articles");
 
   /**
    * Loads articles from the server
    */
-  const [articles, setArticles] = useState(defaultArticles);
+  const [articles, setArticles] = useState(defaultArticlesItems);
 
   /**
    * Re-loads articles from server when the language is changed

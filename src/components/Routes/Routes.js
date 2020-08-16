@@ -9,12 +9,6 @@
  */
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import shortid from "shortid";
-
-/**
- * Imports other components and hooks
- */
-import RouteNotFound from "../RouteNotFound";
 
 /**
  * Imports data
@@ -49,49 +43,20 @@ i18n.addResourceBundle("en-US", "Routes", en_us);
  * Displays the component
  */
 const Routes = props => {
-  const { routes } = props;
+  const { items } = props;
   const { t, i18n } = useTranslation("Routes");
 
-  /**
-   * Collects all resource container translations
-   */
-  const { t: tResourceContainers } = useTranslation("Articles");
-
-  /**
-   * Displays routes on the current language
-   */
-  const routesOnCurrentLang = localizeRoutes({
-    routes: routes,
-    t: tResourceContainers,
-    i18n: i18n
-  });
-
   const routesList =
-    routesOnCurrentLang &&
-    routesOnCurrentLang.map(route => {
-      const { id } = route;
+    items &&
+    items.map(item => {
+      const { id } = item;
 
-      return <Route key={id} {...route} />;
+      return <Route key={id} {...item} />;
     });
-
-  /**
-   * Handles 404 routes
-   */
-  const routeNotFound = (
-    <Route
-      key={shortid.generate()}
-      {...{ path: "*", component: RouteNotFound }}
-    />
-  );
-
-  /**
-   * Merges all route lists
-   */
-  const display = [...routesList, routeNotFound];
 
   return (
     <Router>
-      <Switch>{display}</Switch>
+      <Switch>{routesList}</Switch>
     </Router>
   );
 };

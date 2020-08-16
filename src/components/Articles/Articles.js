@@ -37,7 +37,7 @@ i18n.addResourceBundle("en-US", "Articles", en_us);
  * Displays the component
  */
 const Articles = props => {
-  const { articles: defaultArticles } = props;
+  const { items: defaultArticles } = props;
   const { t, i18n } = useTranslation("Articles");
 
   /**
