@@ -55,6 +55,23 @@ const Routes = props => {
   const { t: tResourceContainers } = useTranslation("Articles");
 
   /**
+   * Displays routes on the current language
+   */
+  const routesOnCurrentLang = localizeRoutes({
+    routes: routes,
+    t: tResourceContainers,
+    i18n: i18n
+  });
+
+  const routesList =
+    routesOnCurrentLang &&
+    routesOnCurrentLang.map(route => {
+      const { id } = route;
+
+      return <Route key={id} {...route} />;
+    });
+
+  /**
    * Handles 404 routes
    */
   const routeNotFound = (
@@ -65,36 +82,9 @@ const Routes = props => {
   );
 
   /**
-   * Displays routes on default language
-   */
-  const routesList =
-    routes &&
-    routes.map(route => {
-      const { id } = route;
-
-      return <Route key={id} {...route} />;
-    });
-
-  /**
-   * Displays routes on localized language
-   */
-  const localizedRoutes = localizeRoutes({
-    routes: routes,
-    t: tResourceContainers
-  });
-
-  const localizedRoutesList =
-    localizedRoutes &&
-    localizedRoutes.map(route => {
-      const { id } = route;
-
-      return <Route key={id} {...route} />;
-    });
-
-  /**
    * Merges all route lists
    */
-  const display = [...routesList, ...localizedRoutesList, routeNotFound];
+  const display = [...routesList, routeNotFound];
 
   return (
     <Router>

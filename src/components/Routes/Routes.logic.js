@@ -100,19 +100,26 @@ const localizePath = props => {
 /**
  * Translates a set of route paths
  *
- * Ex: ['/destinations', '/account'] => ['/destinatii', '/cont']
+ * Ex: ['/destinations', '/account'] => ['/ro/destinatii', '/ro/cont']
  */
 const localizeRoutes = props => {
-  const { routes, t } = props;
+  const { routes, t, i18n } = props;
 
-  return (
+  const localized =
     routes &&
     routes.map(item => {
       const { path } = item;
 
-      return { ...props, path: localizePath({ path: path, t: t }) };
-    })
-  );
+      return { ...item, path: localizePath({ path: path, t: t }) };
+    });
+
+  console.log("localized:", localized);
+
+  const prefixed = prefixRoutes({ routes: localized, i18n: i18n });
+
+  console.log("prefixed:", prefixed);
+
+  return prefixed;
 };
 
 export { localizeRoutes, localizePath, prefixRoutes, generateSlug };
