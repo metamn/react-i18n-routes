@@ -5,7 +5,8 @@ import {
   getDefaultLang,
   isCurrentLangTheDefaultLang,
   prettifyLocale,
-  prefixPath
+  prefixPath,
+  addPrefix
 } from "./Routes.logic.helpers";
 
 /**
@@ -16,10 +17,7 @@ const updateURL = props => {
 
   if (isCurrentLangTheDefaultLang(i18n)) return "/";
 
-  const currentLang = getCurrentLang(i18n);
-  const prettyLocale = prettifyLocale(currentLang);
-
-  return `/${prettyLocale}`;
+  return addPrefix({ current: "", i18n: i18n });
 };
 
 /**
@@ -126,5 +124,6 @@ export {
   prefixRoutes,
   generateSlug,
   updateURL,
-  getCurrentLang
+  getCurrentLang,
+  addPrefix
 };

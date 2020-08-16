@@ -30,7 +30,19 @@ const prettifyLocale = locale => {
 };
 
 /**
- * Ads a prefix to a path
+ * Adds a locale prefix to a current path
+ */
+const addPrefix = props => {
+  const { current, i18n } = props;
+
+  const currentLang = getCurrentLang(i18n);
+  const prettyfiedCurrentLang = prettifyLocale(currentLang);
+
+  return `/${prettyfiedCurrentLang}/${current}`;
+};
+
+/**
+ * Adds a prefix to a path
  *
  * Ex: /prefix/path
  */
@@ -45,5 +57,6 @@ export {
   getDefaultLang,
   isCurrentLangTheDefaultLang,
   prettifyLocale,
-  prefixPath
+  prefixPath,
+  addPrefix
 };

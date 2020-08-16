@@ -15,7 +15,11 @@ import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
  */
 import Layout from "../Layout";
 import Article from "../Article";
-import { routesGenerateSlug, routesGetCurrentLang } from "../Routes";
+import {
+  routesGenerateSlug,
+  routesGetCurrentLang,
+  routesAddPrefix
+} from "../Routes";
 
 /**
  * Imports data
@@ -62,7 +66,10 @@ const Home = props => {
   const articlesName = tArticles("Articles");
 
   // NOTE: 7b. Resource containers should provide their slug to other components. Otherwise the same function with the same settings (`routesGenerateSlug`) should be used to generate the slug across the project.
-  const articlesSlug = tArticles("articles");
+  const articlesSlug = routesAddPrefix({
+    current: tArticles("articles"),
+    i18n: i18n
+  });
 
   /**
    * Articles with internal links
