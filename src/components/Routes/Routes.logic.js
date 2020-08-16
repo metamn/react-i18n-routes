@@ -92,8 +92,6 @@ const localizePath = props => {
   const pathWithoutSlash = pathWithoutQueryParams.substring(1);
   const pathWithoutSlashLocalized = t(pathWithoutSlash, "not-found");
 
-  console.log("pathWithoutSlashLocalized:", pathWithoutSlashLocalized);
-
   return pathWithoutSlashLocalized === "not-found"
     ? path
     : `/${pathWithoutSlashLocalized}${queryParams}`;
@@ -110,8 +108,7 @@ const localizeRoutes = props => {
   return (
     routes &&
     routes.map(item => {
-      const { props } = item;
-      const { path } = props;
+      const { path } = item;
 
       return { ...props, path: localizePath({ path: path, t: t }) };
     })

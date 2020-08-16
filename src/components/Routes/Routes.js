@@ -78,15 +78,23 @@ const Routes = props => {
   /**
    * Displays routes on localized language
    */
-  const localizedRoutesList = localizeRoutes({
-    routes: routesList,
+  const localizedRoutes = localizeRoutes({
+    routes: routes,
     t: tResourceContainers
   });
+
+  const localizedRoutesList =
+    localizedRoutes &&
+    localizedRoutes.map(route => {
+      const { id } = route;
+
+      return <Route key={id} {...route} />;
+    });
 
   /**
    * Merges all route lists
    */
-  const display = [...routesList, routeNotFound];
+  const display = [...routesList, ...localizedRoutesList, routeNotFound];
 
   return (
     <Router>
