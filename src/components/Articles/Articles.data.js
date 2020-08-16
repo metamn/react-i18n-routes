@@ -15,14 +15,14 @@ import { ArticlePropTypes, ArticleDefaultProps } from "../Article";
  * Defines the prop types
  */
 const propTypes = {
-  articles: PropTypes.arrayOf(PropTypes.shape(ArticlePropTypes))
+  items: PropTypes.arrayOf(PropTypes.shape(ArticlePropTypes))
 };
 
 /**
  * Defines the default props
  */
 const defaultProps = {
-  articles: Array(3)
+  items: Array(3)
     .fill(ArticleDefaultProps)
     .map((item, index) => {
       return {

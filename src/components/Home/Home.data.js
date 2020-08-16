@@ -10,19 +10,22 @@ import shortid from "shortid";
  * Imports other components and hooks
  */
 import { ArticlesPropTypes, ArticlesDefaultProps } from "../Articles";
+import { RoutesPropTypes, RoutesDefaultProps } from "../Routes";
 
 /**
  * Defines the prop types
  */
 const propTypes = {
-  ...ArticlesPropTypes
+  articles: PropTypes.shape(ArticlesPropTypes),
+  routes: PropTypes.shape(RoutesPropTypes)
 };
 
 /**
  * Defines the default props
  */
 const defaultProps = {
-  ...ArticlesDefaultProps
+  articles: ArticlesDefaultProps,
+  routes: RoutesDefaultProps
 };
 
 export { propTypes, defaultProps };
