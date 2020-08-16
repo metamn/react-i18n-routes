@@ -53,7 +53,7 @@ const Routes = props => {
   const { items: routes } = props;
   const { t, i18n } = useTranslation("Routes");
 
-  // NOTE: cannot load translations outside the current language. See https://github.com/i18next/react-i18next/issues/896
+  // NOTE: How to load translations outside the current language. See https://github.com/i18next/react-i18next/issues/896
   const ro = i18n.getFixedT("ro-RO", "Articles");
   console.log("ro:", ro("Articles"));
 
