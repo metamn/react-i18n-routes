@@ -3,5 +3,6 @@ export {
   RoutesPropTypes,
   RoutesDefaultProps,
   routesLocalizePath,
-  routesGenerateSlug
+  routesGenerateSlug,
+  routesUpdateURL
 } from "./Routes";

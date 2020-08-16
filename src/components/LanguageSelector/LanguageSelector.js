@@ -11,6 +11,12 @@ import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import shortid from "shortid";
 import { upperCase } from "lodash";
+import { useHistory } from "react-router-dom";
+
+/**
+ * Imports other components and hooks
+ */
+import { routesUpdateURL } from "../Routes";
 
 /**
  * Imports data
@@ -54,6 +60,7 @@ const LanguageSelector = props => {
   const { languages, defaultLanguage } = props;
   const { alternateName } = defaultLanguage;
   const { container, textField } = useStyles(props);
+  const history = useHistory();
 
   const currentLanguage = i18n.language || alternateName;
 
@@ -76,6 +83,7 @@ const LanguageSelector = props => {
    */
   useEffect(() => {
     i18n.changeLanguage(selected);
+    history.push(routesUpdateURL({ i18n: i18n }));
   }, [selected]);
 
   /**

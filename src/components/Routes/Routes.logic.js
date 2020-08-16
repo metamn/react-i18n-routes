@@ -1,5 +1,47 @@
 import { kebabCase } from "lodash";
 
+const updateURL = props => {
+  const { i18n } = props;
+
+  if (isCurrentLangTheDefaultLang(i18n)) return "/";
+
+  const currentLang = getCurrentLang(i18n);
+  const prettyLocale = prettifyLocale(currentLang);
+
+  return `/${prettyLocale}`;
+};
+
+/**
+ * Gets the current language
+ */
+const getCurrentLang = i18n => {
+  return i18n && i18n.language ? i18n.language : "";
+};
+
+/**
+ * Gets the default language
+ */
+const getDefaultLang = i18n => {
+  return i18n && i18n.options && i18n.options.lng ? i18n.options.lng : "";
+};
+
+/**
+ * Checks if the current lang is the default lang
+ */
+const isCurrentLangTheDefaultLang = i18n => {
+  return getDefaultLang(i18n) === getCurrentLang(i18n);
+};
+
+/**
+ * Removes the second part of the locale
+ *
+ * Ex: 'hu-HU' > 'hu'
+ */
+const prettifyLocale = locale => {
+  const split = locale.split("-");
+  return split[0] ? split[0] : "";
+};
+
 /**
  * Generates a slug from a label
  *
@@ -42,24 +84,15 @@ const prefixRoutes = props => {
   if (!i18n) return routes;
 
   /**
-   * Loads languages
-   */
-  const defaultLang =
-    i18n && i18n.options && i18n.options.lng ? i18n.options.lng : "";
-
-  const currentLang = i18n && i18n.language ? i18n.language : "";
-
-  /**
    * Returns no prefix for the default lang
    */
-  if (defaultLang === currentLang) return routes;
+  if (isCurrentLangTheDefaultLang(i18n)) return routes;
 
   /**
-   * Removes the second part of the locale
-   * Ex: 'hu-HU' > 'hu'
+   * Gets the prettyfied version of the current lang
    */
-  const split = currentLang.split("-");
-  const currentLangPrefix = split[0] ? split[0] : "";
+  const currentLang = getCurrentLang(i18n);
+  const currentLangPrefix = prettifyLocale(currentLang);
 
   return (
     routes &&
@@ -122,4 +155,4 @@ const localizeRoutes = props => {
   return prefixed;
 };
 
-export { localizeRoutes, localizePath, prefixRoutes, generateSlug };
+export { localizeRoutes, localizePath, prefixRoutes, generateSlug, updateURL };
