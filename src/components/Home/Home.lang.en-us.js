@@ -1,5 +1,6 @@
 const en_us = {
-  Home: "Home"
+  Home: "Home",
+  home: "/"
 };
 
 export { en_us };

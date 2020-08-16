@@ -1,5 +1,6 @@
 const en_us = {
-  RouteNotFound: "RouteNotFound"
+  RouteNotFound: "RouteNotFound",
+  "route-not-found": "/*"
 };
 
 export { en_us };

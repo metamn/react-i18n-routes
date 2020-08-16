@@ -9,7 +9,7 @@ import shortid from "shortid";
 /**
  * Defines the prop types
  *
- * // NOTE: 1. Resources are coming from the DB
+ * // NOTE: 1. Resources are coming from the DB. They don't need to be localized.
  */
 const propTypes = {
   id: PropTypes.string,

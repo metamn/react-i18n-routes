@@ -30,4 +30,4 @@ http://localhost:3000/ro/articles-ro/article-1-ro
 
 ### Single responsibility principle
 
-- Components are responsible to localize themselves and declare their route needs
+Components are responsible to localize themselves and declare their route needs.
