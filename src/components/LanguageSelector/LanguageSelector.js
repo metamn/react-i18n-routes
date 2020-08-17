@@ -65,8 +65,8 @@ const LanguageSelector = props => {
   const history = useHistory();
 
   /**
-   * Loads breadcrumbs
-   * 1. The default language will be determined from URL
+   * Loads breadcrumbs:
+   * 1. The default language will be determined from URL / breadcrumbs
    * 2. On language change the URL will be updated by translating these breadcrumbs
    * 2.a useLocation is not enough for translations
    */
