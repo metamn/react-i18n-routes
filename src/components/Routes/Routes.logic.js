@@ -26,6 +26,8 @@ const routesForLanguage = props => {
       const label = langF(componentName);
       const slug = langF(kebabCase(componentName));
 
+      console.log("slug:", slug);
+
       return { ...item, path: slug };
     })
   );
@@ -148,5 +150,6 @@ export {
   updateURL,
   getCurrentLang,
   addPrefix,
-  routesForLanguage
+  routesForLanguage,
+  getDefaultLang
 };

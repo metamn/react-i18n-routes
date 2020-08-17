@@ -32,7 +32,8 @@ import {
   generateSlug,
   updateURL,
   getCurrentLang,
-  addPrefix
+  addPrefix,
+  getDefaultLang
 } from "./Routes.logic";
 
 /**
@@ -59,11 +60,29 @@ const Routes = props => {
   const { languages } = LanguageSelectorDefaultProps;
 
   /**
+   * Re-orders languages
+   * - The default language (without) prefix should be the last in the `<Route>` list
+   * - Ex:
+   * 	`<Route path='/ro' ...>`
+   * 	`<Route path='/ro/articles' ...>`
+   * 	`<Route path='/' ...>`
+   * 	`<Route path='/articles' ...>`
+   */
+  const defaultLang = getDefaultLang(i18n);
+  const languagesOrdered = languages.sort(item => {
+    const { alternateName } = item;
+    return alternateName === defaultLang ? 1 : -1;
+  });
+
+  /**
    * Creates routes for all languages
+   * - This is needed to make direct URL access possible.
+   * - Ex: `https://localhost/ro/articles-ro/article-1-ro` should be accessible from the URL bar whatever the current language is
+   * - This way every URL on the site is made shareable
    */
   const routesForLanguages =
-    languages &&
-    languages.map(language => {
+    languagesOrdered &&
+    languagesOrdered.map(language => {
       const localizedRoutes = routesForLanguage({
         routes: routes,
         language: language,

@@ -7,6 +7,8 @@ const getCurrentLang = i18n => {
 
 /**
  * Gets the default language
+ *
+ * Returns the full language code like `en-US`
  */
 const getDefaultLang = i18n => {
   return i18n && i18n.options && i18n.options.lng ? i18n.options.lng : "";
