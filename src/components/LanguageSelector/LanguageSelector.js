@@ -10,7 +10,7 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import shortid from "shortid";
-import { upperCase } from "lodash";
+import { upperCase, startCase } from "lodash";
 import { useHistory } from "react-router-dom";
 import useBreadcrumbs from "use-react-router-breadcrumbs";
 
@@ -65,17 +65,46 @@ const LanguageSelector = props => {
   const history = useHistory();
 
   /**
-   * Saves breadcrumbs
-   * - On language change the URL will be updated by translating these breadcrumbs
-   * - useLocation is not enough for translations
+   * Loads breadcrumbs
+   * 1. The default language will be determined from URL
+   * 2. On language change the URL will be updated by translating these breadcrumbs
+   * 2.a useLocation is not enough for translations
    */
   const breadcrumbs = useBreadcrumbs();
 
   /**
-   * Manages the state of the select box
+   * Loads default language from i18n
    */
   const currentLanguage = routesGetCurrentLang(i18n);
-  const [selected, setSelected] = useState(currentLanguage);
+  console.log("currentLanguage:", currentLanguage);
+
+  /**
+   * Loads language from URL
+   */
+  const breadcrumbForLang = breadcrumbs[1];
+
+  let currentLanguageFromURL = currentLanguage;
+  let urlNeedsTranslation = true;
+
+  if (breadcrumbs[1]?.key) {
+    const split = breadcrumbs[1].key.split("/");
+    const keyWithoutSlash = split[1] ? split[1] : "";
+    const language = languages.find(
+      item => item.displayName === startCase(keyWithoutSlash)
+    );
+    currentLanguageFromURL = language
+      ? language.alternateName
+      : currentLanguage;
+    urlNeedsTranslation = currentLanguageFromURL === currentLanguage;
+  }
+
+  console.log("currentLanguageFromURL:", currentLanguageFromURL);
+  console.log("urlNeedsTranslation:", urlNeedsTranslation);
+
+  /**
+   * Manages the state of the select box
+   */
+  const [selected, setSelected] = useState(currentLanguageFromURL);
 
   /**
    * Manages the select box change
@@ -92,7 +121,7 @@ const LanguageSelector = props => {
   useEffect(() => {
     i18n.changeLanguage(selected);
 
-    if (selected !== currentLanguage) {
+    if (selected !== currentLanguage && urlNeedsTranslation) {
       console.log(
         "URL must be updated from these breadcrumbs:",
         breadcrumbs,
