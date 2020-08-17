@@ -33,11 +33,27 @@ const routesForLanguage = props => {
  * Updates the URL on language change
  */
 const updateURL = props => {
-  const { i18n } = props;
+  const { breadcrumbs, i18n } = props;
 
-  if (isCurrentLangTheDefaultLang(i18n)) return "/";
+  const currentLanguage = getCurrentLang(i18n);
 
-  return addPrefix({ current: "", i18n: i18n });
+  return (
+    breadcrumbs &&
+    breadcrumbs.map(item => {
+      const { breadcrumb } = item;
+      const { props } = breadcrumb;
+      const { children } = props;
+
+      const langF = i18n.getFixedT(currentLanguage, children);
+      const slug = langF(kebabCase(children));
+
+      if (slug === kebabCase(children)) {
+        console.log("Slug is a resource:", slug);
+      }
+
+      return slug;
+    })
+  );
 };
 
 export {

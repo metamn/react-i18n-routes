@@ -4,5 +4,6 @@ export {
   RoutesDefaultProps,
   routesGetCurrentLang,
   routesGetDefaultLang,
-  isCurrentLangTheDefaultLang
+  isCurrentLangTheDefaultLang,
+  routesUpdateURL
 } from "./Routes";

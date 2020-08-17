@@ -32,7 +32,8 @@ import {
   routesForLanguage,
   getCurrentLang,
   getDefaultLang,
-  isCurrentLangTheDefaultLang
+  isCurrentLangTheDefaultLang,
+  updateURL
 } from "./Routes.logic";
 
 /**
@@ -115,5 +116,6 @@ export {
   defaultProps as RoutesDefaultProps,
   getCurrentLang as routesGetCurrentLang,
   getDefaultLang as routesGetDefaultLang,
-  isCurrentLangTheDefaultLang
+  isCurrentLangTheDefaultLang,
+  updateURL as routesUpdateURL
 };
