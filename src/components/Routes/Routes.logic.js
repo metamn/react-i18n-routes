@@ -37,7 +37,7 @@ const updateURL = props => {
 
   const currentLanguage = getCurrentLang(i18n);
 
-  return (
+  const urlParts =
     breadcrumbs &&
     breadcrumbs.map(item => {
       const { breadcrumb } = item;
@@ -49,11 +49,13 @@ const updateURL = props => {
 
       if (slug === kebabCase(children)) {
         console.log("Slug is a resource:", slug);
+        return `/${slug}`;
       }
 
       return slug;
-    })
-  );
+    });
+
+  return urlParts.join("");
 };
 
 export {

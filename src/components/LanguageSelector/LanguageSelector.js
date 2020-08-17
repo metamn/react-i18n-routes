@@ -11,7 +11,7 @@ import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import shortid from "shortid";
 import { upperCase } from "lodash";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import useBreadcrumbs from "use-react-router-breadcrumbs";
 
 /**
@@ -63,6 +63,7 @@ const LanguageSelector = props => {
   const { languages } = props;
   const { container, textField } = useStyles(props);
   const history = useHistory();
+  const location = useLocation();
 
   /**
    * Saves breadcrumbs
@@ -98,10 +99,11 @@ const LanguageSelector = props => {
         " to: ",
         selected
       );
+      console.log("location:", location);
       const newURL = routesUpdateURL({ breadcrumbs: breadcrumbs, i18n: i18n });
       console.log("newURL:", newURL);
+      history.push(newURL);
     }
-    //history.push(routesUpdateURL({ i18n: i18n }));
   }, [selected]);
 
   /**

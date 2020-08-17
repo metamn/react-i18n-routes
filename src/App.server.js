@@ -10,32 +10,38 @@ const makeServer = () => {
       server.create("article", {
         name: "Article 1",
         slug: "article-1",
-        lang: "en-US"
+        lang: "en-US",
+        multilangID: "1"
       });
       server.create("article", {
         name: "Article 2",
         slug: "article-2",
-        lang: "en-US"
+        lang: "en-US",
+        multilangID: "2"
       });
       server.create("article", {
         name: "Article 3",
         slug: "article-3",
-        lang: "en-US"
+        lang: "en-US",
+        multilangID: "3"
       });
       server.create("article", {
         name: "Article 1 (RO)",
         slug: "article-1-ro",
-        lang: "ro-RO"
+        lang: "ro-RO",
+        multilangID: "1"
       });
       server.create("article", {
         name: "Article 2 (RO)",
         slug: "article-2-ro",
-        lang: "ro-RO"
+        lang: "ro-RO",
+        multilangID: "2"
       });
       server.create("article", {
         name: "Article 3 (RO)",
         slug: "article-3-ro",
-        lang: "ro-RO"
+        lang: "ro-RO",
+        multilangID: "3"
       });
     },
 
