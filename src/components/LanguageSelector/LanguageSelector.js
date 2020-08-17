@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 /**
  * Imports other components and hooks
  */
-import { routesUpdateURL } from "../Routes";
+import { routesUpdateURL, routesGetCurrentLang } from "../Routes";
 
 /**
  * Imports data
@@ -41,7 +41,9 @@ import i18n from "../../i18n";
  * Styles the component
  */
 const useStyles = makeStyles(theme => ({
-  container: {},
+  container: {
+    marginBottom: theme.spacing(2)
+  },
 
   textField: {
     /**
@@ -57,12 +59,12 @@ const useStyles = makeStyles(theme => ({
  * Displays the component
  */
 const LanguageSelector = props => {
-  const { languages, defaultLanguage } = props;
-  const { alternateName } = defaultLanguage;
+  const { languages } = props;
   const { container, textField } = useStyles(props);
   const history = useHistory();
 
-  const currentLanguage = i18n.language || alternateName;
+  const currentLanguage = routesGetCurrentLang(i18n);
+  console.log("currentLanguage:", currentLanguage);
 
   /**
    * Manages the state of the select box
@@ -79,10 +81,11 @@ const LanguageSelector = props => {
   /**
    * Sets the new language
    *
-   * // FIXME: also the URL has to be updated. Otherwise we'll get mixed languages un the UI.
+   * Also updates the URL. Otherwise we'll get mixed languages un the UI.
    */
   useEffect(() => {
     i18n.changeLanguage(selected);
+    console.log("selected:", selected);
     //history.push(routesUpdateURL({ i18n: i18n }));
   }, [selected]);
 

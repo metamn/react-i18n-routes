@@ -13,7 +13,6 @@ import clsx from "clsx";
 /**
  * Imports other components and hooks
  */
-import LanguageSelector from "../LanguageSelector";
 import Breadcrumbs from "../Breadcrumbs";
 
 /**
@@ -38,14 +37,11 @@ const useStyles = makeStyles(theme => ({
  * Displays the component
  */
 const Layout = props => {
-  const { languageSelector, children } = props;
+  const { children } = props;
   const { container } = useStyles(props);
 
   return (
     <Grid container spacing={2} className={clsx(container, "Layout")}>
-      <Grid item xs={12}>
-        <LanguageSelector {...languageSelector} />
-      </Grid>
       <Grid item xs={12}>
         <Breadcrumbs />
       </Grid>
