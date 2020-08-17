@@ -11,7 +11,8 @@ import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import shortid from "shortid";
 import { upperCase } from "lodash";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import useBreadcrumbs from "use-react-router-breadcrumbs";
 
 /**
  * Imports other components and hooks
@@ -64,10 +65,10 @@ const LanguageSelector = props => {
   const history = useHistory();
 
   /**
-   * Saves breadcrumbs / location
+   * Saves breadcrumbs
    * On language change the URL will be updated by translating these breadcrumbs
    */
-  //const location = useLocation();
+  const breadcrumbs = useBreadcrumbs();
 
   /**
    * Manages the state of the select box
@@ -91,8 +92,7 @@ const LanguageSelector = props => {
     i18n.changeLanguage(selected);
 
     if (selected !== currentLanguage) {
-      console.log("URL must be updated");
-      //console.log("location:", location);
+      console.log("URL must be updated from these breadcrumbs:", breadcrumbs);
     }
     //history.push(routesUpdateURL({ i18n: i18n }));
   }, [selected]);

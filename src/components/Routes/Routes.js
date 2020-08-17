@@ -12,8 +12,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 /**
  * Imports other components and hooks
+ *
+ * // NOTE: Language selector should stay outside the layout. Otherwise on every click it will be re-rendered, thus re-initialized, thus the URL updated
+ * // NOTE: Language selector should stay inside routes to be able to change the URL
  */
-import { LanguageSelectorDefaultProps } from "../LanguageSelector";
+import LanguageSelector, {
+  LanguageSelectorDefaultProps
+} from "../LanguageSelector";
 
 /**
  * Imports data
@@ -95,6 +100,7 @@ const Routes = props => {
 
   return (
     <Router>
+      <LanguageSelector />
       <Switch>{routesForLanguages}</Switch>
     </Router>
   );
