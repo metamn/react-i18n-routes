@@ -57,7 +57,7 @@ const Articles = props => {
   const articlesName = t("Articles");
 
   // NOTE: 4a. Resource container slugs are generated from their name. They can be either translated or not.
-  const articlesSlug = routesGenerateSlug({ name: "Articles", t: t });
+  const articlesSlug = t("articles");
 
   const articlesList =
     articles &&
@@ -65,7 +65,7 @@ const Articles = props => {
       const { id, name, slug } = item;
 
       // NOTE: 5. Resource containers are responsible to compose up complete, nested links pointing to their childrens
-      const articleSlug = `/${articlesSlug}/${slug}`;
+      const articleSlug = `${articlesSlug}/${slug}`;
 
       return (
         <li key={id}>

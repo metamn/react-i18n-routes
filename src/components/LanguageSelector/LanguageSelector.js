@@ -83,7 +83,7 @@ const LanguageSelector = props => {
    */
   useEffect(() => {
     i18n.changeLanguage(selected);
-    history.push(routesUpdateURL({ i18n: i18n }));
+    //history.push(routesUpdateURL({ i18n: i18n }));
   }, [selected]);
 
   /**
