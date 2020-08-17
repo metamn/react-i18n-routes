@@ -55,7 +55,9 @@ const updateURL = props => {
       return slug;
     });
 
-  return urlParts.join("");
+  console.log("urlParts:", urlParts);
+
+  return urlParts.map(item => item).join("");
 };
 
 export {

@@ -47,7 +47,6 @@ const Articles = props => {
 
   /**
    * Re-loads articles from server when the language is changed
-   * @type {[type]}
    */
   const currentLang = routesGetCurrentLang(i18n);
 
