@@ -8,18 +8,14 @@
  * Imports React and third party packages
  */
 import React, { useState, useEffect } from "react";
-import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
+import shortid from "shortid";
 
 /**
  * Imports other components and hooks
  */
 import Layout from "../Layout";
-import Article from "../Article";
-import {
-  routesGenerateSlug,
-  routesGetCurrentLang,
-  routesAddPrefix
-} from "../Routes";
+import { routesGetCurrentLang } from "../Routes";
 
 /**
  * Imports data
@@ -41,7 +37,7 @@ i18n.addResourceBundle("en-US", "Home", en_us);
  * Displays the component
  */
 const Home = props => {
-  const { articles: defaultArticles, routes } = props;
+  const { articles: defaultArticles } = props;
   const { items: defaultArticlesItems } = defaultArticles;
 
   const { t, i18n } = useTranslation("Home");
@@ -63,14 +59,14 @@ const Home = props => {
       .then(json => setArticles(json.articles));
   }, [currentLang]);
 
-  // NOTE: 7. Resource containers should provide their localized name to other components
+  // NOTE: Resource containers provide their localized name to other components
   const articlesName = tArticles("Articles");
 
-  // NOTE: 7b. Resource containers should provide their slug to other components.
+  // NOTE: Resource containers provide their slug to other components.
   const articlesSlug = tArticles("articles");
 
   /**
-   * Articles with internal links
+   * Displays articles with internal links (Router Link)
    */
   const articlesList =
     articles &&
@@ -86,7 +82,7 @@ const Home = props => {
     });
 
   /**
-   * Articles with external links
+   * Displays articles with external links (<a href=""...)
    */
   const articlesList2 =
     articles &&
@@ -106,17 +102,17 @@ const Home = props => {
   return (
     <Layout>
       <ol>
-        <li key="2">
+        <li key={shortid.generate()}>
           {t("Access articles through the archive")}:&nbsp;
           <Link to={`${articlesSlug}`}>{articlesName}</Link>.
         </li>
 
-        <li key="1">
+        <li key={shortid.generate()}>
           <p>{t("Access articles directly")}:</p>
           <ul>{articlesList}</ul>
         </li>
 
-        <li key="3">
+        <li key={shortid.generate()}>
           <p>{t("Open articles in antother tab")}:</p>
           <ul>{articlesList2}</ul>
         </li>
