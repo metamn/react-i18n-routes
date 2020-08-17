@@ -64,14 +64,10 @@ const Home = props => {
   }, [currentLang]);
 
   // NOTE: 7. Resource containers should provide their localized name to other components
-  // NOTE: 7a. They do via t(). We don't need anything else here
   const articlesName = tArticles("Articles");
 
-  // NOTE: 7b. Resource containers should provide their slug to other components. Otherwise the same function with the same settings (`routesGenerateSlug`) should be used to generate the slug across the project.
-  const articlesSlug = routesAddPrefix({
-    current: tArticles("articles"),
-    i18n: i18n
-  });
+  // NOTE: 7b. Resource containers should provide their slug to other components.
+  const articlesSlug = tArticles("articles");
 
   /**
    * Articles with internal links
@@ -80,9 +76,7 @@ const Home = props => {
     articles &&
     articles.map(item => {
       const { id, name, slug } = item;
-
-      // NOTE: 8. Or they should provide a `List` function to other components
-      const articleSlug = `/${articlesSlug}/${slug}`;
+      const articleSlug = `${articlesSlug}/${slug}`;
 
       return (
         <li key={id}>
@@ -98,7 +92,7 @@ const Home = props => {
     articles &&
     articles.map(item => {
       const { id, name, slug } = item;
-      const articleSlug = `/${articlesSlug}/${slug}`;
+      const articleSlug = `${articlesSlug}/${slug}`;
 
       return (
         <li key={id}>
@@ -114,7 +108,7 @@ const Home = props => {
       <ol>
         <li key="2">
           {t("Access articles through the archive")}:&nbsp;
-          <Link to={`/${articlesSlug}`}>{articlesName}</Link>.
+          <Link to={`${articlesSlug}`}>{articlesName}</Link>.
         </li>
 
         <li key="1">
