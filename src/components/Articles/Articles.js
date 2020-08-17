@@ -15,7 +15,7 @@ import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
  */
 import Layout from "../Layout";
 import Article from "../Article";
-import { routesGenerateSlug } from "../Routes";
+import { routesGetCurrentLang } from "../Routes";
 
 /**
  * Imports data
@@ -45,7 +45,11 @@ const Articles = props => {
    */
   const [articles, setArticles] = useState(defaultArticles);
 
-  const currentLang = i18n && i18n.language ? i18n.language : "";
+  /**
+   * Re-loads articles from server when the language is changed
+   * @type {[type]}
+   */
+  const currentLang = routesGetCurrentLang(i18n);
 
   useEffect(() => {
     fetch(`/api/articles/${currentLang}`)
@@ -53,10 +57,10 @@ const Articles = props => {
       .then(json => setArticles(json.articles));
   }, [currentLang]);
 
-  // NOTE: 4. Resource containers get their name from the language file
+  // NOTE: Resource containers get their name from the language file
   const articlesName = t("Articles");
 
-  // NOTE: 4a. Resource container slugs are generated from their name. They can be either translated or not.
+  // NOTE: Resource container slugs are coming from the language file, too.
   const articlesSlug = t("articles");
 
   const articlesList =
@@ -64,7 +68,7 @@ const Articles = props => {
     articles.map(item => {
       const { id, name, slug } = item;
 
-      // NOTE: 5. Resource containers are responsible to compose up complete, nested links pointing to their childrens
+      // NOTE: Resource containers are responsible to compose up complete, nested links pointing to their childrens
       const articleSlug = `${articlesSlug}/${slug}`;
 
       return (
@@ -74,7 +78,7 @@ const Articles = props => {
       );
     });
 
-  // NOTE: 6. Resource containers manage routes to their children
+  // NOTE: Resource containers manage routes to their children
   const match = useRouteMatch();
   const { path } = match;
 

@@ -9,7 +9,6 @@
  */
 import React, { useState, useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
-import { startCase } from "lodash";
 
 /**
  * Imports other components and hooks
@@ -39,15 +38,14 @@ const Article = props => {
   const { slug: defaultSlug } = props;
   const { t } = useTranslation("Article");
 
-  // NOTE: 2. Resources parse the URL to get their unique id
+  // NOTE: Resources parse the URL to get their unique slug id
   const {
     params: { slug: slugFromURL }
   } = useRouteMatch();
 
   const slugForQuery = slugFromURL ? slugFromURL : defaultSlug;
 
-  // NOTE: 3. Resources query the DB and load their own data
-  // const nameFromSlug = startCase(slug);
+  // NOTE: Resources query the DB and load their own data
   const [article, setArticle] = useState(props);
 
   useEffect(() => {
@@ -56,7 +54,9 @@ const Article = props => {
       .then(json => setArticle(json.article));
   }, []);
 
-  // Parsing the (received) data
+  /**
+   * Parses the received data
+   */
   const { name, slug } = article;
 
   return (
