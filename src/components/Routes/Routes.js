@@ -18,7 +18,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
  */
 import LanguageSelector, {
   LanguageSelectorDefaultProps,
-  getCurrentLang,
   getDefaultLang
 } from "../LanguageSelector";
 

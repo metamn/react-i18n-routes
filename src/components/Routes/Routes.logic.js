@@ -1,10 +1,6 @@
 import { kebabCase } from "lodash";
 
-import {
-  getCurrentLang,
-  getDefaultLang,
-  isCurrentLangTheDefaultLang
-} from "../LanguageSelector";
+import { getCurrentLang } from "../LanguageSelector";
 
 /**
  * Generates routes for a language

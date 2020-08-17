@@ -119,7 +119,7 @@ const Breadcrumbs = props => {
      * Language codes have to be removed from the Breadcrumbs
      * Ex.: Home (Ro) > Ro > Articles Ro => Home (Ro) > Articles Ro
      */
-    if (index === 1 && !isCurrentLangTheDefaultLang(i18n)) return;
+    if (index === 1 && !isCurrentLangTheDefaultLang(i18n)) return null;
 
     /**
      * Labels have to be decamelized

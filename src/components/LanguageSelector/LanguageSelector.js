@@ -10,7 +10,7 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import shortid from "shortid";
-import { upperCase, startCase } from "lodash";
+import { upperCase } from "lodash";
 import { useHistory } from "react-router-dom";
 import useBreadcrumbs from "use-react-router-breadcrumbs";
 
@@ -122,14 +122,7 @@ const LanguageSelector = props => {
     i18n.changeLanguage(selected);
 
     if (selected !== currentLanguage && urlNeedsTranslation) {
-      console.log(
-        "URL must be updated from these breadcrumbs:",
-        breadcrumbs,
-        " to: ",
-        selected
-      );
       const newURL = routesUpdateURL({ breadcrumbs: breadcrumbs, i18n: i18n });
-      console.log("newURL:", newURL);
       history.push(newURL);
     }
   }, [selected]);

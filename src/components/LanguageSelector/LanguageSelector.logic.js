@@ -14,9 +14,9 @@ const getLanguageFromURL = props => {
   const breadcrumbForLang = breadcrumbs[1];
 
   // breadcrumbs[1] is a breadcrumb
-  if (breadcrumbs[1]?.key) {
+  if (breadcrumbForLang?.key) {
     // /ro
-    const key = breadcrumbs[1].key;
+    const key = breadcrumbForLang.key;
 
     // ro
     const split = key.split("/");
