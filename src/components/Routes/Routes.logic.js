@@ -20,8 +20,8 @@ const routesForLanguage = props => {
       const { component } = item;
       const { name: componentName } = component;
 
+      // NOTE: This is a fix. `t` cannot get translations from another language, just form the current one. With `i18n.getFixedT` we can load translations from any language files, nut just the current one.
       const langF = i18n.getFixedT(languageCode, componentName);
-      const label = langF(componentName);
       const slug = langF(kebabCase(componentName));
 
       return { ...item, path: slug };

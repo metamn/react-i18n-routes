@@ -1,5 +1,4 @@
 import { Server, Model } from "miragejs";
-import shortid from "shortid";
 
 const makeServer = () => {
   let server = new Server({
