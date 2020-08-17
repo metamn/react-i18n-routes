@@ -59,10 +59,4 @@ const updateURL = props => {
   return urlParts.map(item => item).join("");
 };
 
-export {
-  routesForLanguage,
-  updateURL,
-  getCurrentLang,
-  getDefaultLang,
-  isCurrentLangTheDefaultLang
-};
+export { routesForLanguage, updateURL };
