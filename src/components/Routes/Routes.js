@@ -24,15 +24,8 @@ import { propTypes, defaultProps } from "./Routes.data";
  * Imports logic
  */
 import {
-  collectTranslationFilenames,
   routesForLanguage,
-  localizeRoutes,
-  localizePath,
-  prefixRoutes,
-  generateSlug,
-  updateURL,
   getCurrentLang,
-  addPrefix,
   getDefaultLang
 } from "./Routes.logic";
 
@@ -52,7 +45,7 @@ i18n.addResourceBundle("en-US", "Routes", en_us);
  */
 const Routes = props => {
   const { items: routes } = props;
-  const { t, i18n } = useTranslation("Routes");
+  const { i18n } = useTranslation("Routes");
 
   /**
    * Loads all languages
@@ -113,9 +106,6 @@ export default Routes;
 export {
   propTypes as RoutesPropTypes,
   defaultProps as RoutesDefaultProps,
-  localizePath as routesLocalizePath,
-  generateSlug as routesGenerateSlug,
-  updateURL as routesUpdateURL,
   getCurrentLang as routesGetCurrentLang,
-  addPrefix as routesAddPrefix
+  getDefaultLang as routesGetDefaultLang
 };

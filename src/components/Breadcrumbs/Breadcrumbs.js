@@ -78,7 +78,6 @@ const StyledBreadcrumb = withStyles(theme => ({
  */
 const Breadcrumbs = props => {
   const { container } = useStyles(props);
-  const { t } = useTranslation("Breadcrumbs");
   const { t: tHome } = useTranslation("Home");
 
   /**

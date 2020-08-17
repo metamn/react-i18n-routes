@@ -2,9 +2,6 @@ export {
   default,
   RoutesPropTypes,
   RoutesDefaultProps,
-  routesLocalizePath,
-  routesGenerateSlug,
-  routesUpdateURL,
   routesGetCurrentLang,
-  routesAddPrefix
+  routesGetDefaultLang
 } from "./Routes";
