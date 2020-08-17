@@ -11,7 +11,7 @@ import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import shortid from "shortid";
 import { upperCase } from "lodash";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 /**
  * Imports other components and hooks
@@ -63,12 +63,16 @@ const LanguageSelector = props => {
   const { container, textField } = useStyles(props);
   const history = useHistory();
 
-  const currentLanguage = routesGetCurrentLang(i18n);
-  console.log("currentLanguage:", currentLanguage);
+  /**
+   * Saves breadcrumbs / location
+   * On language change the URL will be updated by translating these breadcrumbs
+   */
+  //const location = useLocation();
 
   /**
    * Manages the state of the select box
    */
+  const currentLanguage = routesGetCurrentLang(i18n);
   const [selected, setSelected] = useState(currentLanguage);
 
   /**
@@ -85,7 +89,11 @@ const LanguageSelector = props => {
    */
   useEffect(() => {
     i18n.changeLanguage(selected);
-    console.log("selected:", selected);
+
+    if (selected !== currentLanguage) {
+      console.log("URL must be updated");
+      //console.log("location:", location);
+    }
     //history.push(routesUpdateURL({ i18n: i18n }));
   }, [selected]);
 
