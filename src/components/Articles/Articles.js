@@ -57,9 +57,6 @@ const Articles = props => {
       .then(json => setArticles(json.articles));
   }, [currentLang]);
 
-  // NOTE: Resource containers get their name from the language file
-  const articlesName = t("Articles");
-
   // NOTE: Resource container slugs are coming from the language file, too.
   const articlesSlug = t("articles");
 

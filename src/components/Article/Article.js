@@ -52,7 +52,7 @@ const Article = props => {
     fetch(`/api/article/${slugForQuery}`)
       .then(response => response.json())
       .then(json => setArticle(json.article));
-  }, []);
+  }, [slugForQuery]);
 
   /**
    * Parses the received data
