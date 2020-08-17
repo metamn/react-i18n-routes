@@ -30,7 +30,8 @@ import { propTypes, defaultProps } from "./LanguageSelector.data";
 import {
   getCurrentLang,
   getDefaultLang,
-  isCurrentLangTheDefaultLang
+  isCurrentLangTheDefaultLang,
+  getLanguageFromURL
 } from "./LanguageSelector.logic";
 
 /**
@@ -82,38 +83,28 @@ const LanguageSelector = props => {
   const breadcrumbs = useBreadcrumbs();
 
   /**
-   * Loads default language from i18n
+   * Loads the default language from i18n
    */
   const currentLanguage = getCurrentLang(i18n);
-  console.log("currentLanguage:", currentLanguage);
 
   /**
    * Loads language from URL
    */
-  const breadcrumbForLang = breadcrumbs[1];
+  const languageFromURL = getLanguageFromURL({
+    breadcrumbs: breadcrumbs,
+    currentLanguage: currentLanguage,
+    languages: languages
+  });
 
-  let currentLanguageFromURL = currentLanguage;
-  let urlNeedsTranslation = true;
-
-  if (breadcrumbs[1]?.key) {
-    const split = breadcrumbs[1].key.split("/");
-    const keyWithoutSlash = split[1] ? split[1] : "";
-    const language = languages.find(
-      item => item.displayName === startCase(keyWithoutSlash)
-    );
-    currentLanguageFromURL = language
-      ? language.alternateName
-      : currentLanguage;
-    urlNeedsTranslation = currentLanguageFromURL === currentLanguage;
-  }
-
-  console.log("currentLanguageFromURL:", currentLanguageFromURL);
-  console.log("urlNeedsTranslation:", urlNeedsTranslation);
+  /**
+   * Decides if the URL needs translation
+   */
+  const urlNeedsTranslation = currentLanguage === languageFromURL;
 
   /**
    * Manages the state of the select box
    */
-  const [selected, setSelected] = useState(currentLanguageFromURL);
+  const [selected, setSelected] = useState(languageFromURL);
 
   /**
    * Manages the select box change
