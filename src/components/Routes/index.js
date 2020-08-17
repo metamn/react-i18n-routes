@@ -3,5 +3,6 @@ export {
   RoutesPropTypes,
   RoutesDefaultProps,
   routesGetCurrentLang,
-  routesGetDefaultLang
+  routesGetDefaultLang,
+  isCurrentLangTheDefaultLang
 } from "./Routes";

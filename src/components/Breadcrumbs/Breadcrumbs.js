@@ -12,10 +12,12 @@ import clsx from "clsx";
 import shortid from "shortid";
 import { Link as RouterLink } from "react-router-dom";
 import useBreadcrumbs from "use-react-router-breadcrumbs";
+import { startCase, kebabCase } from "lodash";
 
 /**
  * Imports other components and hooks
  */
+import { isCurrentLangTheDefaultLang } from "../Routes";
 
 /**
  * Imports data
@@ -106,19 +108,29 @@ const Breadcrumbs = props => {
 
     /**
      * Only `Home` must be translated
-     * // NOTE: Verify how Breadcrumbs work with translated routes
-     * - The plugin loads the URL, parses it as is, and generates React Router compatible routes.
-     * - If the URL is translated the the breadcrumbs will be translated too
      */
     const translatedLabel =
       children === "Home" ? tHome(children, children) : children;
 
-    // FIXME: translatedLabel has to be decamelized (Article-ro > Article Ro)
+    const translatedSlug =
+      children === "Home" ? tHome(kebabCase(children), key) : key;
+
+    /**
+     * Language codes have to be removed from the Breadcrumbs
+     * Ex.: Home (Ro) > Ro > Articles Ro => Home (Ro) > Articles Ro
+     */
+    if (index === 1 && !isCurrentLangTheDefaultLang(i18n)) return;
+
+    /**
+     * Labels have to be decamelized
+     * Ex: 'Article-1' > 'Article 1'
+     */
+    const translatedLabelDecamelized = startCase(translatedLabel);
 
     return (
       <StyledBreadcrumb
-        label={translatedLabel}
-        to={key}
+        label={translatedLabelDecamelized}
+        to={translatedSlug}
         component={RouterLink}
         key={shortid.generate()}
       />

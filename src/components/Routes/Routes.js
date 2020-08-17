@@ -26,7 +26,8 @@ import { propTypes, defaultProps } from "./Routes.data";
 import {
   routesForLanguage,
   getCurrentLang,
-  getDefaultLang
+  getDefaultLang,
+  isCurrentLangTheDefaultLang
 } from "./Routes.logic";
 
 /**
@@ -107,5 +108,6 @@ export {
   propTypes as RoutesPropTypes,
   defaultProps as RoutesDefaultProps,
   getCurrentLang as routesGetCurrentLang,
-  getDefaultLang as routesGetDefaultLang
+  getDefaultLang as routesGetDefaultLang,
+  isCurrentLangTheDefaultLang
 };

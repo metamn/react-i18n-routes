@@ -40,4 +40,10 @@ const updateURL = props => {
   return addPrefix({ current: "", i18n: i18n });
 };
 
-export { routesForLanguage, updateURL, getCurrentLang, getDefaultLang };
+export {
+  routesForLanguage,
+  updateURL,
+  getCurrentLang,
+  getDefaultLang,
+  isCurrentLangTheDefaultLang
+};
