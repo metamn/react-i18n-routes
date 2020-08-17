@@ -17,7 +17,7 @@ import { startCase, kebabCase } from "lodash";
 /**
  * Imports other components and hooks
  */
-import { isCurrentLangTheDefaultLang } from "../Routes";
+import { isCurrentLangTheDefaultLang } from "../LanguageSelector";
 
 /**
  * Imports data

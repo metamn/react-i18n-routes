@@ -17,7 +17,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
  * // NOTE: Language selector should stay inside routes to be able to change the URL
  */
 import LanguageSelector, {
-  LanguageSelectorDefaultProps
+  LanguageSelectorDefaultProps,
+  getCurrentLang,
+  getDefaultLang
 } from "../LanguageSelector";
 
 /**
@@ -28,13 +30,7 @@ import { propTypes, defaultProps } from "./Routes.data";
 /**
  * Imports logic
  */
-import {
-  routesForLanguage,
-  getCurrentLang,
-  getDefaultLang,
-  isCurrentLangTheDefaultLang,
-  updateURL
-} from "./Routes.logic";
+import { routesForLanguage, updateURL } from "./Routes.logic";
 
 /**
  * Imports translations
@@ -114,8 +110,5 @@ export default Routes;
 export {
   propTypes as RoutesPropTypes,
   defaultProps as RoutesDefaultProps,
-  getCurrentLang as routesGetCurrentLang,
-  getDefaultLang as routesGetDefaultLang,
-  isCurrentLangTheDefaultLang,
   updateURL as routesUpdateURL
 };

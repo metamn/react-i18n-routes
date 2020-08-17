@@ -17,12 +17,21 @@ import useBreadcrumbs from "use-react-router-breadcrumbs";
 /**
  * Imports other components and hooks
  */
-import { routesUpdateURL, routesGetCurrentLang } from "../Routes";
+import { routesUpdateURL } from "../Routes";
 
 /**
  * Imports data
  */
 import { propTypes, defaultProps } from "./LanguageSelector.data";
+
+/**
+ * Imports logic
+ */
+import {
+  getCurrentLang,
+  getDefaultLang,
+  isCurrentLangTheDefaultLang
+} from "./LanguageSelector.logic";
 
 /**
  * Imports Material UI components
@@ -75,7 +84,7 @@ const LanguageSelector = props => {
   /**
    * Loads default language from i18n
    */
-  const currentLanguage = routesGetCurrentLang(i18n);
+  const currentLanguage = getCurrentLang(i18n);
   console.log("currentLanguage:", currentLanguage);
 
   /**
@@ -169,5 +178,8 @@ LanguageSelector.defaultProps = defaultProps;
 export default LanguageSelector;
 export {
   propTypes as LanguageSelectorPropTypes,
-  defaultProps as LanguageSelectorDefaultProps
+  defaultProps as LanguageSelectorDefaultProps,
+  getCurrentLang,
+  getDefaultLang,
+  isCurrentLangTheDefaultLang
 };

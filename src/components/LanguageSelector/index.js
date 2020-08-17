@@ -1,5 +1,8 @@
 export {
   default,
   LanguageSelectorPropTypes,
-  LanguageSelectorDefaultProps
+  LanguageSelectorDefaultProps,
+  getCurrentLang,
+  getDefaultLang,
+  isCurrentLangTheDefaultLang
 } from "./LanguageSelector";

@@ -3,9 +3,8 @@ import { kebabCase } from "lodash";
 import {
   getCurrentLang,
   getDefaultLang,
-  isCurrentLangTheDefaultLang,
-  addPrefix
-} from "./Routes.logic.helpers";
+  isCurrentLangTheDefaultLang
+} from "../LanguageSelector";
 
 /**
  * Generates routes for a language

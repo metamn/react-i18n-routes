@@ -15,7 +15,7 @@ import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
  */
 import Layout from "../Layout";
 import Article from "../Article";
-import { routesGetCurrentLang } from "../Routes";
+import { getCurrentLang } from "../LanguageSelector";
 
 /**
  * Imports data
@@ -48,7 +48,7 @@ const Articles = props => {
   /**
    * Re-loads articles from server when the language is changed
    */
-  const currentLang = routesGetCurrentLang(i18n);
+  const currentLang = getCurrentLang(i18n);
 
   useEffect(() => {
     fetch(`/api/articles/${currentLang}`)
