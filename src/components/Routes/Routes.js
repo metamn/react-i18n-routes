@@ -53,10 +53,6 @@ const Routes = props => {
   const { items: routes } = props;
   const { t, i18n } = useTranslation("Routes");
 
-  // NOTE: How to load translations outside the current language. See https://github.com/i18next/react-i18next/issues/896
-  const ro = i18n.getFixedT("ro-RO", "Articles");
-  console.log("ro:", ro("Articles"));
-
   /**
    * Loads all languages
    */
@@ -67,9 +63,22 @@ const Routes = props => {
    */
   const routesForLanguages =
     languages &&
-    languages.map(language =>
-      routesForLanguage({ routes: routes, language: language, t: t })
-    );
+    languages.map(language => {
+      const localizedRoutes = routesForLanguage({
+        routes: routes,
+        language: language,
+        i18n: i18n
+      });
+
+      return (
+        localizedRoutes &&
+        localizedRoutes.map(item => {
+          const { id } = item;
+
+          return <Route key={id} {...item} />;
+        })
+      );
+    });
 
   return (
     <Router>

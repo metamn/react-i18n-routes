@@ -10,29 +10,25 @@ import {
 } from "./Routes.logic.helpers";
 
 /**
- * Collects translation filename from routes
- *
- * Ex: routes = [{ id: shortid.generate(), path: "/", exact: true, component: Home },
- { id: shortid.generate(), path: "*", component: RouteNotFound }] > ["Home", "RouteNotFound"]
+ * Generates routes for a language
  */
-const collectTranslationFilenames = routes => {
+const routesForLanguage = props => {
+  const { routes, language, i18n } = props;
+  const { alternateName: languageCode } = language;
+
   return (
     routes &&
     routes.map(item => {
       const { component } = item;
-      const { name } = component;
+      const { name: componentName } = component;
 
-      return name;
+      const langF = i18n.getFixedT(languageCode, componentName);
+      const label = langF(componentName);
+      const slug = langF(kebabCase(componentName));
+
+      return { ...item, path: slug };
     })
   );
-};
-
-/**
- * Generates routes for a language
- */
-const routesForLanguage = props => {
-  const { routes, language, t } = props;
-  return routes;
 };
 
 /**
@@ -152,6 +148,5 @@ export {
   updateURL,
   getCurrentLang,
   addPrefix,
-  routesForLanguage,
-  collectTranslationFilenames
+  routesForLanguage
 };
