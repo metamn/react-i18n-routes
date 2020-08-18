@@ -39,13 +39,15 @@ const routesForLanguage = props => {
 
 /**
  * Updates the URL on language change
+ *
+ * - It loops through breadcrumbs
+ * - Looks up breadcrumb in old routes
+ * - Finds new slug on new routes
  */
 const updateURL = props => {
   const { breadcrumbs, i18n, routes, oldLanguage } = props;
 
   const currentLanguage = getCurrentLang(i18n);
-  //console.log("currentLanguage:", currentLanguage);
-  //console.log("oldLanguage:", oldLanguage);
 
   const currentRoutes = routesForLanguage({
     routes: routes,
@@ -61,9 +63,6 @@ const updateURL = props => {
     doPrefixLanguage: true
   });
 
-  console.log("currentRoutes:", currentRoutes);
-  console.log("oldRoutes:", oldRoutes);
-
   const urlParts =
     breadcrumbs &&
     breadcrumbs
@@ -73,18 +72,30 @@ const updateURL = props => {
 
         let newKey = "";
 
-        console.log("key:", key);
         const componentForKey = oldRoutes.find(item => item.path === key);
+
         if (componentForKey) {
-          //console.log("componentForKey:", componentForKey.component);
           const componentForNewKey = currentRoutes.find(
             item => item.component === componentForKey.component
           );
-          //console.log("componentForNewKey:", componentForNewKey);
+
           if (componentForNewKey) {
             const { path } = componentForNewKey;
             newKey = path;
-            console.log("newKey:", newKey);
+          }
+        } else {
+          /**
+           * Loads a resource from the API
+           *
+           * - We reach here for keys like '/', 'articles/article-2', '/ro/articles-ro/article-2-ro'
+           * - So we'll find the last slug
+           * - Do an API call for that slug with the new language code
+           */
+          const split = key.split("/");
+          const lastSplit = split.pop();
+
+          if (lastSplit) {
+            console.log("lastSplit:", lastSplit);
           }
         }
 
