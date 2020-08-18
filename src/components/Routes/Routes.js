@@ -84,8 +84,6 @@ const Routes = props => {
         i18n: i18n
       });
 
-      console.log("localizedRoutes:", localizedRoutes);
-
       return (
         localizedRoutes &&
         localizedRoutes.map(item => {

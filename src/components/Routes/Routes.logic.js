@@ -9,8 +9,8 @@ const routesForLanguage = props => {
   const { routes, language, i18n } = props;
   const { alternateName: languageCode } = language;
 
+  // NOTE: Routes are prefixed with language code by algorithm, not by hand
   const langPrefix = getURLPrefix({ languageCode: languageCode, i18n: i18n });
-  console.log("langPrefix:", langPrefix);
 
   return (
     routes &&
@@ -44,6 +44,8 @@ const updateURL = props => {
 
       const langF = i18n.getFixedT(currentLanguage, children);
       const slug = langF(kebabCase(children));
+
+      console.log("slug:", slug);
 
       if (slug === kebabCase(children)) {
         console.log("Slug is a resource:", slug);
