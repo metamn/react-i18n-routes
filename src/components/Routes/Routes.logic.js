@@ -42,6 +42,7 @@ const updateURL = props => {
   const { breadcrumbs, i18n } = props;
 
   const currentLanguage = getCurrentLang(i18n);
+  console.log("currentLanguage:", currentLanguage);
 
   const urlParts =
     breadcrumbs &&
@@ -53,6 +54,8 @@ const updateURL = props => {
       const langF = i18n.getFixedT(currentLanguage, children);
       const slug = langF(kebabCase(children));
 
+      console.log("breadcrumb:", breadcrumb);
+      console.log("children:", children);
       console.log("slug:", slug);
 
       if (slug === kebabCase(children)) {
@@ -60,12 +63,12 @@ const updateURL = props => {
         return `/${slug}`;
       }
 
-      return slug;
+      return `/${slug}`;
     });
 
   console.log("urlParts:", urlParts);
 
-  return urlParts.map(item => item).join("/");
+  return urlParts.map(item => item).join("");
 };
 
 export { routesForLanguage, updateURL };
