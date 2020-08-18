@@ -64,6 +64,7 @@ const Routes = props => {
    * 	`<Route path='/articles' ...>`
    */
   const defaultLang = getDefaultLang(i18n);
+
   const languagesOrdered = languages.sort(item => {
     const { alternateName } = item;
     return alternateName === defaultLang ? 1 : -1;

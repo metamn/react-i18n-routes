@@ -10,24 +10,57 @@ React multi-language routes
 
 ## Features
 
-### Prefixed routes
+### Translated, Prefixed and persistent URLs
 
 ```
 http://localhost:3000/articles/article-1
 http://localhost:3000/ro/articles-ro/article-1-ro
 ```
 
+- Resources (`article-1`) are translated via the API.
+- Resource containers (`articles`) are translated via i18n.
+- URLs are persistent. They are always available and shareable.
+
 ### Language selector
 
-- When a language is changed the homepage is displayed
-- If the back-end provides a mechanism to connect translations then on language change the current page can be preserved
+- On language change the URL is translated.
+- The API must support this feature, ie. to provide queries to resources based also on the language attribute. Like `GET article/{:slug or :id}/:language`
 
 ### Breadcrumbs
 
-- Breadcrumbs are translated and update themselves on language change
+- Breadcrumbs are translated and update themselves on language change.
+
+### 404 page
+
+- Invalid URLs redirect to a 404 page.
 
 ## How it works
 
 ### Single responsibility principle
 
 Components are responsible to localize themselves and declare their route needs.
+
+```js
+// src/components/Articles/Articles.lang.ro-ro.js
+const ro_ro = {
+  Articles: "Articles (RO)",
+  articles: "articles-ro"
+};
+
+export { ro_ro };
+```
+
+```js
+// src/components/Home/Home.data.js
+const defaultProps = {
+  routes: [{ id: shortid.generate(), path: "/articles", component: Articles }]
+  ...
+};
+```
+
+```js
+// src/components/Routes/Routes.data.js
+...HomeDefaultProps.routes,
+{ id: shortid.generate(), path: "/", exact: true, component: Home },
+{ id: shortid.generate(), path: "*", component: RouteNotFound }
+```
