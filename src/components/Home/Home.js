@@ -8,7 +8,7 @@
  * Imports React and third party packages
  */
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import shortid from "shortid";
 
 /**
@@ -59,6 +59,18 @@ const Home = props => {
       .then(json => setArticles(json.articles));
   }, [currentLang]);
 
+  /**
+   * Loads the current URL
+   */
+  const match = useRouteMatch();
+  const { path } = match;
+
+  /**
+   * `path` works only when id not `/`.
+   * When it is `/` the domain part of the URL is missing
+   */
+  const path2 = path === "/" ? "" : path2;
+
   // NOTE: Resource containers provide their localized name to other components
   const articlesName = tArticles("Articles");
 
@@ -72,7 +84,7 @@ const Home = props => {
     articles &&
     articles.map(item => {
       const { id, name, slug } = item;
-      const articleSlug = `${articlesSlug}/${slug}`;
+      const articleSlug = `${path2}/${articlesSlug}/${slug}`;
 
       return (
         <li key={id}>
@@ -88,7 +100,7 @@ const Home = props => {
     articles &&
     articles.map(item => {
       const { id, name, slug } = item;
-      const articleSlug = `${articlesSlug}/${slug}`;
+      const articleSlug = `${path2}/${articlesSlug}/${slug}`;
 
       return (
         <li key={id}>
@@ -104,7 +116,7 @@ const Home = props => {
       <ol>
         <li key={shortid.generate()}>
           {t("Access articles through the archive")}:&nbsp;
-          <Link to={`${articlesSlug}`}>{articlesName}</Link>.
+          <Link to={`${path2}/${articlesSlug}`}>{articlesName}</Link>.
         </li>
 
         <li key={shortid.generate()}>

@@ -56,16 +56,15 @@ const Articles = props => {
       .then(json => setArticles(json.articles));
   }, [currentLang]);
 
-  // NOTE: Resource container slugs are coming from the language file, too.
-  const articlesSlug = t("articles");
+  // NOTE: Resource containers create routes to children. Without usining the language file.
+  const match = useRouteMatch();
+  const { path } = match;
 
   const articlesList =
     articles &&
     articles.map(item => {
       const { id, name, slug } = item;
-
-      // NOTE: Resource containers are responsible to compose up complete, nested links pointing to their childrens
-      const articleSlug = `${articlesSlug}/${slug}`;
+      const articleSlug = `${path}/${slug}`;
 
       return (
         <li key={id}>
@@ -73,10 +72,6 @@ const Articles = props => {
         </li>
       );
     });
-
-  // NOTE: Resource containers manage routes to their children
-  const match = useRouteMatch();
-  const { path } = match;
 
   return (
     <Switch>
