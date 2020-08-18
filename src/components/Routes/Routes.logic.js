@@ -96,6 +96,10 @@ const updateURL = props => {
 
           if (lastSplit) {
             console.log("lastSplit:", lastSplit);
+
+            fetch(`/api/article/${lastSplit}/${currentLanguage}`)
+              .then(response => response.json())
+              .then(json => console.log(json.article.slug));
           }
         }
 

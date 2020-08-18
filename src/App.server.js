@@ -48,16 +48,41 @@ const makeServer = () => {
     routes() {
       this.namespace = "api";
 
+      /**
+       * Returns all articles for a lang
+       */
       this.get("/articles/:lang", (schema, request) => {
         const lang = request.params.lang;
 
         return schema.articles.where(article => article.lang === lang);
       });
 
+      /**
+       * Returns an article by slug
+       */
       this.get("/article/:slug", (schema, request) => {
         const slug = request.params.slug;
 
         return schema.articles.findBy({ slug: slug });
+      });
+
+      /**
+       * Returns an article on a different language based on slug
+       */
+      this.get("/article/:slug/:lang", (schema, request) => {
+        const slug = request.params.slug;
+        const lang = request.params.lang;
+
+        const article = schema.articles.findBy({ slug: slug });
+        const { multilangID } = article;
+
+        const res = schema.articles.where(
+          article =>
+            article.lang === lang && article.multilangID === multilangID
+        );
+
+        console.log("res:", res.models[0]);
+        return res.models[0];
       });
     }
   });
