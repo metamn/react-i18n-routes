@@ -66,7 +66,7 @@ const Home = props => {
   const { path } = match;
 
   /**
-   * `path` works only when id not `/`.
+   * `path` works only when is not `/`.
    * When it is `/` the domain part of the URL is missing
    */
   const path2 = path === "/" ? "" : path2;

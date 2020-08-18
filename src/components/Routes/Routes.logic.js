@@ -9,8 +9,10 @@ const routesForLanguage = props => {
   const { routes, language, i18n } = props;
   const { alternateName: languageCode } = language;
 
-  // NOTE: Routes are prefixed with language code
-  const langPrefix = getURLPrefix({ languageCode: languageCode, i18n: i18n });
+  const langF1 = i18n.getFixedT(languageCode, "Home");
+  const languagePrefix = langF1("home");
+  const languagePrefixNormalized =
+    languagePrefix !== "" ? `/${languagePrefix}` : languagePrefix;
 
   return (
     routes &&
@@ -22,8 +24,11 @@ const routesForLanguage = props => {
       const langF = i18n.getFixedT(languageCode, componentName);
       const slug = langF(kebabCase(componentName));
 
+      // NOTE: Routes, except for the home component, are prefixed with language code
       const path =
-        componentName === "Home" ? `/${slug}` : `${langPrefix}/${slug}`;
+        componentName === "Home"
+          ? `/${slug}`
+          : `${languagePrefixNormalized}/${slug}`;
 
       return { ...item, path: path };
     })
