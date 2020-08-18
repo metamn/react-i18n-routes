@@ -6,7 +6,7 @@ import { getCurrentLang, getURLPrefix } from "../LanguageSelector";
  * Generates routes for a language
  */
 const routesForLanguage = props => {
-  const { routes, language, i18n } = props;
+  const { routes, language, i18n, doPrefixLanguage } = props;
   const { alternateName: languageCode } = language;
 
   const langF1 = i18n.getFixedT(languageCode, "Home");
@@ -28,7 +28,9 @@ const routesForLanguage = props => {
       const path =
         componentName === "Home"
           ? `/${slug}`
-          : `${languagePrefixNormalized}/${slug}`;
+          : doPrefixLanguage
+          ? `${languagePrefixNormalized}/${slug}`
+          : `/${slug}`;
 
       return { ...item, path: path };
     })
@@ -39,36 +41,60 @@ const routesForLanguage = props => {
  * Updates the URL on language change
  */
 const updateURL = props => {
-  const { breadcrumbs, i18n } = props;
+  const { breadcrumbs, i18n, routes, oldLanguage } = props;
 
   const currentLanguage = getCurrentLang(i18n);
-  console.log("currentLanguage:", currentLanguage);
+  //console.log("currentLanguage:", currentLanguage);
+  //console.log("oldLanguage:", oldLanguage);
+
+  const currentRoutes = routesForLanguage({
+    routes: routes,
+    language: { alternateName: currentLanguage },
+    i18n: i18n,
+    doPrefixLanguage: false
+  });
+
+  const oldRoutes = routesForLanguage({
+    routes: routes,
+    language: { alternateName: oldLanguage },
+    i18n: i18n,
+    doPrefixLanguage: true
+  });
+
+  console.log("currentRoutes:", currentRoutes);
+  console.log("oldRoutes:", oldRoutes);
 
   const urlParts =
     breadcrumbs &&
-    breadcrumbs.map(item => {
-      const { breadcrumb } = item;
-      const { props } = breadcrumb;
-      const { children } = props;
+    breadcrumbs
+      .map(item => {
+        const { breadcrumb } = item;
+        const { key } = breadcrumb;
 
-      const langF = i18n.getFixedT(currentLanguage, children);
-      const slug = langF(kebabCase(children));
+        let newKey = "";
 
-      console.log("breadcrumb:", breadcrumb);
-      console.log("children:", children);
-      console.log("slug:", slug);
+        console.log("key:", key);
+        const componentForKey = oldRoutes.find(item => item.path === key);
+        if (componentForKey) {
+          //console.log("componentForKey:", componentForKey.component);
+          const componentForNewKey = currentRoutes.find(
+            item => item.component === componentForKey.component
+          );
+          //console.log("componentForNewKey:", componentForNewKey);
+          if (componentForNewKey) {
+            const { path } = componentForNewKey;
+            newKey = path;
+            console.log("newKey:", newKey);
+          }
+        }
 
-      if (slug === kebabCase(children)) {
-        console.log("Slug is a resource:", slug);
-        return `/${slug}`;
-      }
-
-      return `/${slug}`;
-    });
+        return newKey ? newKey : null;
+      })
+      .filter(item => item !== null);
 
   console.log("urlParts:", urlParts);
 
-  return urlParts.map(item => item).join("");
+  return urlParts.join("").replace("//", "/");
 };
 
 export { routesForLanguage, updateURL };

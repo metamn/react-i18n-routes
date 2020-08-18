@@ -81,7 +81,8 @@ const Routes = props => {
       const localizedRoutes = routesForLanguage({
         routes: routes,
         language: language,
-        i18n: i18n
+        i18n: i18n,
+        doPrefixLanguage: true
       });
 
       return (

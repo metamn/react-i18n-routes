@@ -17,7 +17,7 @@ import useBreadcrumbs from "use-react-router-breadcrumbs";
 /**
  * Imports other components and hooks
  */
-import { routesUpdateURL } from "../Routes";
+import { routesUpdateURL, RoutesDefaultProps } from "../Routes";
 
 /**
  * Imports data
@@ -77,11 +77,18 @@ const LanguageSelector = props => {
 
   /**
    * Loads breadcrumbs:
-   * 1. The default language will be determined from URL / breadcrumbs
-   * 2. On language change the URL will be updated by translating these breadcrumbs
+   * 1. The default language will be determined from URL with breadcrumbs
+   * 2. On language change the URL will be updated by the help of breadcrumbs
    * 2.a useLocation is not enough for translations
    */
   const breadcrumbs = useBreadcrumbs();
+
+  /**
+   * Loads routes
+   * - They will be used to update the URL on language change
+   * - For this task breadcrumbs alone are not enough
+   */
+  const { items: routes } = RoutesDefaultProps;
 
   /**
    * Loads the default language from i18n
@@ -123,7 +130,12 @@ const LanguageSelector = props => {
     i18n.changeLanguage(selected);
 
     if (selected !== currentLanguage && urlNeedsTranslation) {
-      const newURL = routesUpdateURL({ breadcrumbs: breadcrumbs, i18n: i18n });
+      const newURL = routesUpdateURL({
+        breadcrumbs: breadcrumbs,
+        i18n: i18n,
+        routes: routes,
+        oldLanguage: currentLanguage
+      });
       history.push(newURL);
     }
   }, [selected]);
