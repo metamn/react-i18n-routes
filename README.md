@@ -10,15 +10,15 @@ React multi-language routes
 
 ## Features
 
-### Translated, Prefixed and persistent URLs
+### Translated, prefixed and persistent URLs
 
 ```
 http://localhost:3000/articles/article-1
 http://localhost:3000/ro/articles-ro/article-1-ro
 ```
 
-- Resources (`article-1`) are translated via the API.
 - Resource containers (`articles`) are translated via i18n.
+- Resources (`article-1`) are translated via the API.
 - URLs are persistent. They are always available and shareable.
 
 ### Language selector
@@ -38,7 +38,7 @@ http://localhost:3000/ro/articles-ro/article-1-ro
 
 ### Single responsibility principle
 
-Components are responsible to localize themselves and declare their route needs.
+Components are responsible to localize themselves:
 
 ```js
 // src/components/Articles/Articles.lang.ro-ro.js
@@ -49,6 +49,8 @@ const ro_ro = {
 
 export { ro_ro };
 ```
+
+... and to declare their route needs:
 
 ```js
 // src/components/Home/Home.data.js
