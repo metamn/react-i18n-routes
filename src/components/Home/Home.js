@@ -69,7 +69,7 @@ const Home = props => {
    * `path` works only when is not `/`.
    * When it is `/` the domain part of the URL is missing
    */
-  const path2 = path === "/" ? "" : path2;
+  const path2 = path === "/" ? "" : path;
 
   // NOTE: Resource containers provide their localized name to other components
   const articlesName = tArticles("Articles");

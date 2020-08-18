@@ -65,7 +65,7 @@ const updateURL = props => {
 
   console.log("urlParts:", urlParts);
 
-  return urlParts.map(item => item).join("");
+  return urlParts.map(item => item).join("/");
 };
 
 export { routesForLanguage, updateURL };
