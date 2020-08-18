@@ -1,6 +1,6 @@
 import { kebabCase } from "lodash";
 
-import { getCurrentLang } from "../LanguageSelector";
+import { getCurrentLang, getURLPrefix } from "../LanguageSelector";
 
 /**
  * Generates routes for a language
@@ -8,6 +8,9 @@ import { getCurrentLang } from "../LanguageSelector";
 const routesForLanguage = props => {
   const { routes, language, i18n } = props;
   const { alternateName: languageCode } = language;
+
+  const langPrefix = getURLPrefix({ languageCode: languageCode, i18n: i18n });
+  console.log("langPrefix:", langPrefix);
 
   return (
     routes &&
@@ -19,7 +22,7 @@ const routesForLanguage = props => {
       const langF = i18n.getFixedT(languageCode, componentName);
       const slug = langF(kebabCase(componentName));
 
-      return { ...item, path: slug };
+      return { ...item, path: `${langPrefix}/${slug}` };
     })
   );
 };

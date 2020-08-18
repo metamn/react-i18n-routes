@@ -35,6 +35,21 @@ const getLanguageFromURL = props => {
 };
 
 /**
+ * Returns the URL prefix based on the language
+ *
+ * Ex.: default: '', ro-RO: '/ro'
+ */
+const getURLPrefix = props => {
+  const { languageCode, i18n } = props;
+
+  const currentLanguage = getCurrentLang(i18n);
+
+  return languageCode === currentLanguage
+    ? ""
+    : `/${stripLanguageCode(languageCode)}`;
+};
+
+/**
  * Gets the current language
  */
 const getCurrentLang = i18n => {
@@ -57,9 +72,21 @@ const isCurrentLangTheDefaultLang = i18n => {
   return getDefaultLang(i18n) === getCurrentLang(i18n);
 };
 
+/**
+ * Removes the second part of a locale
+ *
+ * Ex.: en-US > en
+ */
+const stripLanguageCode = languageCode => {
+  const split = languageCode.split("-");
+
+  return split[0] ? split[0] : languageCode;
+};
+
 export {
   getCurrentLang,
   getDefaultLang,
   isCurrentLangTheDefaultLang,
-  getLanguageFromURL
+  getLanguageFromURL,
+  getURLPrefix
 };

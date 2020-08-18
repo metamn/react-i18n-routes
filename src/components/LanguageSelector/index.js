@@ -4,5 +4,6 @@ export {
   LanguageSelectorDefaultProps,
   getCurrentLang,
   getDefaultLang,
-  isCurrentLangTheDefaultLang
+  isCurrentLangTheDefaultLang,
+  getURLPrefix
 } from "./LanguageSelector";

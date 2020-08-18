@@ -31,7 +31,8 @@ import {
   getCurrentLang,
   getDefaultLang,
   isCurrentLangTheDefaultLang,
-  getLanguageFromURL
+  getLanguageFromURL,
+  getURLPrefix
 } from "./LanguageSelector.logic";
 
 /**
@@ -165,5 +166,6 @@ export {
   defaultProps as LanguageSelectorDefaultProps,
   getCurrentLang,
   getDefaultLang,
-  isCurrentLangTheDefaultLang
+  isCurrentLangTheDefaultLang,
+  getURLPrefix
 };
