@@ -106,7 +106,7 @@ const Home = props => {
 
       return (
         <li key={id}>
-          <a href={articleSlug} target="blank">
+          <a href={articleSlug} target="_blank">
             {t(name)}
           </a>
         </li>
@@ -120,7 +120,6 @@ const Home = props => {
           {t("Access articles through the archive")}:&nbsp;
           <Link to={`${path2}/${articlesSlug}`}>{articlesName}</Link>.
         </li>
-
         <li key={shortid.generate()}>
           <p>{t("Access articles directly")}:</p>
           <ul>{articlesList}</ul>
@@ -129,6 +128,27 @@ const Home = props => {
         <li key={shortid.generate()}>
           <p>{t("Open articles in antother tab")}:</p>
           <ul>{articlesList2}</ul>
+        </li>
+        <li key={shortid.generate()}>
+          <p>{t("Open comments in antother tab")}:</p>
+          <ul>
+            <li>
+              <a
+                href="http://localhost:3000/articles-hu/article-1-hu/comments-hu/comment-1-hu"
+                target="_blank"
+              >
+                Comment 1 / 2 for Article 1 (HU)
+              </a>
+            </li>
+            <li>
+              <a
+                href="http://localhost:3000/ro/articles-ro/article-1-ro/comments-ro/comment-2-ro"
+                target="_blank"
+              >
+                Comment 2 / 2 for Article 1 (RO)
+              </a>
+            </li>
+          </ul>
         </li>
       </ol>
     </Layout>
