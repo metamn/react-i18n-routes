@@ -206,13 +206,14 @@ const makeServer = () => {
       });
 
       /**
-       * Returns all comments for an article
+       * Returns all comments for an article on a given language
        */
-      this.get("/comments/:articleID", (schema, request) => {
+      this.get("/comments/:articleID/:lang", (schema, request) => {
         const articleID = request.params.articleID;
+        const lang = request.params.lang;
 
         return schema.comments.where(
-          comment => comment.articleID === articleID
+          comment => comment.articleID === articleID && comment.lang === lang
         );
       });
     }

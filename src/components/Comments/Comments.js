@@ -14,6 +14,7 @@ import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
  * Imports other components and hooks
  */
 import Comment from "../Comment";
+import { getCurrentLang } from "../LanguageSelector";
 
 /**
  * Imports data
@@ -41,15 +42,20 @@ const Comments = props => {
   const { t, i18n } = useTranslation("Comments");
 
   /**
+   * Re-loads articles from server when the language is changed
+   */
+  const currentLang = getCurrentLang(i18n);
+
+  /**
    * Loads comments from the server
    */
   const [comments, setComments] = useState(defaultComments);
 
   useEffect(() => {
-    fetch(`/api/comments/${articleID}`)
+    fetch(`/api/comments/${articleID}/${currentLang}`)
       .then(response => response.json())
       .then(json => setComments(json.comments));
-  }, [articleID]);
+  }, [articleID, currentLang]);
 
   // NOTE: Resource containers create routes to children. Without usining the language file.
   const match = useRouteMatch();
