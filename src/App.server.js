@@ -43,6 +43,24 @@ const makeServer = () => {
         lang: "ro-RO",
         multilangID: "3"
       });
+      server.create("article", {
+        name: "Article 1 (HU)",
+        slug: "article-1-hu",
+        lang: "hu-HU",
+        multilangID: "1"
+      });
+      server.create("article", {
+        name: "Article 2 (HU)",
+        slug: "article-2-hu",
+        lang: "hu-HU",
+        multilangID: "2"
+      });
+      server.create("article", {
+        name: "Article 3 (HU)",
+        slug: "article-3-hu",
+        lang: "hu-HU",
+        multilangID: "3"
+      });
     },
 
     routes() {
