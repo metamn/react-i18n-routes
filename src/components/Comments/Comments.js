@@ -46,6 +46,9 @@ const Comments = props => {
    */
   const currentLang = getCurrentLang(i18n);
 
+  console.log("articleID:", articleID);
+  console.log("currentLang:", currentLang);
+
   /**
    * Loads comments from the server
    */

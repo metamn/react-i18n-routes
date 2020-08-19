@@ -61,7 +61,7 @@ const Article = props => {
   /**
    * Parses the received data
    */
-  const { name, slug, id } = article;
+  const { name, slug, multilangID } = article;
 
   return (
     <Layout>
@@ -72,7 +72,7 @@ const Article = props => {
         <dd>{slug}</dd>
         <dt>{tComments("Comments")}:</dt>
         <dd>
-          <Comments {...comments} articleID={id} articleSlug={slug} />
+          <Comments {...comments} articleID={multilangID} articleSlug={slug} />
         </dd>
       </dl>
     </Layout>
