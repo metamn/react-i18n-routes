@@ -55,12 +55,13 @@ const Comments = props => {
   const match = useRouteMatch();
   const { path } = match;
   const path2 = path.replace(":slug", articleSlug);
+  const commentsSlug = t("comments");
 
   const commentsList =
     comments &&
     comments.map(item => {
       const { id, name, slug } = item;
-      const commentSlug = `${path2}/${slug}`;
+      const commentSlug = `${path2}/${commentsSlug}/${slug}`;
 
       return (
         <li key={id}>
