@@ -14,6 +14,7 @@ import { useRouteMatch } from "react-router-dom";
  * Imports other components and hooks
  */
 import Layout from "../Layout";
+import Comments from "../Comments";
 
 /**
  * Imports data
@@ -37,7 +38,7 @@ i18n.addResourceBundle("hu-HU", "Article", hu_hu);
  * Displays the component
  */
 const Article = props => {
-  const { slug: defaultSlug } = props;
+  const { slug: defaultSlug, comments } = props;
   const { t } = useTranslation("Article");
 
   // NOTE: Resources parse the URL to get their unique slug id
@@ -59,7 +60,7 @@ const Article = props => {
   /**
    * Parses the received data
    */
-  const { name, slug } = article;
+  const { name, slug, id } = article;
 
   return (
     <Layout>
@@ -68,6 +69,10 @@ const Article = props => {
         <dd>{name}</dd>
         <dt>{t("Slug")}:</dt>
         <dd>{slug}</dd>
+        <dt>{t("Comments")}:</dt>
+        <dd>
+          <Comments {...comments} articleID={id} />
+        </dd>
       </dl>
     </Layout>
   );

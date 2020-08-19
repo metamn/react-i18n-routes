@@ -23,7 +23,7 @@ import { propTypes, defaultProps } from "./Comment.data";
 /**
  * Imports translations
  */
-import i18n from "../../../i18n";
+import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 import { ro_ro } from "./Comment.lang.ro-ro";
 import { hu_hu } from "./Comment.lang.hu-hu";

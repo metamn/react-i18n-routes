@@ -13,7 +13,6 @@ import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
 /**
  * Imports other components and hooks
  */
-import Layout from "../Layout";
 import Comment from "../Comment";
 
 /**
@@ -24,7 +23,7 @@ import { propTypes, defaultProps } from "./Comments.data";
 /**
  * Imports translations
  */
-import i18n from "../../../i18n";
+import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 import { ro_ro } from "./Comments.lang.ro-ro";
 import { hu_hu } from "./Comments.lang.hu-hu";
@@ -38,8 +37,7 @@ i18n.addResourceBundle("en-US", "Comments", en_us);
  * Displays the component
  */
 const Comments = props => {
-  const { items: defaultComments, article } = props;
-  const { id: articleID } = article;
+  const { items: defaultComments, articleID } = props;
   const { t, i18n } = useTranslation("Comments");
 
   /**
@@ -51,7 +49,7 @@ const Comments = props => {
     fetch(`/api/comments/${articleID}`)
       .then(response => response.json())
       .then(json => setComments(json.comments));
-  }, [currentLang]);
+  }, [articleID]);
 
   // NOTE: Resource containers create routes to children. Without usining the language file.
   const match = useRouteMatch();
@@ -76,9 +74,7 @@ const Comments = props => {
         <Comment />
       </Route>
       <Route path={path}>
-        <Layout>
-          <ul>{commentsList}</ul>
-        </Layout>
+        <ul>{commentsList}</ul>
       </Route>
     </Switch>
   );
