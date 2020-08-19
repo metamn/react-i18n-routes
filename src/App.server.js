@@ -134,6 +134,15 @@ const makeServer = () => {
       });
 
       /**
+       * Returns a comment by slug
+       */
+      this.get("/comment/:slug", (schema, request) => {
+        const slug = request.params.slug;
+
+        return schema.comments.findBy({ slug: slug });
+      });
+
+      /**
        * Returns all comments for an article
        */
       this.get("/comments/:articleID", (schema, request) => {
