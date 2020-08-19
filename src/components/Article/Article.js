@@ -40,6 +40,7 @@ i18n.addResourceBundle("hu-HU", "Article", hu_hu);
 const Article = props => {
   const { slug: defaultSlug, comments } = props;
   const { t } = useTranslation("Article");
+  const { t: tComments } = useTranslation("Comments");
 
   // NOTE: Resources parse the URL to get their unique slug id
   const {
@@ -69,7 +70,7 @@ const Article = props => {
         <dd>{name}</dd>
         <dt>{t("Slug")}:</dt>
         <dd>{slug}</dd>
-        <dt>{t("Comments")}:</dt>
+        <dt>{tComments("Comments")}:</dt>
         <dd>
           <Comments {...comments} articleID={id} articleSlug={slug} />
         </dd>

@@ -1,5 +1,5 @@
 const hu_hu = {
-  Comments: "Comments (hu_hu)",
+  Comments: "Comments (HU)",
   comments: "comments-hu"
 };
 
