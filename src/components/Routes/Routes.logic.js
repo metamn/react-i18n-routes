@@ -100,10 +100,14 @@ const updateURL = props => {
           const slug = split.pop();
 
           if (slug && lastResource) {
-            const resource = "ccc";
-            const newKey2 = `/api/${resource}/${slug}/${currentLanguage}`;
-            console.log("query:", newKey2);
-            console.log("lastResource:", lastResource);
+            const { component } = lastResource;
+            const { defaultProps } = component;
+            const { api } = defaultProps;
+            const { endpointForResource } = api;
+
+            return endpointForResource
+              ? `{query: ${endpointForResource}/${slug}/${currentLanguage}}`
+              : null;
           }
         }
 
