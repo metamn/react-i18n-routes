@@ -37,7 +37,8 @@ i18n
    */
   .init({
     resources,
-    lng: "en-US",
+    // NOTE: When the default language is updated also the slugs in `Home.lang` should be updated
+    lng: "ro-RO",
 
     keySeparator: false, // we do not use keys in form messages.welcome
 

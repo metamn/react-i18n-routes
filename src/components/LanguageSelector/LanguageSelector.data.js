@@ -36,12 +36,7 @@ const defaultProps = {
       alternateName: "ro-RO",
       displayName: "Ro"
     }
-  ],
-  defaultLanguage: {
-    name: "English",
-    alternateName: "en-US",
-    displayName: "En"
-  }
+  ]
 };
 
 export { propTypes, defaultProps };
