@@ -35,6 +35,11 @@ const defaultProps = {
       name: "Romanian",
       alternateName: "ro-RO",
       displayName: "Ro"
+    },
+    {
+      name: "Hungarian",
+      alternateName: "hu-HU",
+      displayName: "Hu"
     }
   ]
 };

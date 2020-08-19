@@ -27,9 +27,11 @@ import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 import { ro_ro } from "./Article.lang.ro-ro";
 import { en_us } from "./Article.lang.en-us";
+import { hu_hu } from "./Article.lang.hu-hu";
 
 i18n.addResourceBundle("ro-RO", "Article", ro_ro);
 i18n.addResourceBundle("en-US", "Article", en_us);
+i18n.addResourceBundle("hu-HU", "Article", hu_hu);
 
 /**
  * Displays the component
