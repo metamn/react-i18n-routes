@@ -46,6 +46,8 @@ const Comment = props => {
 
   const slugForQuery = slugFromURL ? slugFromURL : defaultSlug;
 
+  console.log("slugForQuery:", slugForQuery);
+
   // NOTE: Resources query the DB and load their own data
   const [comment, setcomment] = useState(props);
 
