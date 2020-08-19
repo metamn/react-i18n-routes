@@ -110,6 +110,11 @@ const LanguageSelector = props => {
   const urlNeedsTranslation = currentLanguage === languageFromURL;
 
   /**
+   * Manages the state of the translated URL
+   */
+  const [newURL, setNewURL] = useState("");
+
+  /**
    * Manages the state of the select box
    */
   const [selected, setSelected] = useState(languageFromURL);
@@ -130,15 +135,23 @@ const LanguageSelector = props => {
     i18n.changeLanguage(selected);
 
     if (selected !== currentLanguage && urlNeedsTranslation) {
-      const newURL = routesUpdateURL({
-        breadcrumbs: breadcrumbs,
-        i18n: i18n,
-        routes: routes,
-        oldLanguage: currentLanguage
-      });
-      history.push(newURL);
+      setNewURL(
+        routesUpdateURL({
+          breadcrumbs: breadcrumbs,
+          i18n: i18n,
+          routes: routes,
+          oldLanguage: currentLanguage
+        })
+      );
     }
   }, [selected]);
+
+  /**
+   * Updates the URL
+   */
+  useEffect(() => {
+    history.push(newURL);
+  }, [newURL]);
 
   /**
    * Prepares the select box items

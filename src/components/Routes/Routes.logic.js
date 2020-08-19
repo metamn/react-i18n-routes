@@ -106,7 +106,7 @@ const updateURL = props => {
             const { endpointForResource } = api;
 
             return endpointForResource
-              ? `{query: ${endpointForResource}/${slug}/${currentLanguage}}`
+              ? `/{${endpointForResource}/${slug}/${currentLanguage}}`
               : null;
           }
         }
