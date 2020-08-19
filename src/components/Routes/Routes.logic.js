@@ -88,18 +88,16 @@ const updateURL = props => {
            * Loads a resource from the API
            *
            * - We reach here for keys like '/', 'articles/article-2', '/ro/articles-ro/article-2-ro'
-           * - So we'll find the last slug
-           * - Do an API call for that slug with the new language code
+           * - So we'll find the last two slugs
+           * - And do an API call to the penultimate resource with the last slug and the new language code
            */
           const split = key.split("/");
-          const lastSplit = split.pop();
+          const slug = split.pop();
+          const resource = split.pop();
 
-          if (lastSplit) {
-            console.log("lastSplit:", lastSplit);
-
-            fetch(`/api/article/${lastSplit}/${currentLanguage}`)
-              .then(response => response.json())
-              .then(json => console.log(json.article.slug));
+          if (slug && resource) {
+            newKey = `/api/${resource}/${slug}/${currentLanguage}`;
+            console.log("query:", newKey);
           }
         }
 
