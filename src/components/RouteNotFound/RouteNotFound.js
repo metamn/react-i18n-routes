@@ -28,9 +28,11 @@ import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 import { ro_ro } from "./RouteNotFound.lang.ro-ro";
 import { en_us } from "./RouteNotFound.lang.en-us";
+import { hu_hu } from "./RouteNotFound.lang.hu-hu";
 
 i18n.addResourceBundle("ro-RO", "RouteNotFound", ro_ro);
 i18n.addResourceBundle("en-US", "RouteNotFound", en_us);
+i18n.addResourceBundle("hu-HU", "RouteNotFound", hu_hu);
 
 /**
  * Displays the component
