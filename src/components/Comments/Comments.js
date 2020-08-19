@@ -37,7 +37,7 @@ i18n.addResourceBundle("en-US", "Comments", en_us);
  * Displays the component
  */
 const Comments = props => {
-  const { items: defaultComments, articleID } = props;
+  const { items: defaultComments, articleID, articleSlug } = props;
   const { t, i18n } = useTranslation("Comments");
 
   /**
@@ -54,12 +54,13 @@ const Comments = props => {
   // NOTE: Resource containers create routes to children. Without usining the language file.
   const match = useRouteMatch();
   const { path } = match;
+  const path2 = path.replace(":slug", articleSlug);
 
   const commentsList =
     comments &&
     comments.map(item => {
       const { id, name, slug } = item;
-      const commentSlug = `${path}/${slug}`;
+      const commentSlug = `${path2}/${slug}`;
 
       return (
         <li key={id}>

@@ -1,5 +1,6 @@
 const en_us = {
-  Comments: "Comments"
+  Comments: "Comments",
+  comments: "comments"
 };
 
 export { en_us };

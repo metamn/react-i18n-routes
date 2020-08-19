@@ -71,7 +71,7 @@ const Article = props => {
         <dd>{slug}</dd>
         <dt>{t("Comments")}:</dt>
         <dd>
-          <Comments {...comments} articleID={id} />
+          <Comments {...comments} articleID={id} articleSlug={slug} />
         </dd>
       </dl>
     </Layout>
