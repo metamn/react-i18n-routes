@@ -15,7 +15,6 @@ import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
  */
 import Layout from "../Layout";
 import Comment from "../Comment";
-import { getCurrentLang } from "../LanguageSelector";
 
 /**
  * Imports data
@@ -39,7 +38,8 @@ i18n.addResourceBundle("en-US", "Comments", en_us);
  * Displays the component
  */
 const Comments = props => {
-  const { items: defaultComments } = props;
+  const { items: defaultComments, article } = props;
+  const { id: articleID } = article;
   const { t, i18n } = useTranslation("Comments");
 
   /**
@@ -47,13 +47,8 @@ const Comments = props => {
    */
   const [comments, setComments] = useState(defaultComments);
 
-  /**
-   * Re-loads comments from server when the language is changed
-   */
-  const currentLang = getCurrentLang(i18n);
-
   useEffect(() => {
-    fetch(`/api/comments/${currentLang}`)
+    fetch(`/api/comments/${articleID}`)
       .then(response => response.json())
       .then(json => setComments(json.comments));
   }, [currentLang]);
@@ -66,11 +61,11 @@ const Comments = props => {
     comments &&
     comments.map(item => {
       const { id, name, slug } = item;
-      const articleSlug = `${path}/${slug}`;
+      const commentSlug = `${path}/${slug}`;
 
       return (
         <li key={id}>
-          <Link to={articleSlug}>{t(name)}</Link>
+          <Link to={commentSlug}>{t(name)}</Link>
         </li>
       );
     });
