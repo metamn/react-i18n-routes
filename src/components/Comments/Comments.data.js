@@ -16,11 +16,7 @@ import { CommentPropTypes, CommentDefaultProps } from "../Comment";
  */
 const propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape(CommentPropTypes)),
-  articleID: PropTypes.string,
-  api: PropTypes.shape({
-    endpointForCollection: PropTypes.string,
-    endpointForResource: PropTypes.string
-  })
+  articleID: PropTypes.string
 };
 
 /**

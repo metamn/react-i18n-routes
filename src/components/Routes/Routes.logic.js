@@ -86,8 +86,9 @@ const updateURL = props => {
 
         const componentForKey = oldRoutes.find(item => item.path === key);
 
+        //console.log("breadcrumb:", breadcrumb);
         console.log("key:", key);
-        console.log("componentForKey:", componentForKey);
+        //console.log("componentForKey:", componentForKey);
 
         if (componentForKey) {
           lastResource = componentForKey;
@@ -105,6 +106,8 @@ const updateURL = props => {
            * Loads a resource from the API
            *
            * - We reach here for keys like '/', 'articles/article-2', '/ro/articles-ro/article-2-ro'
+           * - OR '/articles-hu/article-1-hu/comment-1-hu'
+           * - OR '/articles-hu/article-1-hu/comments-hu'
            * - So we'll find the last slug
            * - And do an API call with the last slug and the new language code
            * - The resource to call is saved earlier into `lastResource`
@@ -117,6 +120,10 @@ const updateURL = props => {
             const { defaultProps } = component;
             const { api } = defaultProps;
             const { endpointForResource } = api;
+
+            // TODO: We need a call here to the parent resource (Article) to tell what to do with it's children
+
+            console.log("endpointForResource:", endpointForResource);
 
             if (!endpointForResource) return null;
 
