@@ -176,8 +176,9 @@ const LanguageSelector = props => {
    */
   useEffect(() => {
     const isDirty = newURL.includes("{query-");
+    const isEmpty = newURL === "";
 
-    if (!isDirty) {
+    if (!isDirty && !isEmpty) {
       history.push(newURL);
     }
   }, [newURL]);
