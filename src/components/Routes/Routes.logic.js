@@ -123,8 +123,6 @@ const updateURL = props => {
       })
       .filter(item => item !== null);
 
-  console.log("urlParts:", urlParts);
-
   return { url: urlParts.join("").replace("//", "/"), queries: queries };
 };
 
