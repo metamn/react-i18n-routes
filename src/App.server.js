@@ -92,6 +92,69 @@ const makeServer = () => {
         lang: "en-US",
         articleID: "2"
       });
+      server.create("comment", {
+        id: "4",
+        name: "Comment 1 / 1 for Article 3",
+        slug: "comment-4",
+        lang: "en-US",
+        articleID: "3"
+      });
+      server.create("comment", {
+        id: "5",
+        name: "Comment 1 / 2 for Article 1 (RO)",
+        slug: "comment-1-ro",
+        lang: "ro-RO",
+        articleID: "1"
+      });
+      server.create("comment", {
+        id: "6",
+        name: "Comment 2 / 2 for Article 1 (RO)",
+        slug: "comment-2-ro",
+        lang: "ro-RO",
+        articleID: "1"
+      });
+      server.create("comment", {
+        id: "7",
+        name: "Comment 1 / 1 for Article 2 (RO)",
+        slug: "comment-3-ro",
+        lang: "ro-RO",
+        articleID: "2"
+      });
+      server.create("comment", {
+        id: "8",
+        name: "Comment 1 / 1 for Article 3 (RO)",
+        slug: "comment-4-ro",
+        lang: "ro-RO",
+        articleID: "3"
+      });
+      server.create("comment", {
+        id: "9",
+        name: "Comment 1 / 2 for Article 1 (HU)",
+        slug: "comment-1-hu",
+        lang: "hu-HU",
+        articleID: "1"
+      });
+      server.create("comment", {
+        id: "10",
+        name: "Comment 2 / 2 for Article 1 (HU)",
+        slug: "comment-2-hu",
+        lang: "hu-HU",
+        articleID: "1"
+      });
+      server.create("comment", {
+        id: "11",
+        name: "Comment 1 / 1 for Article 2 (HU)",
+        slug: "comment-3-hu",
+        lang: "hu-HU",
+        articleID: "2"
+      });
+      server.create("comment", {
+        id: "12",
+        name: "Comment 1 / 1 for Article 3 (HU)",
+        slug: "comment-4-hu",
+        lang: "hu-HU",
+        articleID: "3"
+      });
     },
 
     routes() {
