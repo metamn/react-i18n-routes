@@ -69,6 +69,9 @@ const updateURL = props => {
     doPrefixLanguage: true
   });
 
+  console.log("oldRoutes:", oldRoutes);
+  console.log("currentRoutes:", currentRoutes);
+
   let lastResource = null;
   let queries = [];
 
@@ -82,6 +85,9 @@ const updateURL = props => {
         let newKey = "";
 
         const componentForKey = oldRoutes.find(item => item.path === key);
+
+        console.log("key:", key);
+        console.log("componentForKey:", componentForKey);
 
         if (componentForKey) {
           lastResource = componentForKey;
@@ -122,6 +128,9 @@ const updateURL = props => {
         return newKey ? newKey : null;
       })
       .filter(item => item !== null);
+
+  console.log("urlParts:", urlParts);
+  console.log("queries:", queries);
 
   return { url: urlParts.join("").replace("//", "/"), queries: queries };
 };
