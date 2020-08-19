@@ -1,6 +1,6 @@
 const en_us = {
   Home: "Home",
-  home: "en"
+  home: ""
 };
 
 export { en_us };

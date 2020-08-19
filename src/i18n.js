@@ -37,8 +37,8 @@ i18n
    */
   .init({
     resources,
-    // NOTE: When the default language is updated also the slugs in `Home.lang` should be updated
-    lng: "ro-RO",
+    // NOTE: When the default language is updated also the slugs in `Home.lang` should be updated. The slug for Home in default language should be empty, on other languages prefixed with 'en' or 'ro' etc.
+    lng: "en-US",
 
     keySeparator: false, // we do not use keys in form messages.welcome
 
