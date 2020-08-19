@@ -48,7 +48,7 @@ const routesForLanguage = props => {
  *
  * - Returns: { url: the translated url, queries: API query strings }
  * - Ex.: { url: '/articles/', queries: [] }
- * - Ex.: { url: '/articles/{query}', queries: ['/api/article/article-2-ro/en-US'] }
+ * - Ex.: { url: '/articles/{query-1}', queries: ['/api/article/article-2-ro/en-US'] }
  */
 const updateURL = props => {
   const { breadcrumbs, i18n, routes, oldLanguage } = props;
