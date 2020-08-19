@@ -63,6 +63,8 @@ const updateURL = props => {
     doPrefixLanguage: true
   });
 
+  let lastResource = null;
+
   const urlParts =
     breadcrumbs &&
     breadcrumbs
@@ -75,6 +77,8 @@ const updateURL = props => {
         const componentForKey = oldRoutes.find(item => item.path === key);
 
         if (componentForKey) {
+          lastResource = componentForKey;
+
           const componentForNewKey = currentRoutes.find(
             item => item.component === componentForKey.component
           );
@@ -88,16 +92,18 @@ const updateURL = props => {
            * Loads a resource from the API
            *
            * - We reach here for keys like '/', 'articles/article-2', '/ro/articles-ro/article-2-ro'
-           * - So we'll find the last two slugs
-           * - And do an API call to the penultimate resource with the last slug and the new language code
+           * - So we'll find the last slug
+           * - And do an API call with the last slug and the new language code
+           * - The resource to call is saved earlier into `lastResource`
            */
           const split = key.split("/");
           const slug = split.pop();
-          const resource = split.pop();
 
-          if (slug && resource) {
-            newKey = `/api/${resource}/${slug}/${currentLanguage}`;
-            console.log("query:", newKey);
+          if (slug && lastResource) {
+            const resource = "ccc";
+            const newKey2 = `/api/${resource}/${slug}/${currentLanguage}`;
+            console.log("query:", newKey2);
+            console.log("lastResource:", lastResource);
           }
         }
 
