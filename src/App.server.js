@@ -81,7 +81,6 @@ const makeServer = () => {
             article.lang === lang && article.multilangID === multilangID
         );
 
-        console.log("res:", res.models[0]);
         return res.models[0];
       });
     }

@@ -43,6 +43,12 @@ const routesForLanguage = props => {
  * - It loops through breadcrumbs
  * - Looks up breadcrumb in old routes
  * - Finds new slug on new routes
+ * - If the new slug is not found it means it must be translated via an API call
+ * - Since we can't make an async API call here we will return the query to the component where it will be executed
+ *
+ * - Returns: { url: the translated url, queries: API query strings }
+ * - Ex.: { url: '/articles/', queries: [] }
+ * - Ex.: { url: '/articles/{query}', queries: ['/api/article/article-2-ro/en-US'] }
  */
 const updateURL = props => {
   const { breadcrumbs, i18n, routes, oldLanguage } = props;
@@ -64,6 +70,7 @@ const updateURL = props => {
   });
 
   let lastResource = null;
+  let queries = [];
 
   const urlParts =
     breadcrumbs &&
@@ -105,9 +112,10 @@ const updateURL = props => {
             const { api } = defaultProps;
             const { endpointForResource } = api;
 
-            return endpointForResource
-              ? `/{${endpointForResource}/${slug}/${currentLanguage}}`
-              : null;
+            if (!endpointForResource) return null;
+
+            queries.push(`${endpointForResource}/${slug}/${currentLanguage}`);
+            return `/{query-${queries.length}}`;
           }
         }
 
@@ -117,7 +125,7 @@ const updateURL = props => {
 
   console.log("urlParts:", urlParts);
 
-  return urlParts.join("").replace("//", "/");
+  return { url: urlParts.join("").replace("//", "/"), queries: queries };
 };
 
 export { routesForLanguage, updateURL };

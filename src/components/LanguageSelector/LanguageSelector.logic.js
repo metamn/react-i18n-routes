@@ -1,6 +1,17 @@
 import { startCase } from "lodash";
 
 /**
+ * Replaces a query in the URL with a slug
+ *
+ * Ex.: '/articles/{query-1}' > '/articles/article-1'
+ */
+const updateQueryInURL = props => {
+  const { url, index, slug } = props;
+
+  return url.replace(`{query-${index}}`, slug);
+};
+
+/**
  * Gets language from URL
  */
 const getLanguageFromURL = props => {
@@ -88,5 +99,6 @@ export {
   getDefaultLang,
   isCurrentLangTheDefaultLang,
   getLanguageFromURL,
-  getURLPrefix
+  getURLPrefix,
+  updateQueryInURL
 };

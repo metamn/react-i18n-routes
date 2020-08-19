@@ -32,7 +32,8 @@ import {
   getDefaultLang,
   isCurrentLangTheDefaultLang,
   getLanguageFromURL,
-  getURLPrefix
+  getURLPrefix,
+  updateQueryInURL
 } from "./LanguageSelector.logic";
 
 /**
@@ -115,6 +116,11 @@ const LanguageSelector = props => {
   const [newURL, setNewURL] = useState("");
 
   /**
+   * Manages the state of the URL queries
+   */
+  const [URLQueries, setURLQueries] = useState([]);
+
+  /**
    * Manages the state of the select box
    */
   const [selected, setSelected] = useState(languageFromURL);
@@ -135,22 +141,45 @@ const LanguageSelector = props => {
     i18n.changeLanguage(selected);
 
     if (selected !== currentLanguage && urlNeedsTranslation) {
-      setNewURL(
-        routesUpdateURL({
-          breadcrumbs: breadcrumbs,
-          i18n: i18n,
-          routes: routes,
-          oldLanguage: currentLanguage
-        })
-      );
+      const { url, queries } = routesUpdateURL({
+        breadcrumbs: breadcrumbs,
+        i18n: i18n,
+        routes: routes,
+        oldLanguage: currentLanguage
+      });
+
+      setNewURL(url);
+      setURLQueries(queries);
     }
   }, [selected]);
+
+  /**
+   * Translates the resources needed for the new URL
+   */
+  useEffect(() => {
+    for (var i = 0; i < URLQueries.length; i++) {
+      const queryString = URLQueries[i];
+
+      fetch(queryString)
+        .then(response => response.json())
+        .then(json => Object.values(json).shift())
+        .then(resource =>
+          setNewURL(
+            updateQueryInURL({ url: newURL, index: i, slug: resource.slug })
+          )
+        );
+    }
+  }, [URLQueries]);
 
   /**
    * Updates the URL
    */
   useEffect(() => {
-    history.push(newURL);
+    const isDirty = newURL.includes("{query-");
+
+    if (!isDirty) {
+      history.push(newURL);
+    }
   }, [newURL]);
 
   /**
