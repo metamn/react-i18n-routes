@@ -42,7 +42,8 @@ const defaultProps = {
         component: Comments
       }
     ]
-  }
+  },
+  apiEndpoint: "/api/article"
 };
 
 export { propTypes, defaultProps };

@@ -67,7 +67,7 @@ const routesForLanguage = props => {
 };
 
 /**
- * Const finds a key from oldRoutes in currentRoutes
+ * Finds a key from oldRoutes in currentRoutes
  */
 const findNewKey = props => {
   const { oldRoutes, currentRoutes, key } = props;
@@ -88,6 +88,38 @@ const findNewKey = props => {
   }
 
   return newKey;
+};
+
+const createNewQuery = props => {
+  const { oldRoutes, currentRoutes, keys, currentLanguage } = props;
+  const { oldKey, currentKey } = keys;
+
+  //console.log("currentKey:", currentKey);
+
+  let newQuery = "";
+
+  const componentForKey = oldRoutes.find(item => item.path === currentKey);
+
+  if (componentForKey) {
+    const componentForNewKey = currentRoutes.find(
+      item => item.component === componentForKey.component
+    );
+
+    if (componentForNewKey) {
+      const { component } = componentForNewKey;
+      const { defaultProps } = component;
+      const { apiEndpoint } = defaultProps;
+
+      //console.log("apiEndpoint:", apiEndpoint);
+
+      if (apiEndpoint) {
+        const slug = oldKey.split("/").pop();
+        newQuery = `${apiEndpoint}/${slug}/${currentLanguage}`;
+      }
+    }
+  }
+
+  return newQuery;
 };
 
 /**
@@ -166,6 +198,14 @@ const updateURL = props => {
 
         if (newKey) {
           saved = { oldKey: key, currentKey: keyWithSlug2 };
+          queries.push(
+            createNewQuery({
+              oldRoutes: oldRoutes,
+              currentRoutes: currentRoutes,
+              keys: saved,
+              currentLanguage: currentLanguage
+            })
+          );
           return newKey;
         }
 
@@ -214,6 +254,7 @@ const updateURL = props => {
       .filter(item => item !== null);
 
   console.log("urlParts:", urlParts);
+  console.log("queries:", queries);
 };
 
 const updateURL2 = props => {
