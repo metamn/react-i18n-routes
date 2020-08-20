@@ -67,6 +67,30 @@ const routesForLanguage = props => {
 };
 
 /**
+ * Const finds a key from oldRoutes in currentRoutes
+ */
+const findNewKey = props => {
+  const { oldRoutes, currentRoutes, key } = props;
+
+  let newKey = null;
+
+  const componentForKey = oldRoutes.find(item => item.path === key);
+
+  if (componentForKey) {
+    const componentForNewKey = currentRoutes.find(
+      item => item.component === componentForKey.component
+    );
+
+    if (componentForNewKey) {
+      const { path } = componentForNewKey;
+      newKey = path;
+    }
+  }
+
+  return newKey;
+};
+
+/**
  * Updates the URL on language change
  *
  * - It loops through breadcrumbs
@@ -80,6 +104,119 @@ const routesForLanguage = props => {
  * - Ex.: { url: '/articles/{query-1}', queries: ['/api/article/article-2-ro/en-US'] }
  */
 const updateURL = props => {
+  const { breadcrumbs, i18n, routes, oldLanguage } = props;
+
+  const currentLanguage = getCurrentLang(i18n);
+
+  const currentRoutes = routesForLanguage({
+    routes: routes,
+    language: { alternateName: currentLanguage },
+    i18n: i18n,
+    doPrefixLanguage: false
+  });
+
+  const oldRoutes = routesForLanguage({
+    routes: routes,
+    language: { alternateName: oldLanguage },
+    i18n: i18n,
+    doPrefixLanguage: true
+  });
+
+  let saved = null;
+  let queries = [];
+
+  console.log("oldRoutes:", oldRoutes);
+  console.log("currentRoutes:", currentRoutes);
+
+  const urlParts =
+    breadcrumbs &&
+    breadcrumbs
+      .map(item => {
+        const { breadcrumb } = item;
+        const { key } = breadcrumb;
+
+        let newKey = null;
+
+        /**
+         * Step1: Looks for a direct match
+         *
+         * Ex. /, /articles
+         */
+        newKey = findNewKey({
+          oldRoutes: oldRoutes,
+          currentRoutes: currentRoutes,
+          key: key
+        });
+
+        if (newKey) return newKey;
+
+        /**
+         * Step 2: Looks for a match with :slug
+         *
+         * Ex.: /articles/article-1
+         */
+        const keyWithSlug = key.split("/").slice(0, -1);
+        const keyWithSlug2 = [...keyWithSlug, ":slug"].join("/");
+
+        newKey = findNewKey({
+          oldRoutes: oldRoutes,
+          currentRoutes: currentRoutes,
+          key: keyWithSlug2
+        });
+
+        if (newKey) {
+          saved = { oldKey: key, currentKey: keyWithSlug2 };
+          return newKey;
+        }
+
+        /**
+         * Step 3: Looks for match with the help of a previous found
+         *
+         * Ex. /articles/article-1/comments
+         */
+        const { oldKey, currentKey } = saved;
+        const keyWithReplacement = key.replace(oldKey, currentKey);
+
+        newKey = findNewKey({
+          oldRoutes: oldRoutes,
+          currentRoutes: currentRoutes,
+          key: keyWithReplacement
+        });
+
+        if (newKey) {
+          saved = { oldKey: key, currentKey: keyWithReplacement };
+          return newKey;
+        }
+
+        /**
+         * Step 4: Looks for match with the help of a previous found + slug
+         *
+         * Ex. /articles/article-1/comments
+         */
+        const keyWithReplacementAndSlug = keyWithReplacement
+          .split("/")
+          .slice(0, -1);
+        const keyWithReplacementAndSlug2 = [
+          ...keyWithReplacementAndSlug,
+          ":slug"
+        ].join("/");
+
+        newKey = findNewKey({
+          oldRoutes: oldRoutes,
+          currentRoutes: currentRoutes,
+          key: keyWithReplacementAndSlug2
+        });
+
+        if (newKey) {
+          return newKey;
+        }
+      })
+      .filter(item => item !== null);
+
+  console.log("urlParts:", urlParts);
+};
+
+const updateURL2 = props => {
   const { breadcrumbs, i18n, routes, oldLanguage } = props;
 
   const currentLanguage = getCurrentLang(i18n);
@@ -115,7 +252,7 @@ const updateURL = props => {
 
         const componentForKey = oldRoutes.find(item => item.path === key);
 
-        console.log("breadcrumb:", breadcrumb);
+        console.log("key:", key);
 
         if (componentForKey) {
           lastResource = componentForKey;
