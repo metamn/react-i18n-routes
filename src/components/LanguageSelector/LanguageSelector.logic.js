@@ -6,9 +6,7 @@ import { startCase } from "lodash";
  * Ex.: '/articles/{query-1}' > '/articles/article-1'
  */
 const updateQueryInURL = props => {
-  const { url, index, slug } = props;
-
-  //console.log("index:", index);
+  const { url, slug } = props;
 
   return url.replace(":slug", slug);
 };
