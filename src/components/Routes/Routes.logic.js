@@ -63,7 +63,6 @@ const routesForLanguage = props => {
       })
       .reverse();
 
-  console.log("results:", results);
   return results;
 };
 

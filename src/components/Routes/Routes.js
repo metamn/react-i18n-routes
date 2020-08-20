@@ -94,8 +94,6 @@ const Routes = props => {
         doPrefixLanguage: true
       });
 
-      //console.log("localizedRoutes:", localizedRoutes);
-
       return (
         localizedRoutes &&
         localizedRoutes.map(item => {
