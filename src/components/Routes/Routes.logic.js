@@ -154,7 +154,7 @@ const updateURL = props => {
     doPrefixLanguage: true
   });
 
-  let saved = null;
+  let saved = {};
   let queries = [];
 
   const urlParts =
@@ -165,6 +165,7 @@ const updateURL = props => {
         const { key } = breadcrumb;
 
         let newKey = null;
+        console.log("key:", key);
 
         /**
          * Step1: Looks for a direct match
