@@ -42,6 +42,8 @@ const Article = props => {
   const { t } = useTranslation("Article");
   const { t: tComments } = useTranslation("Comments");
 
+  console.log("x");
+
   // NOTE: Resources parse the URL to get their unique slug id
   const {
     params: { slug: slugFromURL }

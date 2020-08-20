@@ -27,7 +27,7 @@ const propTypes = {
  */
 const defaultProps = {
   items: [
-    ...HomeDefaultProps.routes,
+    ...HomeDefaultProps.routes.items,
     { id: shortid.generate(), path: "/", exact: true, component: Home },
     { id: shortid.generate(), path: "*", component: RouteNotFound }
   ]

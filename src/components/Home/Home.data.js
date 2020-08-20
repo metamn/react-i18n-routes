@@ -25,7 +25,12 @@ const propTypes = {
  */
 const defaultProps = {
   articles: ArticlesDefaultProps,
-  routes: [{ id: shortid.generate(), path: "/articles", component: Articles }]
+  routes: {
+    items: [
+      ...ArticlesDefaultProps.routes.items,
+      { id: shortid.generate(), path: "/articles", component: Articles }
+    ]
+  }
 };
 
 export { propTypes, defaultProps };

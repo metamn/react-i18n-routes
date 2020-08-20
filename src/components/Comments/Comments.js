@@ -78,9 +78,6 @@ const Comments = props => {
 
   return (
     <Switch>
-      <Route path={`${path2}/${commentsSlug}/:slug`}>
-        <Comment />
-      </Route>
       <Route path={path}>
         <ul>{commentsList}</ul>
       </Route>

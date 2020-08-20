@@ -24,6 +24,8 @@ const routesForLanguage = props => {
       const langF = i18n.getFixedT(languageCode, componentName);
       const slug = langF(kebabCase(componentName));
 
+      //console.log("slug:", slug);
+
       // NOTE: Routes, except for the home component, are prefixed with language code
       const path =
         componentName === "Home"

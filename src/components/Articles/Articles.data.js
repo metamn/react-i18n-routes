@@ -9,13 +9,15 @@ import shortid from "shortid";
 /**
  * Imports other components and hooks
  */
-import { ArticlePropTypes, ArticleDefaultProps } from "../Article";
+import Article, { ArticlePropTypes, ArticleDefaultProps } from "../Article";
+import { RoutesPropTypes } from "../Routes";
 
 /**
  * Defines the prop types
  */
 const propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape(ArticlePropTypes)),
+  routes: PropTypes.shape(RoutesPropTypes),
   // NOTE: The component should define it's API query endpoints. When the URL is translated this data is used to translate a resource via the API
   api: PropTypes.shape({
     endpointForCollection: PropTypes.string,
@@ -37,6 +39,12 @@ const defaultProps = {
         slug: `article-${index + 1}a`
       };
     }),
+  routes: {
+    items: [
+      ...ArticleDefaultProps.routes.items,
+      { id: shortid.generate(), path: "/articles/:slug", component: Article }
+    ]
+  },
   api: {
     endpointForCollection: "/api/articles",
     endpointForResource: "/api/article"

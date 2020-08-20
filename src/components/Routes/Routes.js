@@ -49,6 +49,16 @@ const Routes = props => {
   const { items: routes } = props;
   const { i18n } = useTranslation("Routes");
 
+  console.log("routes:", routes);
+
+  const routesList =
+    routes &&
+    routes.map(item => {
+      const { id } = item;
+
+      return <Route key={id} {...item} />;
+    });
+
   /**
    * Loads all languages
    */
@@ -86,6 +96,8 @@ const Routes = props => {
         doPrefixLanguage: true
       });
 
+      //console.log("localizedRoutes:", localizedRoutes);
+
       return (
         localizedRoutes &&
         localizedRoutes.map(item => {
@@ -99,7 +111,7 @@ const Routes = props => {
   return (
     <Router>
       <LanguageSelector />
-      <Switch>{routesForLanguages}</Switch>
+      <Switch>{routesList}</Switch>
     </Router>
   );
 };

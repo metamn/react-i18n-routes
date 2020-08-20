@@ -9,13 +9,15 @@ import shortid from "shortid";
 /**
  * Imports other components and hooks
  */
-import { CommentPropTypes, CommentDefaultProps } from "../Comment";
+import Comment, { CommentPropTypes, CommentDefaultProps } from "../Comment";
+import { RoutesPropTypes } from "../Routes";
 
 /**
  * Defines the prop types
  */
 const propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape(CommentPropTypes)),
+  routes: PropTypes.shape(RoutesPropTypes),
   articleID: PropTypes.string
 };
 
@@ -33,6 +35,15 @@ const defaultProps = {
         slug: `comment-${index + 1}a`
       };
     }),
+  routes: {
+    items: [
+      {
+        id: shortid.generate(),
+        path: "/articles/:slug/comments/:slug",
+        component: Comment
+      }
+    ]
+  },
   articleID: "1",
   api: {
     endpointForCollection: "/api/comments",

@@ -77,9 +77,6 @@ const Articles = props => {
 
   return (
     <Switch>
-      <Route path={`${path}/:slug`}>
-        <Article />
-      </Route>
       <Route path={path}>
         <Layout>
           <ul>{articlesList}</ul>

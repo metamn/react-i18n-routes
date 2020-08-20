@@ -9,7 +9,8 @@ import shortid from "shortid";
 /**
  * Imports other components and hooks
  */
-import { CommentsPropTypes, CommentsDefaultProps } from "../Comments";
+import Comments, { CommentsPropTypes, CommentsDefaultProps } from "../Comments";
+import { RoutesPropTypes } from "../Routes";
 
 /**
  * Defines the prop types
@@ -20,7 +21,8 @@ const propTypes = {
   id: PropTypes.string,
   slug: PropTypes.string,
   name: PropTypes.string,
-  comments: PropTypes.shape(CommentsPropTypes)
+  comments: PropTypes.shape(CommentsPropTypes),
+  routes: PropTypes.shape(RoutesPropTypes)
 };
 
 /**
@@ -30,7 +32,17 @@ const defaultProps = {
   id: shortid.generate(),
   slug: "article",
   name: "Article",
-  comments: CommentsDefaultProps
+  comments: CommentsDefaultProps,
+  routes: {
+    items: [
+      ...CommentsDefaultProps.routes.items,
+      {
+        id: shortid.generate(),
+        path: "/articles/:slug/comments",
+        component: Comments
+      }
+    ]
+  }
 };
 
 export { propTypes, defaultProps };
