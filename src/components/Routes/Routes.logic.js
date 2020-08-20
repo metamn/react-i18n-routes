@@ -165,7 +165,6 @@ const updateURL = props => {
         const { key } = breadcrumb;
 
         let newKey = null;
-        console.log("key:", key);
 
         /**
          * Step1: Looks for a direct match
@@ -261,16 +260,6 @@ const updateURL = props => {
       .filter(item => item !== null);
 
   const url = urlParts.pop();
-  const urlWithSlugReplaced = url
-    .split(":slug")
-    .slice(0, -1)
-    .map((item, index) => `${item}/{query-${index + 1}}`)
-    .join("")
-    .split("//")
-    .join("/");
-
-  console.log("url:", url);
-  console.log("queries:", queries);
 
   return { url: url, queries: queries };
 };
