@@ -260,103 +260,18 @@ const updateURL = props => {
       .filter(item => item !== null);
 
   const url = urlParts.pop();
+  const urlWithSlugReplaced = url
+    .split(":slug")
+    .slice(0, -1)
+    .map((item, index) => `${item}/{query-${index + 1}}`)
+    .join("")
+    .split("//")
+    .join("/");
 
   console.log("url:", url);
   console.log("queries:", queries);
 
   return { url: url, queries: queries };
-};
-
-const updateURL2 = props => {
-  const { breadcrumbs, i18n, routes, oldLanguage } = props;
-
-  const currentLanguage = getCurrentLang(i18n);
-
-  const currentRoutes = routesForLanguage({
-    routes: routes,
-    language: { alternateName: currentLanguage },
-    i18n: i18n,
-    doPrefixLanguage: false
-  });
-
-  const oldRoutes = routesForLanguage({
-    routes: routes,
-    language: { alternateName: oldLanguage },
-    i18n: i18n,
-    doPrefixLanguage: true
-  });
-
-  console.log("oldRoutes:", oldRoutes);
-  console.log("currentRoutes:", currentRoutes);
-
-  let lastResource = null;
-  let queries = [];
-
-  const urlParts =
-    breadcrumbs &&
-    breadcrumbs
-      .map(item => {
-        const { breadcrumb } = item;
-        const { key } = breadcrumb;
-
-        let newKey = "";
-
-        const componentForKey = oldRoutes.find(item => item.path === key);
-
-        console.log("key:", key);
-
-        if (componentForKey) {
-          lastResource = componentForKey;
-
-          const componentForNewKey = currentRoutes.find(
-            item => item.component === componentForKey.component
-          );
-
-          if (componentForNewKey) {
-            const { path } = componentForNewKey;
-            newKey = path;
-          }
-        } else {
-          /**
-           * Loads a resource from the API
-           *
-           * - We reach here for keys like '/', 'articles/article-2', '/ro/articles-ro/article-2-ro'
-           * - OR '/articles-hu/article-1-hu/comment-1-hu'
-           * - OR '/articles-hu/article-1-hu/comments-hu'
-           * - So we'll find the last slug
-           * - And do an API call with the last slug and the new language code
-           * - The resource to call is saved earlier into `lastResource`
-           */
-          const split = key.split("/");
-          const slug = split.pop();
-
-          if (slug && lastResource) {
-            const { component } = lastResource;
-            const { defaultProps } = component;
-            const { api } = defaultProps;
-            const { endpointForResource } = api;
-
-            // TODO: We need a call here to the parent resource (Article) to tell what to do with it's children
-
-            console.log("endpointForResource:", endpointForResource);
-
-            if (!endpointForResource) return null;
-
-            queries.push(`${endpointForResource}/${slug}/${currentLanguage}`);
-            return `/{query-${queries.length}}`;
-          }
-        }
-
-        return newKey ? newKey : null;
-      })
-      .filter(item => item !== null);
-
-  const urlPartsNormalized =
-    urlParts.length >= 1 ? urlParts.slice(1) : urlParts;
-
-  console.log("queries:", queries);
-
-  return { url: urlPartsNormalized.join(""), queries: queries };
 };
 
 export { routesForLanguage, updateURL };

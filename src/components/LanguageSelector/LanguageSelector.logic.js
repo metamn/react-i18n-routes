@@ -8,9 +8,9 @@ import { startCase } from "lodash";
 const updateQueryInURL = props => {
   const { url, index, slug } = props;
 
-  console.log("url:", url);
+  //console.log("index:", index);
 
-  return url.replace(`:slug`, slug);
+  return url.replace(":slug", slug);
 };
 
 /**

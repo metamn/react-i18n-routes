@@ -157,20 +157,16 @@ const LanguageSelector = props => {
    * Translates the resources needed for the new URL
    */
   useEffect(() => {
-    for (var i = 0; i < URLQueries.length; i++) {
-      const queryString = URLQueries[i];
-
-      fetch(queryString)
-        .then(response => response.json())
-        .then(json => Object.values(json).shift())
-        .then(resource => {
-          console.log("resource:", resource);
-          return setNewURL(
-            updateQueryInURL({ url: newURL, index: i, slug: resource.slug })
-          );
-        });
-    }
-  }, [URLQueries]);
+    const queryString = URLQueries.shift();
+    fetch(queryString)
+      .then(response => response.json())
+      .then(json => Object.values(json).shift())
+      .then(resource => {
+        return setNewURL(
+          updateQueryInURL({ url: newURL, slug: resource.slug })
+        );
+      });
+  }, [URLQueries.length]);
 
   /**
    * Updates the URL
@@ -185,6 +181,7 @@ const LanguageSelector = props => {
   }, [newURL]);
 
   console.log("newURL:", newURL);
+  console.log("URLQueries:", URLQueries);
 
   /**
    * Prepares the select box items
