@@ -21,7 +21,8 @@ const propTypes = {
 const defaultProps = {
   id: shortid.generate(),
   slug: "comment",
-  name: "Comment"
+  name: "Comment",
+  apiEndpoint: "/api/comment/"
 };
 
 export { propTypes, defaultProps };
