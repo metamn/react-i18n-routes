@@ -29,7 +29,12 @@ import { propTypes, defaultProps } from "./Routes.data";
 /**
  * Imports logic
  */
-import { routesForLanguage, updateURL } from "./Routes.logic";
+import {
+  routesForLanguage,
+  updateURL,
+  whatNeedsToBeTranslated,
+  getTranslations
+} from "./Routes.logic";
 
 /**
  * Imports translations
@@ -50,14 +55,6 @@ const Routes = props => {
   const { i18n } = useTranslation("Routes");
 
   console.log("routes:", routes);
-
-  const routesList =
-    routes &&
-    routes.map(item => {
-      const { id } = item;
-
-      return <Route key={id} {...item} />;
-    });
 
   /**
    * Loads all languages
@@ -86,17 +83,20 @@ const Routes = props => {
    * - Ex: `https://localhost/ro/articles-ro/article-1-ro` should be accessible from the URL bar whatever the current language is
    * - This way every URL on the site is made shareable
    */
+  const routesReversed = routes.reverse();
+  console.log("routesReversed:", routesReversed);
+
   const routesForLanguages =
     languagesOrdered &&
     languagesOrdered.map(language => {
       const localizedRoutes = routesForLanguage({
-        routes: routes,
+        routes: routesReversed,
         language: language,
         i18n: i18n,
         doPrefixLanguage: true
       });
 
-      //console.log("localizedRoutes:", localizedRoutes);
+      console.log("localizedRoutes:", localizedRoutes);
 
       return (
         localizedRoutes &&
@@ -111,7 +111,7 @@ const Routes = props => {
   return (
     <Router>
       <LanguageSelector />
-      <Switch>{routesList}</Switch>
+      <Switch>{routesForLanguages}</Switch>
     </Router>
   );
 };

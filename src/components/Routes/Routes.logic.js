@@ -9,6 +9,62 @@ const routesForLanguage = props => {
   const { routes, language, i18n, doPrefixLanguage } = props;
   const { alternateName: languageCode } = language;
 
+  const translations = [];
+
+  return (
+    routes &&
+    routes.map(item => {
+      const { path, component } = item;
+      const { name: componentName } = component;
+
+      const langF = i18n.getFixedT(languageCode, componentName);
+
+      /**
+       * Home is a special case
+       */
+      if (path === "/") {
+        const translation = langF(kebabCase(componentName));
+
+        translations.push({
+          path: "",
+          translation: `/${translation}`
+        });
+
+        return { ...item, path: `/${translation}` };
+      }
+
+      const splits = path.split("/");
+
+      const translatedPath = splits
+        .map(split => {
+          if (split === ":slug") return split;
+
+          const alreadyTranslated = translations.find(t => t.path === split);
+
+          if (alreadyTranslated && alreadyTranslated.translation)
+            return alreadyTranslated.translation;
+
+          const translationFromi18n = langF(kebabCase(componentName));
+
+          if (translationFromi18n) {
+            translations.push({
+              path: split,
+              translation: translationFromi18n
+            });
+            return translationFromi18n;
+          }
+        })
+        .join("/");
+
+      return { ...item, path: translatedPath };
+    })
+  ).reverse();
+};
+
+const routesForLanguage2 = props => {
+  const { routes, language, i18n, doPrefixLanguage } = props;
+  const { alternateName: languageCode } = language;
+
   const langF1 = i18n.getFixedT(languageCode, "Home");
   const languagePrefix = langF1("home");
   const languagePrefixNormalized =
@@ -71,8 +127,8 @@ const updateURL = props => {
     doPrefixLanguage: true
   });
 
-  console.log("oldRoutes:", oldRoutes);
-  console.log("currentRoutes:", currentRoutes);
+  //console.log("oldRoutes:", oldRoutes);
+  //console.log("currentRoutes:", currentRoutes);
 
   let lastResource = null;
   let queries = [];
