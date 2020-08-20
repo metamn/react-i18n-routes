@@ -22,7 +22,7 @@ const defaultProps = {
   id: shortid.generate(),
   slug: "comment",
   name: "Comment",
-  apiEndpoint: "/api/comment/"
+  apiEndpoint: "/api/comment"
 };
 
 export { propTypes, defaultProps };

@@ -90,11 +90,13 @@ const findNewKey = props => {
   return newKey;
 };
 
+/**
+ * Creates a new query string
+ *
+ */
 const createNewQuery = props => {
   const { oldRoutes, currentRoutes, keys, currentLanguage } = props;
   const { oldKey, currentKey } = keys;
-
-  console.log("currentKey:", currentKey);
 
   let newQuery = "";
 
@@ -109,8 +111,6 @@ const createNewQuery = props => {
       const { component } = componentForNewKey;
       const { defaultProps } = component;
       const { apiEndpoint } = defaultProps;
-
-      console.log("apiEndpoint:", apiEndpoint);
 
       if (apiEndpoint) {
         const slug = oldKey.split("/").pop();
@@ -156,9 +156,6 @@ const updateURL = props => {
 
   let saved = null;
   let queries = [];
-
-  console.log("oldRoutes:", oldRoutes);
-  console.log("currentRoutes:", currentRoutes);
 
   const urlParts =
     breadcrumbs &&
@@ -262,8 +259,12 @@ const updateURL = props => {
       })
       .filter(item => item !== null);
 
-  console.log("urlParts:", urlParts.pop());
+  const url = urlParts.pop();
+
+  console.log("url:", url);
   console.log("queries:", queries);
+
+  return { url: url, queries: queries };
 };
 
 const updateURL2 = props => {
