@@ -66,40 +66,6 @@ const routesForLanguage = props => {
   return results;
 };
 
-const routesForLanguage2 = props => {
-  const { routes, language, i18n, doPrefixLanguage } = props;
-  const { alternateName: languageCode } = language;
-
-  const langF1 = i18n.getFixedT(languageCode, "Home");
-  const languagePrefix = langF1("home");
-  const languagePrefixNormalized =
-    languagePrefix !== "" ? `/${languagePrefix}` : languagePrefix;
-
-  return (
-    routes &&
-    routes.map(item => {
-      const { component } = item;
-      const { name: componentName } = component;
-
-      // NOTE: This is a fix. `t` cannot get translations from another language, just form the current one. With `i18n.getFixedT` we can load translations from any language files, nut just the current one.
-      const langF = i18n.getFixedT(languageCode, componentName);
-      const slug = langF(kebabCase(componentName));
-
-      //console.log("slug:", slug);
-
-      // NOTE: Routes, except for the home component, are prefixed with language code
-      const path =
-        componentName === "Home"
-          ? `/${slug}`
-          : doPrefixLanguage
-          ? `${languagePrefixNormalized}/${slug}`
-          : `/${slug}`;
-
-      return { ...item, path: path };
-    })
-  );
-};
-
 /**
  * Updates the URL on language change
  *
@@ -132,8 +98,8 @@ const updateURL = props => {
     doPrefixLanguage: true
   });
 
-  //console.log("oldRoutes:", oldRoutes);
-  //console.log("currentRoutes:", currentRoutes);
+  console.log("oldRoutes:", oldRoutes);
+  console.log("currentRoutes:", currentRoutes);
 
   let lastResource = null;
   let queries = [];
@@ -149,9 +115,7 @@ const updateURL = props => {
 
         const componentForKey = oldRoutes.find(item => item.path === key);
 
-        //console.log("breadcrumb:", breadcrumb);
-        console.log("key:", key);
-        //console.log("componentForKey:", componentForKey);
+        console.log("breadcrumb:", breadcrumb);
 
         if (componentForKey) {
           lastResource = componentForKey;
@@ -199,10 +163,12 @@ const updateURL = props => {
       })
       .filter(item => item !== null);
 
-  console.log("urlParts:", urlParts);
+  const urlPartsNormalized =
+    urlParts.length >= 1 ? urlParts.slice(1) : urlParts;
+
   console.log("queries:", queries);
 
-  return { url: urlParts.join("").replace("//", "/"), queries: queries };
+  return { url: urlPartsNormalized.join(""), queries: queries };
 };
 
 export { routesForLanguage, updateURL };
