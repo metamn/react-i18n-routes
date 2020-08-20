@@ -13,6 +13,7 @@ import { useRouteMatch } from "react-router-dom";
 /**
  * Imports other components and hooks
  */
+import Layout from "../Layout";
 
 /**
  * Imports data
@@ -61,12 +62,14 @@ const Comment = props => {
   const { name, slug } = comment;
 
   return (
-    <dl>
-      <dt>{t("Name")}:</dt>
-      <dd>{name}</dd>
-      <dt>{t("Slug")}:</dt>
-      <dd>{slug}</dd>
-    </dl>
+    <Layout>
+      <dl>
+        <dt>{t("Name")}:</dt>
+        <dd>{name}</dd>
+        <dt>{t("Slug")}:</dt>
+        <dd>{slug}</dd>
+      </dl>
+    </Layout>
   );
 };
 

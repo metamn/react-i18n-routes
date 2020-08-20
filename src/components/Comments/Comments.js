@@ -15,6 +15,7 @@ import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
  */
 import Comment from "../Comment";
 import { getCurrentLang } from "../LanguageSelector";
+import Layout from "../Layout";
 
 /**
  * Imports data
@@ -79,7 +80,9 @@ const Comments = props => {
   return (
     <Switch>
       <Route path={path}>
-        <ul>{commentsList}</ul>
+        <Layout>
+          <ul>{commentsList}</ul>
+        </Layout>
       </Route>
     </Switch>
   );
