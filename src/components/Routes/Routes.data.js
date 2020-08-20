@@ -30,7 +30,7 @@ const defaultProps = {
     ...HomeDefaultProps.routes.items,
     { id: shortid.generate(), path: "/", exact: true, component: Home },
     { id: shortid.generate(), path: "*", component: RouteNotFound }
-  ]
+  ].reverse()
 };
 
 export { propTypes, defaultProps };

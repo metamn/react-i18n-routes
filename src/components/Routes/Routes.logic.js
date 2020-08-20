@@ -11,54 +11,60 @@ const routesForLanguage = props => {
 
   const translations = [];
 
-  return (
+  const results =
     routes &&
-    routes.map(item => {
-      const { path, component } = item;
-      const { name: componentName } = component;
+    routes
+      .map(item => {
+        const { path, component } = item;
+        const { name: componentName } = component;
 
-      const langF = i18n.getFixedT(languageCode, componentName);
+        const langF = i18n.getFixedT(languageCode, componentName);
 
-      /**
-       * Home is a special case
-       */
-      if (path === "/") {
-        const translation = langF(kebabCase(componentName));
+        /**
+         * Home is a special case
+         */
+        if (path === "/") {
+          const translation = langF(kebabCase(componentName));
 
-        translations.push({
-          path: "",
-          translation: `/${translation}`
-        });
+          translations.push({
+            path: "",
+            translation: `/${translation}`
+          });
 
-        return { ...item, path: `/${translation}` };
-      }
+          return { ...item, path: `/${translation}` };
+        }
 
-      const splits = path.split("/");
+        const splits = path.split("/");
 
-      const translatedPath = splits
-        .map(split => {
-          if (split === ":slug") return split;
+        const translatedPath = splits
+          .map(split => {
+            if (split === ":slug") return split;
 
-          const alreadyTranslated = translations.find(t => t.path === split);
+            const alreadyTranslated = translations.find(t => t.path === split);
 
-          if (alreadyTranslated && alreadyTranslated.translation)
-            return alreadyTranslated.translation;
+            if (alreadyTranslated && alreadyTranslated.translation)
+              return alreadyTranslated.translation;
 
-          const translationFromi18n = langF(kebabCase(componentName));
+            const translationFromi18n = langF(kebabCase(componentName));
 
-          if (translationFromi18n) {
-            translations.push({
-              path: split,
-              translation: translationFromi18n
-            });
-            return translationFromi18n;
-          }
-        })
-        .join("/");
+            if (translationFromi18n) {
+              translations.push({
+                path: split,
+                translation: translationFromi18n
+              });
 
-      return { ...item, path: translatedPath };
-    })
-  ).reverse();
+              return translationFromi18n;
+            }
+          })
+          .join("/")
+          .replace("//", "/");
+
+        return { ...item, path: translatedPath };
+      })
+      .reverse();
+
+  console.log("results:", results);
+  return results;
 };
 
 const routesForLanguage2 = props => {

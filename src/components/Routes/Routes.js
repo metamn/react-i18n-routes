@@ -54,7 +54,7 @@ const Routes = props => {
   const { items: routes } = props;
   const { i18n } = useTranslation("Routes");
 
-  console.log("routes:", routes);
+  //console.log("routes:", routes);
 
   /**
    * Loads all languages
@@ -83,20 +83,18 @@ const Routes = props => {
    * - Ex: `https://localhost/ro/articles-ro/article-1-ro` should be accessible from the URL bar whatever the current language is
    * - This way every URL on the site is made shareable
    */
-  const routesReversed = routes.reverse();
-  console.log("routesReversed:", routesReversed);
 
   const routesForLanguages =
     languagesOrdered &&
     languagesOrdered.map(language => {
       const localizedRoutes = routesForLanguage({
-        routes: routesReversed,
+        routes: routes,
         language: language,
         i18n: i18n,
         doPrefixLanguage: true
       });
 
-      console.log("localizedRoutes:", localizedRoutes);
+      //console.log("localizedRoutes:", localizedRoutes);
 
       return (
         localizedRoutes &&
