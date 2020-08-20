@@ -206,6 +206,23 @@ const makeServer = () => {
       });
 
       /**
+       * Returns a comment on a different language based on slug
+       */
+      this.get("/comment/:slug/:lang", (schema, request) => {
+        const slug = request.params.slug;
+        const lang = request.params.lang;
+
+        const comment = schema.comments.findBy({ slug: slug });
+        const { articleID } = comment;
+
+        const res = schema.comments.where(
+          comment => comment.lang === lang && comment.articleID === articleID
+        );
+
+        return res.models[0];
+      });
+
+      /**
        * Returns all comments for an article on a given language
        */
       this.get("/comments/:articleID/:lang", (schema, request) => {

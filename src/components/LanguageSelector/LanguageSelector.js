@@ -163,11 +163,12 @@ const LanguageSelector = props => {
       fetch(queryString)
         .then(response => response.json())
         .then(json => Object.values(json).shift())
-        .then(resource =>
-          setNewURL(
+        .then(resource => {
+          console.log("resource:", resource);
+          return setNewURL(
             updateQueryInURL({ url: newURL, index: i, slug: resource.slug })
-          )
-        );
+          );
+        });
     }
   }, [URLQueries]);
 
@@ -175,13 +176,15 @@ const LanguageSelector = props => {
    * Updates the URL
    */
   useEffect(() => {
-    const isDirty = newURL.includes("{query-");
+    const isDirty = newURL.includes(":slug");
     const isEmpty = newURL === "";
 
     if (!isDirty && !isEmpty) {
       history.push(newURL);
     }
   }, [newURL]);
+
+  console.log("newURL:", newURL);
 
   /**
    * Prepares the select box items
