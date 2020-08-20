@@ -180,8 +180,8 @@ const LanguageSelector = props => {
     }
   }, [newURL]);
 
-  console.log("newURL:", newURL);
-  console.log("URLQueries:", URLQueries);
+  //console.log("newURL:", newURL);
+  //console.log("URLQueries:", URLQueries);
 
   /**
    * Prepares the select box items
